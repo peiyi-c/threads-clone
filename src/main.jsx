@@ -5,28 +5,7 @@ import "./index.css";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { mode } from "@chakra-ui/theme-tools";
 import { BrowserRouter } from "react-router-dom";
-
-const menuTheme = {
-  list: {
-    borderRadius: "16px",
-    border: "none",
-    boxShadow: "md",
-    p: "6",
-    bg: "white",
-    py: 2,
-    px: 0,
-    borderColor: "none",
-  },
-  item: {
-    color: "#000000",
-  },
-  divider: {
-    mt: "1.5rem",
-    mb: "1.5rem",
-    borderColor: "#00000026",
-    opacity: "1",
-  },
-};
+import menuStyle from "./themes/menu.jsx";
 
 const styles = {
   global: (props) => ({
@@ -45,18 +24,30 @@ const styles = {
         bg: "transparent",
       },
     },
-    components: {
-      Menu: menuTheme,
+    header: {
+      bg: mode("#ffffffd9", "#101010d9")(props),
+    },
+    footer: {
+      bg: mode("#ffffffd9", "#101010d9")(props),
     },
   }),
 };
 
 const config = {
-  initialColorMode: "system",
+  initialColorMode:
+    JSON.stringify(localStorage.getItem("chakra-ui-color-mode")) || "system",
   useSystemColorMode: true,
 };
 
-const theme = extendTheme({ config, styles });
+const components = {
+  Menu: { ...menuStyle },
+};
+
+const theme = extendTheme({
+  config,
+  styles,
+  components,
+});
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

@@ -10,6 +10,7 @@ import {
   MenuItem,
   MenuList,
   Text,
+  useColorMode,
 } from "@chakra-ui/react";
 
 const HeaderMenu = () => {
@@ -17,6 +18,8 @@ const HeaderMenu = () => {
   const handleClick = () => {
     buttonRef.current.click();
   };
+  const { toggleColorMode } = useColorMode();
+
   return (
     <Grid
       gridTemplateColumns={"1fr"}
@@ -24,17 +27,23 @@ const HeaderMenu = () => {
       alignItems={"center"}
       justifyItems={"end"}
     >
-      <GridItem colStart={1} colEnd={2} rowStart={1} rowEnd={1} zIndex={10}>
+      <GridItem
+        colStart={1}
+        colEnd={2}
+        rowStart={1}
+        rowEnd={1}
+        zIndex={"dropdown"}
+      >
         <MenuIcon handleClick={handleClick} />
       </GridItem>
       <GridItem colStart={1} colEnd={2} rowStart={1} rowEnd={1}>
-        <Menu closeOnSelect={true}>
+        <Menu closeOnSelect={true} size={"sm"}>
           <MenuButton as={Button} ref={buttonRef} opacity={0} aria-hidden>
             Menu
           </MenuButton>
           <MenuList minW="0" w={"fit-content"}>
             <MenuItem hidden aria-hidden></MenuItem>
-            <MenuItem>
+            <MenuItem onClick={toggleColorMode}>
               <Text w={"full"} textAlign={"center"}>
                 Switch appearance
               </Text>
