@@ -1,9 +1,15 @@
+import "./index.css";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import { ContentMessage } from "./contexts/contentContext";
+
 function App() {
   return (
     <>
-      <div>
-        <h1>Hi!</h1>
-      </div>
+      <ContentMessage>
+        <Header />
+        <Footer />
+      </ContentMessage>
     </>
   );
 }
