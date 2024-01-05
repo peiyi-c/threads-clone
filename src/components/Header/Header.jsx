@@ -2,6 +2,7 @@ import { Box, Grid, GridItem } from "@chakra-ui/react";
 import { Threads } from "../../assets/logos";
 import Navigation from "../Navigation/Navigation";
 import HeaderMenu from "./HeaderMenu";
+
 const Header = () => {
   return (
     <header
@@ -9,7 +10,6 @@ const Header = () => {
         width: "100%",
         position: "sticky",
         top: 0,
-        background: "#ffffffd9",
       }}
     >
       <Box h={{ base: "60px", md: "74px" }}>

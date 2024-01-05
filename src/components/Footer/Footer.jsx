@@ -8,7 +8,6 @@ const Footer = () => {
         width: "100%",
         position: "fixed",
         bottom: 0,
-        background: "#ffffffd9",
       }}
     >
       <Box h={{ base: "60px", md: "74px" }}>
