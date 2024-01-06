@@ -6,6 +6,10 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { mode } from "@chakra-ui/theme-tools";
 import { BrowserRouter } from "react-router-dom";
 import menuStyle from "./themes/menu.jsx";
+import buttonStyle from "./themes/button.jsx";
+import dividerStyle from "./themes/divider.jsx";
+import modalStyle from "./themes/modal.jsx";
+import inputStyle from "./themes/input.jsx";
 
 const styles = {
   global: (props) => ({
@@ -26,7 +30,9 @@ const styles = {
     },
     header: {
       bg: mode("#ffffffd9", "#101010d9")(props),
+      zIndex: "sticky",
     },
+    main: {},
     footer: {
       bg: mode("#ffffffd9", "#101010d9")(props),
     },
@@ -41,6 +47,10 @@ const config = {
 
 const components = {
   Menu: { ...menuStyle },
+  Button: { ...buttonStyle },
+  Divider: { ...dividerStyle },
+  Modal: { ...modalStyle },
+  Input: { ...inputStyle },
 };
 
 const theme = extendTheme({
