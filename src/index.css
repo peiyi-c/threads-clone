@@ -2,3 +2,8 @@
   margin: 0 auto;
   max-width: 1230px;
 }
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  opacity: 0;
+}
