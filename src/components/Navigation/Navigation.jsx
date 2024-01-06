@@ -7,22 +7,27 @@ import { Activity } from "../../assets/logos";
 import { Profile } from "../../assets/logos";
 import { Link as RouterLink } from "react-router-dom";
 import { useColorModeValue } from "@chakra-ui/react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ContentContext } from "../../contexts/contentContext";
-
+import { useNavigate } from "react-router-dom";
 const Navigation = () => {
   const hoverBgColor = useColorModeValue("#0000000a", "#ffffff0d");
   const { content, setContent } = useContext(ContentContext);
+  const navigate = useNavigate();
 
-  const handleClick = (e) => {
+  const handleNavClick = (e) => {
     setContent(
       (content) => e.target?.closest("svg")?.ariaLabel || e.target.title
     );
   };
 
+  useEffect(() => {
+    navigate(content);
+  }, [content, navigate]);
+
   return (
     <nav
-      onClick={handleClick}
+      onClick={handleNavClick}
       style={{
         width: "100%",
         height: "100%",
@@ -38,7 +43,7 @@ const Navigation = () => {
         cursor={"pointer"}
       >
         <GridItem
-          title="Home"
+          title="/"
           _hover={{ bg: `${hoverBgColor}`, borderRadius: "8px" }}
           _active={{
             transform: "scale(0.9)",
@@ -117,7 +122,7 @@ const Navigation = () => {
           alignItems={"center"}
           justifyContent={"center"}
         >
-          <Link to="/@username" as={RouterLink}>
+          <Link to="/profile" as={RouterLink}>
             <Profile />
           </Link>
         </GridItem>
