@@ -301,6 +301,165 @@ export const Menu = ({ handleClick }) => {
 };
 
 // Comment
+export const VerticalLine = ({ h }) => {
+  const color = useColorModeValue("#e5e5e5", "#333638");
+  return (
+    <Box color={color} m={"12px 0 0 6px"}>
+      <svg
+        className="xv787a8"
+        aria-hidden="true"
+        fill="none"
+        height={h}
+        viewBox={`0 0 21 ${h}`}
+        width={21}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d={`M18 1L18 ${h}`}
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+        />
+      </svg>
+    </Box>
+  );
+};
+export const AttachMedia = () => {
+  const color = useColorModeValue("#999999", "#777777");
+  return (
+    <Box color={color}>
+      <svg
+        aria-label="Attach media"
+        role="img"
+        viewBox="0 0 24 24"
+        style={{
+          fill: "currentColor",
+          height: 20,
+          width: 20,
+        }}
+      >
+        <title>Attach media</title>
+        <g>
+          <path
+            clipRule="evenodd"
+            d="M2.00207 9.4959C1.65132 7.00019 1.47595 5.75234 1.82768 4.73084C2.13707 3.83231 2.72297 3.05479 3.50142 2.50971C4.38639 1.89005 5.63425 1.71467 8.12996 1.36392L10.7047 1.00207C13.2004 0.651325 14.4482 0.47595 15.4697 0.827679C16.3682 1.13707 17.1458 1.72297 17.6908 2.50142C17.9171 2.82454 18.0841 3.19605 18.2221 3.65901C17.7476 3.64611 17.2197 3.64192 16.6269 3.64055C16.5775 3.5411 16.5231 3.44881 16.4621 3.36178C16.0987 2.84282 15.5804 2.45222 14.9814 2.24596C14.3004 2.01147 13.4685 2.12839 11.8047 2.36222L7.44748 2.97458C5.78367 3.20841 4.95177 3.32533 4.36178 3.73844C3.84282 4.10182 3.45222 4.62017 3.24596 5.21919C3.01147 5.90019 3.12839 6.73209 3.36222 8.3959L3.97458 12.7531C4.15588 14.0431 4.26689 14.833 4.50015 15.3978C4.50083 16.3151 4.50509 17.0849 4.53201 17.7448C4.13891 17.4561 3.79293 17.1036 3.50971 16.6991C2.89005 15.8142 2.71467 14.5663 2.36392 12.0706L2.00207 9.4959Z"
+            fill="currentColor"
+            fillRule="evenodd"
+          />
+          <g>
+            <g clipPath="url(#clip0_16905_4767)">
+              <rect
+                fill="none"
+                height={15.5}
+                rx={3.75}
+                stroke="currentColor"
+                strokeWidth={1.5}
+                width={15.5}
+                x={6.75}
+                y={5.8894}
+              />
+              <path
+                d="M6.6546 17.8894L8.59043 15.9536C9.1583 15.3857 10.0727 15.3658 10.6647 15.9085L12.5062 17.5966C12.9009 17.9584 13.5105 17.9451 13.8891 17.5665L17.8181 13.6376C18.4038 13.0518 19.3536 13.0518 19.9394 13.6375L22.0663 15.7644"
+                fill="none"
+                stroke="currentColor"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+              />
+              <circle cx={10.75} cy={9.8894} fill="currentColor" r={1.25} />
+            </g>
+          </g>
+        </g>
+        <defs>
+          <clipPath id="clip0_16905_4767">
+            <rect
+              fill="white"
+              height={17}
+              rx={4.5}
+              width={17}
+              x={6}
+              y={5.1394}
+            />
+          </clipPath>
+        </defs>
+      </svg>
+    </Box>
+  );
+};
+export const Tag = () => {
+  const color = useColorModeValue("#999999", "#777777");
+  return (
+    <Box color={color}>
+      <svg
+        aria-label="Add a tag"
+        role="img"
+        viewBox="0 0 24 24"
+        style={{
+          fill: "currentColor",
+          height: 20,
+          width: 20,
+        }}
+      >
+        <title>Add a tag</title>
+        <path color="currentColor" stroke="currentColor" d="M5 8.50012H20" />
+        <path color="currentColor" stroke="currentColor" d="M4 15.0001H20" />
+        <path
+          color="currentColor"
+          stroke="currentColor"
+          d="M7.59985 19.9399L10.3999 4.06036"
+        />
+        <path
+          color="currentColor"
+          stroke="currentColor"
+          d="M13.5999 19.9399L16.3999 4.06036"
+        />
+      </svg>
+    </Box>
+  );
+};
+export const Poll = () => {
+  const color = useColorModeValue("#999999", "#777777");
+  return (
+    <Box color={color}>
+      <svg
+        aria-label="Add a poll"
+        role="img"
+        viewBox="0 0 24 24"
+        style={{
+          fill: "currentColor",
+          height: 20,
+          width: 20,
+        }}
+      >
+        <title>Add a poll</title>
+        <rect
+          fill="currentColor"
+          height={1.5}
+          rx={0.75}
+          width={8}
+          x={4}
+          y={5.5}
+        />
+        <rect
+          fill="currentColor"
+          height={1.5}
+          rx={0.75}
+          width={16}
+          x={4}
+          y={11.25}
+        />
+        <rect
+          fill="currentColor"
+          height={1.5}
+          rx={0.75}
+          width={11}
+          x={4}
+          y={17}
+        />
+      </svg>
+    </Box>
+  );
+};
 export const UnLike = () => {
   const color = useColorModeValue("#000000", "#F3F5F7");
   return (
