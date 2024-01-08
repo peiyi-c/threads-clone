@@ -16,9 +16,12 @@ const Navigation = () => {
   const navigate = useNavigate();
 
   const handleNavClick = (e) => {
-    setContent(
-      (content) => e.target?.closest("svg")?.ariaLabel || e.target.title
-    );
+    let value = e.target?.closest("svg")?.ariaLabel || e.target.title;
+    if (value === "Home") {
+      value = "/";
+    }
+    if (value === "Create") return;
+    setContent((prevValue) => value);
   };
 
   useEffect(() => {
