@@ -32,6 +32,29 @@ const buttonStyle = {
       borderRadius: 0,
       padding: 0,
     },
+    square: (props) => ({
+      bg: props.colorMode === "light" ? "#000000" : "#FFF",
+      color: props.colorMode === "light" ? "#FFF" : "#000000",
+      _hover: {
+        bg: props.colorMode === "light" ? "#000000" : "#FFF",
+      },
+      borderColor: props.colorMode === "light" ? "#000000" : "#FFF",
+      h: "34px",
+      borderRadius: "10px",
+      p: "0 16px",
+    }),
+    squareOutline: (props) => ({
+      bg: props.colorMode === "light" ? "#FFF" : "#000",
+      color: props.colorMode === "light" ? "#000" : "#FFF",
+      _hover: {
+        bg: props.colorMode === "light" ? "#FFF" : "#000",
+      },
+      border: "1px solid",
+      borderColor: props.colorMode === "light" ? "#00000026" : "#f3f5f726",
+      h: "34px",
+      borderRadius: "10px",
+      p: "0 16px",
+    }),
   },
 };
 
