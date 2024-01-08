@@ -81,7 +81,7 @@ export const Home = () => {
   return (
     <Box
       style={{
-        color: content !== "/" ? color : colorFill,
+        color: content !== "Home" ? color : colorFill,
       }}
     >
       <svg

@@ -6,26 +6,41 @@ import { Create } from "../../assets/logos";
 import { Activity } from "../../assets/logos";
 import { Profile } from "../../assets/logos";
 import { Link as RouterLink } from "react-router-dom";
-import { useColorModeValue } from "@chakra-ui/react";
-import { useContext, useEffect } from "react";
+import { useColorModeValue, useDisclosure } from "@chakra-ui/react";
+import { useContext, useEffect, useMemo } from "react";
 import { ContentContext } from "../../contexts/contentContext";
 import { useNavigate } from "react-router-dom";
+import FeedPostFormModal from "../FeedPosts/FeedPostFormModal";
+
 const Navigation = () => {
   const hoverBgColor = useColorModeValue("#0000000a", "#ffffff0d");
   const { content, setContent } = useContext(ContentContext);
+  const { onOpen, isOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
 
   const handleNavClick = (e) => {
     let value = e.target?.closest("svg")?.ariaLabel || e.target.title;
-    if (value === "Home") {
-      value = "/";
-    }
-    if (value === "Create") return;
     setContent((prevValue) => value);
   };
-
   useEffect(() => {
-    navigate(content);
+    let redirect;
+    switch (content) {
+      case "Home":
+        redirect = "/";
+        break;
+      case "Search":
+      case "Activity":
+        redirect = content;
+        break;
+      case "Create":
+        break;
+      case "Profile":
+        redirect = "@username";
+        break;
+      default:
+        redirect = "/";
+    }
+    navigate(redirect);
   }, [content, navigate]);
 
   return (
@@ -80,6 +95,7 @@ const Navigation = () => {
         </GridItem>
 
         <GridItem
+          onClick={onOpen}
           title="Create"
           _hover={{ bg: `${hoverBgColor}`, borderRadius: "8px" }}
           _active={{
@@ -95,7 +111,9 @@ const Navigation = () => {
             <Create />
           </Box>
         </GridItem>
-
+        {isOpen ? (
+          <FeedPostFormModal onClosePost={onClose} isOpenPost={isOpen} />
+        ) : null}
         <GridItem
           title="Activity"
           _hover={{ bg: `${hoverBgColor}`, borderRadius: "8px" }}
