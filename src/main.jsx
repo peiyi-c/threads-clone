@@ -34,7 +34,8 @@ const styles = {
     },
     main: {},
     footer: {
-      bg: mode("#ffffffd9", "#101010d9")(props),
+      bg: { base: mode("#ffffffd9", "#101010d9")(props), md: "transparent" },
+      zIndex: "sticky",
     },
   }),
 };
