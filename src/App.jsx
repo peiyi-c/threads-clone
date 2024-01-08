@@ -4,7 +4,8 @@ import "swiper/css/navigation";
 
 import { ContentMessage } from "./contexts/contentContext";
 import { Route, Routes } from "react-router-dom";
-import PageLayout from "./layouts/PageLayout";
+import GeneralLayout from "./layouts/PageLayout";
+import PrivateLayout from "./layouts/PrivateLayout";
 import HomePage from "./pages/HomePage/HomePage";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import ActivityPage from "./pages/ActivityPage/ActivityPage";
@@ -16,11 +17,14 @@ function App() {
     <>
       <ContentMessage>
         <Routes>
-          <Route path="/" element={<PageLayout />}>
+          <Route path="/" element={<GeneralLayout />}>
             {/*  only for authUser */}
-            <Route index element={<HomePage />} />
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="/activity" element={<ActivityPage />} />
+            <Route element={<PrivateLayout />}>
+              <Route index element={<HomePage />} />
+              <Route path="/search" element={<SearchPage />} />
+              <Route path="/activity" element={<ActivityPage />} />
+            </Route>
+
             {/* only for non-authUser */}
             {/* <Route path="/login" element={<LoginPage />} />  */}
 
