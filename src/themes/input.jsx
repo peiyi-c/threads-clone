@@ -2,6 +2,7 @@ const inputStyle = {
   variants: {
     standard: (props) => ({
       field: {
+        p: "0",
         border: "none",
         bg: "transparent",
         fontSize: "15px",

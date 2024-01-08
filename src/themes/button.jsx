@@ -20,6 +20,18 @@ const buttonStyle = {
       borderRadius: "100%",
       padding: 0,
     }),
+    // create new variants
+    line: {
+      bg: "transparent",
+      color: "inherit",
+      _hover: {
+        bg: "transparent",
+      },
+      border: "unset",
+      borderColor: "transparent",
+      borderRadius: 0,
+      padding: 0,
+    },
   },
 };
 

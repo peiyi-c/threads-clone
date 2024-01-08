@@ -55,6 +55,7 @@ const modalStyle = {
         borderRadius: { md: "18px" },
       },
       body: {
+        py: 0,
         borderRadius: { md: "18px" },
       },
       footer: {

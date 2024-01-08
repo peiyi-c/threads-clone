@@ -10,6 +10,7 @@ import buttonStyle from "./themes/button.jsx";
 import dividerStyle from "./themes/divider.jsx";
 import modalStyle from "./themes/modal.jsx";
 import inputStyle from "./themes/input.jsx";
+import textareaStyle from "./themes/textarea.jsx";
 
 const styles = {
   global: (props) => ({
@@ -52,6 +53,7 @@ const components = {
   Divider: { ...dividerStyle },
   Modal: { ...modalStyle },
   Input: { ...inputStyle },
+  Textarea: { ...textareaStyle },
 };
 
 const theme = extendTheme({
