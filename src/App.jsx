@@ -29,7 +29,9 @@ function App() {
             {/* <Route path="/login" element={<LoginPage />} />  */}
 
             {/* authUser || non-authUser */}
-            <Route path="/:username" element={<ProfilePage />} />
+            <Route element={<PrivateLayout />}>
+              <Route path="/:username" element={<ProfilePage />} />
+            </Route>
           </Route>
         </Routes>
       </ContentMessage>
