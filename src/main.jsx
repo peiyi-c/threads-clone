@@ -11,6 +11,7 @@ import dividerStyle from "./themes/divider.jsx";
 import modalStyle from "./themes/modal.jsx";
 import inputStyle from "./themes/input.jsx";
 import textareaStyle from "./themes/textarea.jsx";
+import tabsStyle from "./themes/tab.jsx";
 
 const styles = {
   global: (props) => ({
@@ -54,6 +55,7 @@ const components = {
   Modal: { ...modalStyle },
   Input: { ...inputStyle },
   Textarea: { ...textareaStyle },
+  Tabs: { ...tabsStyle },
 };
 
 const theme = extendTheme({
