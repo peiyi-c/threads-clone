@@ -4,6 +4,7 @@ import {
   Button,
   Flex,
   Text,
+  Divider,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -30,6 +31,7 @@ const FeedPostForm = () => {
           Post
         </Button>
       </Flex>
+      <Divider orientation="horizontal" variant={"standard"} />
       {isOpen ? (
         <FeedPostFormModal onClosePost={onClose} isOpenPost={isOpen} />
       ) : (

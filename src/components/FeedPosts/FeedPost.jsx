@@ -35,7 +35,6 @@ const images = [
 const FeedPost = () => {
   return (
     <>
-      <Divider orientation="horizontal" variant={"standard"} />
       <Grid
         my={"12px"}
         templateColumns={"48px minmax(0, 1fr)"}
@@ -172,6 +171,7 @@ const FeedPost = () => {
           </Text>
         </Text>
       </Grid>
+      <Divider orientation="horizontal" variant={"standard"} />
     </>
   );
 };
