@@ -25,8 +25,7 @@ const inputStyle = {
     }),
     search: (props) => ({
       field: {
-        py: "16px",
-        h: "70px",
+        h: { base: "42px", md: "70px" },
         fontSize: "15px",
         color: "inherit",
         borderRadius: "16px",
