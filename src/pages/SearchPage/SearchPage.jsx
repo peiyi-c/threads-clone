@@ -31,7 +31,7 @@ const SearchPage = () => {
           size={{ base: "xs", md: "md" }}
           variant={"search"}
           pl={"3.25rem"}
-          maxlength="25"
+          maxLength="25"
           placeholder="Search"
         />
         {value.length > 0 && (
