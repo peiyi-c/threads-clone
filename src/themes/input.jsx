@@ -41,6 +41,27 @@ const inputStyle = {
         },
       },
     }),
+    login: (props) => ({
+      field: {
+        p: "16px",
+        h: "full",
+        bg: "#f5f5f5",
+        fontSize: "15px",
+        border: "1px solid transparent",
+        borderRadius: "12px",
+        _placeholder: {
+          color: props.colorMode === "light" ? "#999999" : "#777777",
+        },
+        _active: {
+          border: "1px solid",
+          borderColor: props.colorMode === "light" ? "#00000026" : "#4D4D4D",
+        },
+        _focus: {
+          border: "1px solid",
+          borderColor: props.colorMode === "light" ? "#00000026" : "#4D4D4D",
+        },
+      },
+    }),
   },
 };
 

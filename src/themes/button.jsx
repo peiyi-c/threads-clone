@@ -55,6 +55,16 @@ const buttonStyle = {
       borderRadius: "10px",
       p: "0 16px",
     }),
+    login: (props) => ({
+      p: "16px",
+      bg: props.colorMode === "light" ? "#000000" : "#FFFFFF",
+      color: props.colorMode === "light" ? "#FFFFFF" : "#000000",
+      borderRadius: "10px",
+      _hover: {
+        bg: props.colorMode === "light" ? "#000000" : "#FFFFFF",
+        color: props.colorMode === "light" ? "#FFFFFF" : "#000000",
+      },
+    }),
   },
 };
 
