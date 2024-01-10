@@ -219,7 +219,6 @@ export const Profile = () => {
         aria-label="profile"
         role="img"
         viewBox="0 0 26 26"
-        className="x1lliihq xffa9am x1jwls1v x1n2onr6 x17fnjtu x3egl4o"
         style={{
           height: 26,
           width: 26,
