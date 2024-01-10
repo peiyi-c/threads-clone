@@ -1,12 +1,22 @@
 import { Input } from "@chakra-ui/react";
 import { SubmitButton } from "./AuthForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const LogIn = () => {
+  const [isDisabled, setIsDisabled] = useState(true);
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    if (inputs.email.trim(" ") && inputs.password.trim(" ")) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  }, [inputs.email, inputs.password]);
+
   const handleChange = (e) => {
     setInputs({
       ...inputs,
@@ -31,7 +41,7 @@ const LogIn = () => {
         variant={"auth"}
         placeholder="* Password"
       />
-      <SubmitButton ButtonText={"Log In"} />
+      <SubmitButton ButtonText={"Log In"} isDisabled={isDisabled} />
     </>
   );
 };

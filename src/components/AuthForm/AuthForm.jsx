@@ -24,7 +24,7 @@ const AuthForm = () => {
         </Heading>
         {/* input fields */}
         {pathname === "/login" ? <LogIn /> : <SignUp />}
-
+        {/* switch button */}
         <Flex
           justifyContent={"center"}
           alignItems={"center"}
@@ -48,7 +48,7 @@ const AuthForm = () => {
 
 export default AuthForm;
 
-export const SubmitButton = ({ ButtonText }) => {
+export const SubmitButton = ({ ButtonText, isDisabled }) => {
   return (
     <Button
       mt={"6px"}
@@ -57,7 +57,7 @@ export const SubmitButton = ({ ButtonText }) => {
       size={"lg"}
       variant={"auth"}
       fontSize={"15px"}
-      isDisabled
+      isDisabled={isDisabled}
       _disabled={{
         bg: useColorModeValue("#000000", "#FFFFFF"),
         color: useColorModeValue("#FFFFFF", "#000000"),
