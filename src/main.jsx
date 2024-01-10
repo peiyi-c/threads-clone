@@ -31,11 +31,15 @@ const styles = {
       },
     },
     header: {
+      maxWidth: "1230px",
       bg: mode("#ffffffd9", "#101010d9")(props),
       zIndex: "sticky",
     },
-    main: {},
+    main: {
+      maxWidth: "1230px",
+    },
     footer: {
+      maxWidth: "1230px",
       bg: { base: mode("#ffffffd9", "#101010d9")(props), md: "transparent" },
       zIndex: "sticky",
     },
