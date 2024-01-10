@@ -14,7 +14,6 @@ import SignUp from "./SignUp";
 
 const AuthForm = () => {
   const { pathname } = useLocation();
-  console.log(pathname);
   return (
     <Container maxW={"md"}>
       <form>
@@ -47,32 +46,6 @@ const AuthForm = () => {
 };
 
 export default AuthForm;
-
-export const SubmitButton = ({ ButtonText, isDisabled }) => {
-  return (
-    <Button
-      mt={"6px"}
-      h={"full"}
-      w={"full"}
-      size={"lg"}
-      variant={"auth"}
-      fontSize={"15px"}
-      isDisabled={isDisabled}
-      _disabled={{
-        bg: useColorModeValue("#000000", "#FFFFFF"),
-        color: useColorModeValue("#FFFFFF", "#000000"),
-        opacity: 0.8,
-        _hover: {
-          bg: useColorModeValue("#000000", "#FFFFFF"),
-          color: useColorModeValue("#FFFFFF", "#000000"),
-          opacity: 0.8,
-        },
-      }}
-    >
-      {ButtonText}
-    </Button>
-  );
-};
 
 const SwitchButton = ({ ButtonText }) => {
   const { pathname } = useLocation();

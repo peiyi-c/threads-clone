@@ -1,5 +1,5 @@
-import { Input } from "@chakra-ui/react";
-import { SubmitButton } from "./AuthForm";
+import { Input, Button, useColorModeValue } from "@chakra-ui/react";
+
 import { useEffect, useState } from "react";
 
 const LogIn = () => {
@@ -41,7 +41,27 @@ const LogIn = () => {
         variant={"auth"}
         placeholder="* Password"
       />
-      <SubmitButton ButtonText={"Log In"} isDisabled={isDisabled} />
+      <Button
+        mt={"6px"}
+        h={"full"}
+        w={"full"}
+        size={"lg"}
+        variant={"auth"}
+        fontSize={"15px"}
+        isDisabled={isDisabled}
+        _disabled={{
+          bg: useColorModeValue("#000000", "#FFFFFF"),
+          color: useColorModeValue("#FFFFFF", "#000000"),
+          opacity: 0.8,
+          _hover: {
+            bg: useColorModeValue("#000000", "#FFFFFF"),
+            color: useColorModeValue("#FFFFFF", "#000000"),
+            opacity: 0.8,
+          },
+        }}
+      >
+        Log In
+      </Button>
     </>
   );
 };
