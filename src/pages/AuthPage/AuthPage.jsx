@@ -12,12 +12,13 @@ const AuthPage = () => {
         position={"absolute"}
         top={0}
         minW={"1785px"}
-        display={{ base: "none", md: "block" }}
+        display={{ base: "none", lg: "block" }}
+        zIndex={"hide"}
       />
       <Flex
-        display={{ base: "block", md: "none" }}
+        display={{ base: "block", lg: "none" }}
         position={"absolute"}
-        top={"20%"}
+        top={"10%"}
         left={"50%"}
         transform={"translateX(-50%)"}
         w={"60px"}

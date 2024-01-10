@@ -41,7 +41,7 @@ const inputStyle = {
         },
       },
     }),
-    login: (props) => ({
+    auth: (props) => ({
       field: {
         p: "16px",
         h: "full",
