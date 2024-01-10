@@ -11,38 +11,30 @@ import { useContext, useEffect, useMemo } from "react";
 import { ContentContext } from "../../contexts/contentContext";
 import { useNavigate } from "react-router-dom";
 import FeedPostFormModal from "../FeedPosts/FeedPostFormModal";
+import useAuthStore from "../../store/authStore";
 
 const Navigation = () => {
   const hoverBgColor = useColorModeValue("#0000000a", "#ffffff0d");
   const { content, setContent } = useContext(ContentContext);
   const { onOpen, isOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
-  const location = useLocation();
+  const { user } = useAuthStore();
 
   const handleNavClick = (e) => {
     let value = e.target?.closest("svg")?.ariaLabel || e.target.title;
-    setContent((prevValue) => value);
+    setContent((prev) => value);
   };
+
   useEffect(() => {
-    let redirect;
-    switch (content) {
-      case "home":
-        redirect = "/";
-        break;
-      case "search":
-      case "activity":
-        redirect = content;
-        break;
-      case "create":
-        break;
-      case "profile":
-        redirect = "@username";
-        break;
-      default:
-        redirect = location;
-    }
-    navigate(redirect);
-  }, [content, navigate, location]);
+    const changePage = () => {
+      if (content === "profile") {
+        navigate(user.username);
+      } else {
+        navigate(content);
+      }
+    };
+    changePage();
+  }, [content, user.username, navigate]);
 
   return (
     <nav
