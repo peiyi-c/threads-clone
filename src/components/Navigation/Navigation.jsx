@@ -5,7 +5,7 @@ import { Search } from "../../assets/logos";
 import { Create } from "../../assets/logos";
 import { Activity } from "../../assets/logos";
 import { Profile } from "../../assets/logos";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import { useColorModeValue, useDisclosure } from "@chakra-ui/react";
 import { useContext, useEffect, useMemo } from "react";
 import { ContentContext } from "../../contexts/contentContext";
@@ -17,6 +17,7 @@ const Navigation = () => {
   const { content, setContent } = useContext(ContentContext);
   const { onOpen, isOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleNavClick = (e) => {
     let value = e.target?.closest("svg")?.ariaLabel || e.target.title;
@@ -25,23 +26,23 @@ const Navigation = () => {
   useEffect(() => {
     let redirect;
     switch (content) {
-      case "Home":
+      case "home":
         redirect = "/";
         break;
-      case "Search":
-      case "Activity":
+      case "search":
+      case "activity":
         redirect = content;
         break;
-      case "Create":
+      case "create":
         break;
-      case "Profile":
+      case "profile":
         redirect = "@username";
         break;
       default:
-        redirect = "/";
+        redirect = location;
     }
     navigate(redirect);
-  }, [content, navigate]);
+  }, [content, navigate, location]);
 
   return (
     <nav
@@ -61,7 +62,7 @@ const Navigation = () => {
         cursor={"pointer"}
       >
         <GridItem
-          title="/"
+          title="home"
           _hover={{ bg: `${hoverBgColor}`, borderRadius: "8px" }}
           _active={{
             transform: "scale(0.9)",
@@ -78,7 +79,7 @@ const Navigation = () => {
         </GridItem>
 
         <GridItem
-          title="Search"
+          title="search"
           _hover={{ bg: `${hoverBgColor}`, borderRadius: "8px" }}
           _active={{
             transform: "scale(0.9)",
@@ -96,7 +97,7 @@ const Navigation = () => {
 
         <GridItem
           onClick={onOpen}
-          title="Create"
+          title="create"
           _hover={{ bg: `${hoverBgColor}`, borderRadius: "8px" }}
           _active={{
             transform: "scale(0.9)",
@@ -115,7 +116,7 @@ const Navigation = () => {
           <FeedPostFormModal onClosePost={onClose} isOpenPost={isOpen} />
         ) : null}
         <GridItem
-          title="Activity"
+          title="activity"
           _hover={{ bg: `${hoverBgColor}`, borderRadius: "8px" }}
           _active={{
             transform: "scale(0.9)",
@@ -132,7 +133,7 @@ const Navigation = () => {
         </GridItem>
 
         <GridItem
-          title="Profile"
+          title="profile"
           _hover={{ bg: `${hoverBgColor}`, borderRadius: "8px" }}
           _active={{
             transform: "scale(0.9)",
