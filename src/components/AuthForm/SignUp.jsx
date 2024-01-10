@@ -1,6 +1,13 @@
-import { Flex, Input } from "@chakra-ui/react";
-import { SubmitButton } from "./AuthForm";
+import {
+  Flex,
+  Input,
+  Alert,
+  AlertIcon,
+  Button,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { useState, useEffect } from "react";
+import useSignupWithEmailAndPassword from "../../hooks/useSignupWithEmailAndPassword";
 
 const SignUp = () => {
   const [isDisabled, setIsDisabled] = useState(true);
@@ -30,6 +37,7 @@ const SignUp = () => {
       [e.target.name]: e.target.value,
     });
   };
+  const { loading, error, signup } = useSignupWithEmailAndPassword();
   return (
     <>
       <Flex w={"full"} flexDir={{ base: "column", md: "row" }}>
@@ -68,7 +76,35 @@ const SignUp = () => {
         variant={"auth"}
         placeholder="* Password"
       />
-      <SubmitButton ButtonText={"Sign Up"} isDisabled={isDisabled} />
+      <Button
+        onClick={() => signup(inputs)}
+        isLoading={loading}
+        mt={"6px"}
+        h={"full"}
+        w={"full"}
+        size={"lg"}
+        variant={"auth"}
+        fontSize={"15px"}
+        isDisabled={isDisabled}
+        _disabled={{
+          bg: useColorModeValue("#000000", "#FFFFFF"),
+          color: useColorModeValue("#FFFFFF", "#000000"),
+          opacity: 0.8,
+          _hover: {
+            bg: useColorModeValue("#000000", "#FFFFFF"),
+            color: useColorModeValue("#FFFFFF", "#000000"),
+            opacity: 0.8,
+          },
+        }}
+      >
+        Sign Up
+      </Button>
+      {error && (
+        <Alert status="error" fontSize={13} p={2} mt={2} borderRadius={4}>
+          <AlertIcon fontSize={12} />
+          {error.message}
+        </Alert>
+      )}
     </>
   );
 };
