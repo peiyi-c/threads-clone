@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 const useSignupWithEmailAndPassword = () => {
   const [createUserWithEmailAndPassword, , loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+
   const showToast = useShowToast();
   const { loginUser } = useAuthStore();
   const navigate = useNavigate();
@@ -24,6 +25,8 @@ const useSignupWithEmailAndPassword = () => {
     if (!username || !displayName || !email || !password) {
       showToast("Error", "Please fill all the fields", "error");
       return;
+    } else {
+      showToast("Loading", "Checking your names...", "loading");
     }
     // check username field
     const usersRef = collection(firestore, "users");
@@ -32,8 +35,18 @@ const useSignupWithEmailAndPassword = () => {
     if (!qSnapshot.empty) {
       showToast("Error", "Username already exists", "error");
       return;
+    } else {
+      showToast("Loading", "Username validated!", "loading");
     }
-
+    // check display name field
+    const qDisplay = query(usersRef, where("displayName", "==", displayName));
+    const qDisplaySnapshot = await getDocs(qDisplay);
+    if (!qDisplaySnapshot.empty) {
+      showToast("Error", "Display name already exists", "error");
+      return;
+    } else {
+      showToast("Loading", "Display name validated!", "loading");
+    }
     try {
       // create new user
       const newUser = await createUserWithEmailAndPassword(email, password);
@@ -43,6 +56,7 @@ const useSignupWithEmailAndPassword = () => {
       }
       // put user in database
       if (newUser) {
+        showToast("Success", "Account created successfully", "success");
         const userDoc = {
           uid: newUser.user.uid,
           createdAt: Date.now(),
@@ -65,10 +79,11 @@ const useSignupWithEmailAndPassword = () => {
           hides: [],
           notifications: [],
         };
+        showToast("Loading", "Setting up your data...", "loading");
         await setDoc(doc(firestore, "users", newUser.user.uid), userDoc);
-        localStorage.setItem("user-info", JSON.stringify(userDoc));
-        loginUser(userDoc);
         navigate("/");
+        loginUser(userDoc);
+        localStorage.setItem("user-info", JSON.stringify(userDoc));
       }
     } catch (error) {
       showToast("Error", error.message, "error");
