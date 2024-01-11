@@ -18,6 +18,7 @@ const Navigation = () => {
   const { content, setContent } = useContext(ContentContext);
   const { onOpen, isOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { user } = useAuthStore();
 
   const handleNavClick = (e) => {
@@ -30,13 +31,15 @@ const Navigation = () => {
       if (content === "home") {
         navigate("/");
       } else if (content === "profile") {
-        navigate(user.username);
+        if (user) {
+          navigate(`@${user.username}`);
+        }
       } else {
         navigate(content);
       }
     };
     changePage();
-  }, [content, user.username, navigate]);
+  }, [content, user, navigate]);
 
   return (
     <nav
