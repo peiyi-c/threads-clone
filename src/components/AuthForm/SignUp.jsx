@@ -1,11 +1,4 @@
-import {
-  Flex,
-  Input,
-  Alert,
-  AlertIcon,
-  Button,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Flex, Input, Button, useColorModeValue } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import useSignupWithEmailAndPassword from "../../hooks/useSignupWithEmailAndPassword";
 
@@ -17,6 +10,7 @@ const SignUp = () => {
     email: "",
     password: "",
   });
+  const { loading, signup } = useSignupWithEmailAndPassword();
 
   useEffect(() => {
     if (
@@ -37,7 +31,10 @@ const SignUp = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const { loading, error, signup } = useSignupWithEmailAndPassword();
+  const handleClick = () => {
+    signup(inputs);
+    setIsDisabled(true);
+  };
   return (
     <>
       <Flex w={"full"} flexDir={{ base: "column", md: "row" }}>
@@ -77,7 +74,8 @@ const SignUp = () => {
         placeholder="* Password"
       />
       <Button
-        onClick={() => signup(inputs)}
+        onClick={handleClick}
+        isDisabled={isDisabled}
         isLoading={loading}
         mt={"6px"}
         h={"full"}
@@ -85,7 +83,6 @@ const SignUp = () => {
         size={"lg"}
         variant={"auth"}
         fontSize={"15px"}
-        isDisabled={isDisabled}
         _disabled={{
           bg: useColorModeValue("#000000", "#FFFFFF"),
           color: useColorModeValue("#FFFFFF", "#000000"),
@@ -94,17 +91,12 @@ const SignUp = () => {
             bg: useColorModeValue("#000000", "#FFFFFF"),
             color: useColorModeValue("#FFFFFF", "#000000"),
             opacity: 0.8,
+            cursor: "not-allowed",
           },
         }}
       >
         Sign Up
       </Button>
-      {error && (
-        <Alert status="error" fontSize={13} p={2} mt={2} borderRadius={4}>
-          <AlertIcon fontSize={12} />
-          {error.message}
-        </Alert>
-      )}
     </>
   );
 };
