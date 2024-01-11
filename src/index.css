@@ -2,6 +2,9 @@
   margin: 0 auto;
   /* max-width: 1230px; */
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .swiper-button-prev::after,
