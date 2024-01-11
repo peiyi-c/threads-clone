@@ -27,7 +27,9 @@ const Navigation = () => {
 
   useEffect(() => {
     const changePage = () => {
-      if (content === "profile") {
+      if (content === "home") {
+        navigate("/");
+      } else if (content === "profile") {
         navigate(user.username);
       } else {
         navigate(content);
