@@ -10,6 +10,8 @@ import SearchPage from "./pages/SearchPage/SearchPage";
 import ActivityPage from "./pages/ActivityPage/ActivityPage";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import PrivateRoute from "./routes/PrivateRoute";
+import PublicRoute from "./routes/PublicRoute";
 
 function App() {
   return (
@@ -17,13 +19,20 @@ function App() {
       <ContentMessage>
         <Routes>
           <Route path="/" element={<GeneralLayout />}>
-            <Route index element={<HomePage />} />
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="/activity" element={<ActivityPage />} />
+            {/* only for auth user */}
+            <Route element={<PrivateRoute />}>
+              <Route index element={<HomePage />} />
+              <Route path="/search" element={<SearchPage />} />
+              <Route path="/activity" element={<ActivityPage />} />
+            </Route>
+            {/* for both auth user and not auth user */}
             <Route path="/:username" element={<ProfilePage />} />
           </Route>
-          <Route path="/login" element={<AuthPage />} />
-          <Route path="/signup" element={<AuthPage />} />
+          {/* only for not auth user */}
+          <Route element={<PublicRoute />}>
+            <Route path="/login" element={<AuthPage />} />
+            <Route path="/signup" element={<AuthPage />} />
+          </Route>
         </Routes>
       </ContentMessage>
     </>
