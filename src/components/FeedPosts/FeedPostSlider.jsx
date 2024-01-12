@@ -14,13 +14,11 @@ const FeedPostSlider = ({ images }) => {
     if (currentSlide === 2) return;
     swiperRef.current?.slidePrev();
     setCurrentSlide((prev) => prev - 1);
-    console.log(currentSlide);
   };
   const handleNextClick = () => {
     if (currentSlide === images.length) return;
     swiperRef.current?.slideNext();
     setCurrentSlide((prev) => prev + 1);
-    console.log(currentSlide);
   };
   return (
     <HStack ml={"-10px"}>
@@ -46,8 +44,8 @@ const FeedPostSlider = ({ images }) => {
         slidesPerView={3}
         navigation
         scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
+        //  onSwiper={(swiper) => console.log(swiper)}
+        //  onSlideChange={() => console.log("slide change")}
       >
         {images.map((image) => (
           <SwiperSlide key={image.id}>
