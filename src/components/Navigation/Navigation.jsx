@@ -34,6 +34,8 @@ const Navigation = () => {
         if (user) {
           navigate(`@${user.username}`);
         }
+      } else if (content === "create") {
+        return;
       } else {
         navigate(content);
       }
