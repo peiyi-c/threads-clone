@@ -19,16 +19,16 @@ function App() {
       <ContentMessage>
         <Routes>
           <Route path="/" element={<GeneralLayout />}>
-            {/* only for auth user */}
+            {/* only for authUser */}
             <Route element={<PrivateRoute />}>
               <Route index element={<HomePage />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/activity" element={<ActivityPage />} />
             </Route>
-            {/* for both auth user and not auth user */}
+            {/* for authUser and !authUser */}
             <Route path="/:username" element={<ProfilePage />} />
           </Route>
-          {/* only for not auth user */}
+          {/* only for !authUser */}
           <Route element={<PublicRoute />}>
             <Route path="/login" element={<AuthPage />} />
             <Route path="/signup" element={<AuthPage />} />
