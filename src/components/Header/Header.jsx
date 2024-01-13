@@ -1,9 +1,13 @@
-import { Box, Grid, GridItem } from "@chakra-ui/react";
+import { Box, Grid, GridItem, Button } from "@chakra-ui/react";
 import { Threads } from "../../assets/logos";
 import Navigation from "../Navigation/Navigation";
 import HeaderMenu from "./HeaderMenu";
+import useAuthStore from "../../store/authStore";
+import { Link } from "react-router-dom";
 
 const Header = () => {
+  const { user } = useAuthStore();
+
   return (
     <header
       style={{
@@ -45,18 +49,23 @@ const Header = () => {
             pe={"24px"}
           >
             {/* when authUser */}
-            <HeaderMenu />
+            {user && <HeaderMenu />}
+
             {/* when !authUser */}
-            {/* <Button
-            size={"sm"}
-            color={"white"}
-            bg="blackAlpha.900"
-            _hover={{
-              bg: "blackAlpha.900",
-            }}
-          >
-            Log in
-          </Button> */}
+            {!user && (
+              <Link to="/login">
+                <Button
+                  size={"sm"}
+                  color={"white"}
+                  bg="blackAlpha.900"
+                  _hover={{
+                    bg: "blackAlpha.900",
+                  }}
+                >
+                  Log in
+                </Button>
+              </Link>
+            )}
           </GridItem>
         </Grid>
       </Box>

@@ -12,6 +12,7 @@ import {
   Text,
   useColorMode,
 } from "@chakra-ui/react";
+import useLogout from "../../hooks/useLogout";
 
 const HeaderMenu = () => {
   const buttonRef = useRef(null);
@@ -19,7 +20,7 @@ const HeaderMenu = () => {
     buttonRef.current.click();
   };
   const { toggleColorMode } = useColorMode();
-
+  const { logout } = useLogout();
   return (
     <Grid
       gridTemplateColumns={"1fr"}
@@ -50,7 +51,12 @@ const HeaderMenu = () => {
             </MenuItem>
             <MenuDivider />
             <MenuItem>
-              <Text w={"full"} textAlign={"center"}>
+              <Text
+                onClick={() => logout()}
+                w={"full"}
+                textAlign={"center"}
+                role="button"
+              >
                 Log out
               </Text>
             </MenuItem>
