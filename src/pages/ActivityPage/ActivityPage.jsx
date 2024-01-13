@@ -7,7 +7,7 @@ const ActivityPage = () => {
   const activities = [
     "All",
     "Requests",
-    "Relies",
+    "Replies",
     "Mentions",
     "Quotes",
     "Verified",
