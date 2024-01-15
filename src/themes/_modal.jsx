@@ -6,7 +6,7 @@ const modalStyle = {
       borderRadius: "18px",
     },
     overlay: {
-      bg: "#00000066",
+      bg: "#56565699",
     },
     dialogContainer: {},
     dialog: {
@@ -20,46 +20,31 @@ const modalStyle = {
     },
     footer: {
       bg: mode("#ffffff", "#181818")(props),
+      boxShadow: "0 12px 24px 0 #00000014",
       borderRadius: "18px",
     },
   }),
   variants: {
-    title: {
-      header: {
-        padding: 0,
-        color: "#fff",
-        textAlign: "center",
-        bg: "transparent",
-      },
-      dialogContainer: {
-        bg: "transparent",
-
-        margin: 0,
-      },
-      dialog: {
-        bg: "transparent",
-        "--modal-shadow": "none",
-      },
-      body: {},
-      footer: {},
-    },
     form: {
       header: {
+        backgroundColor: { base: "#ffffff", md: "transparent" },
         borderRadius: { md: "18px" },
+        color: { base: "#000000", md: "#ffffff" },
       },
       dialogContainer: {},
       dialog: {
         h: { base: "100vh", md: "auto" },
         w: { base: "100vw" },
         maxW: { md: "32rem" },
-        borderRadius: { md: "18px" },
+        backgroundColor: "transparent",
+        "--modal-shadow": "none",
       },
       body: {
         py: 0,
-        borderRadius: { md: "18px" },
+        borderRadius: { md: "18px 18px 0 0" },
       },
       footer: {
-        borderRadius: { md: "18px" },
+        borderRadius: { md: "0 0 18px 18px" },
       },
     },
   },

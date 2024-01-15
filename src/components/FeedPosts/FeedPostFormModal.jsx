@@ -189,18 +189,3 @@ const FeedPostFormModal = ({ onClosePost, isOpenPost }) => {
 };
 
 export default FeedPostFormModal;
-// const FeedPostFormModalHeader = ({ isOpen, onClose }) => {
-//   return (
-//     <Modal
-//       onClose={onClose}
-//       isOpen={isOpen}
-//       motionPreset="slideInTop"
-//       variant={"title"}
-//       closeOnOverlayClick={false}
-//     >
-//       <ModalContent>
-//         <ModalHeader>New thread</ModalHeader>
-//       </ModalContent>
-//     </Modal>
-//   );
-// };
