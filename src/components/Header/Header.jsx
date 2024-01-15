@@ -4,10 +4,12 @@ import Navigation from "../Navigation/Navigation";
 import HeaderMenu from "./HeaderMenu";
 import useAuthStore from "../../store/authStore";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { ContentContext } from "../../contexts/contentContext";
 
 const Header = () => {
   const { user } = useAuthStore();
-
+  const { setContent } = useContext(ContentContext);
   return (
     <header
       style={{
@@ -29,9 +31,11 @@ const Header = () => {
             alignSelf={"center"}
             justifySelf={{ base: "center", md: "start" }}
             pl={{ md: "24px" }}
+            onClick={() => setContent("home")}
           >
             <Threads />
           </GridItem>
+
           <GridItem
             display={{ base: "none", md: "block" }}
             colStart={{ md: 2 }}
