@@ -7,19 +7,20 @@ import { Activity } from "../../assets/logos";
 import { Profile } from "../../assets/logos";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { useColorModeValue, useDisclosure } from "@chakra-ui/react";
-import { useContext, useEffect, useMemo } from "react";
+import { useContext, useEffect } from "react";
 import { ContentContext } from "../../contexts/contentContext";
 import { useNavigate } from "react-router-dom";
 import FeedPostFormModal from "../FeedPosts/FeedPostFormModal";
 import useAuthStore from "../../store/authStore";
+import useUserProfileStore from "../../store/userProfileStore";
 
 const Navigation = () => {
   const hoverBgColor = useColorModeValue("#0000000a", "#ffffff0d");
   const { content, setContent } = useContext(ContentContext);
   const { onOpen, isOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
-  const { pathname } = useLocation();
   const { user } = useAuthStore();
+  const { pathname } = useLocation();
 
   const handleNavClick = (e) => {
     let value = e.target?.closest("svg")?.ariaLabel || e.target.title;
@@ -28,20 +29,35 @@ const Navigation = () => {
 
   useEffect(() => {
     const changePage = () => {
-      if (content === "home") {
-        navigate("/");
-      } else if (content === "profile") {
-        if (user) {
-          navigate(`@${user.username}`);
+      if (!user) {
+        switch (pathname) {
+          case "/":
+          case "/search":
+          case "/activity":
+            navigate("/login");
+            break;
         }
-      } else if (content === "create") {
-        return;
-      } else {
-        navigate(content);
+        pathname.startsWith("/@") ? navigate(pathname) : navigate("/login");
+      }
+      if (user) {
+        switch (content) {
+          case "home":
+            navigate("/");
+            break;
+          case "search":
+          case "activity":
+            navigate(content);
+            break;
+          case "create":
+            return;
+          case "profile":
+            navigate(`@${user.username}`);
+            return;
+        }
       }
     };
     changePage();
-  }, [content, user, navigate]);
+  }, [content, user, navigate, pathname]);
 
   return (
     <nav

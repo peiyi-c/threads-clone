@@ -26,7 +26,7 @@ function App() {
               <Route path="/activity" element={<ActivityPage />} />
             </Route>
             {/* for authUser and !authUser */}
-            <Route path="/:username" element={<ProfilePage />} />
+            <Route path="/:ausername" element={<ProfilePage />} />
           </Route>
           {/* only for !authUser */}
           <Route element={<PublicRoute />}>
