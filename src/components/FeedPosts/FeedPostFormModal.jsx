@@ -20,11 +20,13 @@ import {
 import { AttachMedia, Poll, Tag } from "../../assets/logos";
 import { useLayoutEffect, useRef, useState } from "react";
 import FeedPostFormModalAlert from "./FeedPostFormModalAlert";
+import useAuthStore from "../../store/authStore";
 
 const FeedPostFormModal = ({ onClosePost, isOpenPost }) => {
   const [value, setValue] = useState("");
   const textRef = useRef(null);
   const { onOpen, isOpen, onClose } = useDisclosure();
+  const { user } = useAuthStore();
 
   const MIN_TEXTAREA_HEIGHT = 16;
 
@@ -100,7 +102,7 @@ const FeedPostFormModal = ({ onClosePost, isOpenPost }) => {
                   src=""
                 />
                 <Text as={"span"} fontSize={"15px"} fontWeight={"bold"}>
-                  username
+                  {user && user?.username}
                 </Text>
                 <Textarea
                   ref={textRef}
