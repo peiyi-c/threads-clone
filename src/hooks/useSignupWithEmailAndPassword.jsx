@@ -64,6 +64,7 @@ const useSignupWithEmailAndPassword = () => {
           username,
           displayName,
           bioDescription: "",
+          bioLink: "",
           profilePicURL: "",
           followers: [],
           followings: [],
