@@ -8,6 +8,7 @@ import modalStyle from "./_modal.jsx";
 import inputStyle from "./_input.jsx";
 import textareaStyle from "./_textarea.jsx";
 import tabsStyle from "./_tab.jsx";
+import switchStyle from "./_switch.jsx";
 
 const styles = {
   global: (props) => ({
@@ -59,6 +60,7 @@ const components = {
   Input: { ...inputStyle },
   Textarea: { ...textareaStyle },
   Tabs: { ...tabsStyle },
+  Switch: { ...switchStyle },
 };
 
 const theme = extendTheme({

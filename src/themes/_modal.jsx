@@ -25,17 +25,21 @@ const modalStyle = {
     },
   }),
   variants: {
-    form: {
+    form: (props) => ({
       header: {
-        backgroundColor: { base: "#ffffff", md: "transparent" },
+        backgroundColor: {
+          base: mode("#ffffff", "#181818")(props),
+          md: "transparent",
+        },
         borderRadius: { md: "18px" },
-        color: { base: "#000000", md: "#ffffff" },
+        color: { base: mode("#000000", "#ffffff")(props), md: "#ffffff" },
+        fontSize: "16px",
       },
       dialogContainer: {},
       dialog: {
         h: { base: "100vh", md: "auto" },
         w: { base: "100vw" },
-        maxW: { md: "32rem" },
+        maxW: { md: "38.75rem" },
         backgroundColor: "transparent",
         "--modal-shadow": "none",
       },
@@ -46,7 +50,7 @@ const modalStyle = {
       footer: {
         borderRadius: { md: "0 0 18px 18px" },
       },
-    },
+    }),
   },
 };
 
