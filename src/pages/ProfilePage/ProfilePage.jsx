@@ -1,16 +1,18 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex, useDisclosure } from "@chakra-ui/react";
 import ProfileCard from "../../components/Profile/ProfileCard";
 import ProfileTabs from "../../components/Profile/ProfileTabs";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import useAuthStore from "../../store/authStore";
 import { useParams } from "react-router-dom";
 import useGetProfileByUsername from "../../hooks/useGetProfileByUsername";
+import ProfileEditModal from "../../components/Profile/ProfileEditModal";
 
 const ProfilePage = () => {
   const { user } = useAuthStore();
   const { ausername } = useParams();
   const username = ausername.slice(1);
   const { isLoading, userProfile } = useGetProfileByUsername(username);
+  const { onOpen, isOpen, onClose } = useDisclosure();
 
   const viewOwnProfileAndAuth = user?.username === username;
   const viewOthersProfileAndAuth = user?.username !== userProfile?.username;
@@ -27,6 +29,7 @@ const ProfilePage = () => {
       <Box my={"12px"}>
         {viewOwnProfileAndAuth && (
           <Button
+            onClick={onOpen}
             w={"full"}
             variant={"squareOutline"}
             _active={{
@@ -70,6 +73,14 @@ const ProfilePage = () => {
 
       {/* Tabs */}
       {!isLoading && <ProfileTabs user={userProfile} />}
+
+      {viewOwnProfileAndAuth && isOpen && (
+        <ProfileEditModal
+          onCloseEdit={onClose}
+          isOpenEdit={isOpen}
+          user={user}
+        />
+      )}
     </>
   );
 };
