@@ -33,7 +33,7 @@ const ProfileCard = ({ user, isLoading }) => {
             <Text lineHeight={"21px"}>{user.username}</Text>
           </Box>
           <Box ml={"auto"}>
-            <Avatar size={"lg"} />
+            <Avatar size={"lg"} src={user.profilePicURL} />
           </Box>
         </Flex>
         <Text lineHeight={"21px"}>{user.bioDescription}</Text>
