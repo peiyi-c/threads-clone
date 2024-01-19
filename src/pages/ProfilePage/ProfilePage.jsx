@@ -6,6 +6,7 @@ import useAuthStore from "../../store/authStore";
 import { useParams } from "react-router-dom";
 import useGetProfileByUsername from "../../hooks/useGetProfileByUsername";
 import ProfileEditModal from "../../components/Profile/ProfileEditModal";
+import useFollowUser from "../../hooks/useFollowUser";
 
 const ProfilePage = () => {
   const { user } = useAuthStore();
@@ -13,10 +14,17 @@ const ProfilePage = () => {
   const username = ausername.slice(1);
   const { isLoading, userProfile } = useGetProfileByUsername(username);
   const { onOpen, isOpen, onClose } = useDisclosure();
+  const { handleFollowUser, isFollowing } = useFollowUser(userProfile?.uid);
 
   const viewOwnProfileAndAuth = user?.username === username;
   const viewOthersProfileAndAuth = user?.username !== userProfile?.username;
-  // const viewProfileAndUnauth = !user;
+  const viewProfileAndUnauth = !user;
+  const displayProfileTab =
+    viewOwnProfileAndAuth ||
+    !userProfile?.isPrivate ||
+    (viewOthersProfileAndAuth &&
+      userProfile?.isPrivate &&
+      user.followings.includes(userProfile.uid));
   const userNotFound = !isLoading && !userProfile;
 
   if (userNotFound && !viewOwnProfileAndAuth) return <NotFoundPage />;
@@ -26,54 +34,58 @@ const ProfilePage = () => {
       {<ProfileCard user={userProfile} isLoading={isLoading} />}
 
       {/* Button */}
-      <Box my={"12px"}>
-        {viewOwnProfileAndAuth && (
-          <Button
-            onClick={onOpen}
-            w={"full"}
-            variant={"squareOutline"}
-            _active={{
-              transform: "scale(0.95)",
-              transition: "transform 0.11s ease-in-out",
-            }}
-            fontSize={"15px"}
-          >
-            Edit Profile
-          </Button>
-        )}
+      {!viewProfileAndUnauth && (
+        <Box my={"12px"}>
+          {viewOwnProfileAndAuth && (
+            <Button
+              onClick={onOpen}
+              w={"full"}
+              variant={"squareOutline"}
+              _active={{
+                transform: "scale(0.95)",
+                transition: "transform 0.11s ease-in-out",
+              }}
+              fontSize={"15px"}
+            >
+              Edit Profile
+            </Button>
+          )}
 
-        {!isLoading && viewOthersProfileAndAuth && (
-          <Flex justifyContent={"center"} gap={"4px"}>
-            <Button
-              w={"full"}
-              variant={"squareOutline"}
-              _active={{
-                transform: "scale(0.9)",
-                transition: "transform 0.11s ease-in-out",
-              }}
-              fontSize={"15px"}
-            >
-              Follow
-            </Button>
-            <Button
-              w={"full"}
-              variant={"squareOutline"}
-              _active={{
-                transform: "scale(0.9)",
-                transition: "transform 0.11s ease-in-out",
-              }}
-              fontSize={"15px"}
-            >
-              Mention
-            </Button>
-          </Flex>
-        )}
-        {/* {viewProfileAndUnauth && <></>} */}
-      </Box>
+          {!isLoading && viewOthersProfileAndAuth && (
+            <Flex justifyContent={"center"} gap={"4px"}>
+              <Button
+                onClick={handleFollowUser}
+                w={"full"}
+                variant={"squareOutline"}
+                _active={{
+                  transform: "scale(0.9)",
+                  transition: "transform 0.11s ease-in-out",
+                }}
+                fontSize={"15px"}
+              >
+                {isFollowing ? "Unfollow" : "Follow"}
+              </Button>
+              <Button
+                w={"full"}
+                variant={"squareOutline"}
+                _active={{
+                  transform: "scale(0.9)",
+                  transition: "transform 0.11s ease-in-out",
+                }}
+                fontSize={"15px"}
+              >
+                Mention
+              </Button>
+            </Flex>
+          )}
+          {/* {viewProfileAndUnauth && <></>} */}
+        </Box>
+      )}
 
       {/* Tabs */}
-      {!isLoading && <ProfileTabs user={userProfile} />}
+      {!isLoading && displayProfileTab && <ProfileTabs user={userProfile} />}
 
+      {/* Edit Profile Modal */}
       {viewOwnProfileAndAuth && isOpen && (
         <ProfileEditModal
           onCloseEdit={onClose}
