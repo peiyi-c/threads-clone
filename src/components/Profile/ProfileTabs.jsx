@@ -1,7 +1,7 @@
 import { Tabs, Tab, TabList, TabPanels, TabPanel } from "@chakra-ui/react";
 import FeedPost from "../FeedPosts/FeedPost";
 
-const ProfileTabs = () => {
+const ProfileTabs = ({ user }) => {
   const tabs = ["Threads", "Replies", "Reposts"];
   return (
     <Tabs colorScheme="black">
