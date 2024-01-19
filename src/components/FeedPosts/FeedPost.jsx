@@ -79,7 +79,7 @@ const FeedPost = () => {
           </Text>
 
           <Box my={"12px"} cursor={"pointer"}>
-            <FeedPostSlider images={images} />
+            <FeedPostSlider images={images} isEdit={false} />
           </Box>
 
           <HStack my={"12px"}>
