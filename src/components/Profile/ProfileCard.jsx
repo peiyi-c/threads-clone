@@ -18,7 +18,8 @@ const ProfileCard = ({ user, isLoading }) => {
   if (isLoading) return <ProfileCardSkeleton />;
 
   return (
-    !isLoading && (
+    !isLoading &&
+    user && (
       <VStack p={"16px 12px"} alignItems={"flex-start"}>
         <Flex
           w={"full"}
