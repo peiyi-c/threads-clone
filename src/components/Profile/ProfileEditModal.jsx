@@ -18,7 +18,7 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import usePreviewImg from "../../hooks/usePreviewImg";
 import useEditProfile from "../../hooks/useEditProfile";
 
