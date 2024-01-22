@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useAuthStore from "../store/authStore";
-import usePostStore from "../store/postStore";
+import useThreadStore from "../store/threadStore";
 import useUserProfileStore from "../store/userProfileStore";
 import useShowToast from "./useShowToast";
 import {
@@ -17,7 +17,7 @@ import { getDownloadURL, ref, uploadString } from "firebase/storage";
 const useCreateThread = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useAuthStore();
-  const { createPost } = usePostStore();
+  const { createThread } = useThreadStore();
   const { userProfile, addPost } = useUserProfileStore();
   const showToast = useShowToast();
 
@@ -29,9 +29,9 @@ const useCreateThread = () => {
     }
 
     setIsLoading(true);
-
+    console.log(images);
     const newThread = {
-      id: "", // will get from postDocRef later
+      // id: "", // will get from postDocRef later
       createdBy: user.uid,
       createdAt: Date.now(),
       text,
@@ -63,9 +63,7 @@ const useCreateThread = () => {
 
       const uploadStrings = async (imageRefs, selectedFiles) => {
         for (let i = 0; i < imageRefs.length; i++) {
-          for (let j = 0; j < selectedFiles.length; j++) {
-            await uploadString(imageRefs[i], selectedFiles[j], "data_url");
-          }
+          await uploadString(imageRefs[i], selectedFiles[i], "data_url");
         }
       };
       await uploadStrings(imageRefs, selectedFiles);
@@ -74,7 +72,10 @@ const useCreateThread = () => {
         let URLs = [];
         for (let i = 0; i < imageRefs.length; i++) {
           const downloadURL = await getDownloadURL(imageRefs[i]);
-          URLs.push(downloadURL);
+          URLs.push({
+            id: i,
+            path: downloadURL,
+          });
         }
         return URLs;
       };
@@ -84,7 +85,7 @@ const useCreateThread = () => {
       // update store
       newThread.mediaURLs = downloadURLs;
       if (userProfile) {
-        createPost({ ...newThread, id: postDocRef.id });
+        createThread({ ...newThread, id: postDocRef.id });
         addPost({ ...newThread, id: postDocRef.id });
       }
 
