@@ -13,13 +13,14 @@ import { Continue } from "../../assets/logos";
 import { useRef, useState } from "react";
 
 const FeedPostSlider = ({ images, setImages, isEdit }) => {
-  const [currentSlide, setCurrentSlide] = useState(2);
+  const INITIAL_SLIDE = 2;
+  const [currentSlide, setCurrentSlide] = useState(INITIAL_SLIDE);
   const imageBorderColor = useColorModeValue("#0000001a", "#ffffff0d");
   const swiperRef = useRef(null);
   const useSwiper = images?.length >= 3;
 
   const handlePrevClick = () => {
-    if (currentSlide === 2) return;
+    if (currentSlide === INITIAL_SLIDE) return;
     swiperRef.current?.slidePrev();
     setCurrentSlide((prev) => prev - 1);
   };
@@ -75,6 +76,7 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
                   justifyContent={"center"}
                 >
                   <Image
+                    h={"full"}
                     src={image.path}
                     borderRadius={"18px"}
                     border={`1.5px solid ${imageBorderColor}`}
