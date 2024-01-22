@@ -1,22 +1,22 @@
 import { Tabs, Tab, TabList, TabPanels, TabPanel } from "@chakra-ui/react";
-import FeedPost from "../FeedPosts/FeedPost";
+import useGetUserThreads from "../../hooks/useGetUserPosts";
+import FeedPosts from "../FeedPosts/FeedPosts";
 
-const ProfileTabs = ({ user }) => {
-  const tabs = ["Threads", "Replies", "Reposts"];
+const ProfileTabs = () => {
+  const TABS = ["Threads", "Replies", "Reposts"];
+  const { isLoading, threads } = useGetUserThreads();
+
   return (
     <Tabs colorScheme="black">
       <TabList>
-        {tabs.map((tab, index) => (
+        {TABS.map((tab, index) => (
           <Tab key={index} fontSize={"15px"}>
             {tab}
           </Tab>
         ))}
       </TabList>
       <TabPanels>
-        <TabPanel>
-          <FeedPost />
-          <FeedPost />
-        </TabPanel>
+        <TabPanel>{!isLoading && <FeedPosts threads={threads} />}</TabPanel>
         <TabPanel>
           <p>Replies</p>
         </TabPanel>

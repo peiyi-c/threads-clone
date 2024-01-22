@@ -83,7 +83,7 @@ const ProfilePage = () => {
       )}
 
       {/* Tabs */}
-      {!isLoading && displayProfileTab && <ProfileTabs user={userProfile} />}
+      {!isLoading && displayProfileTab && <ProfileTabs />}
 
       {/* Edit Profile Modal */}
       {viewOwnProfileAndAuth && isOpen && (
