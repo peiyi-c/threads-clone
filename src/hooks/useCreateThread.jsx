@@ -29,7 +29,7 @@ const useCreateThread = () => {
     }
 
     setIsLoading(true);
-    console.log(images);
+
     const newThread = {
       // id: "", // will get from postDocRef later
       createdBy: user.uid,
