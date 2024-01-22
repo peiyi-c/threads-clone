@@ -68,7 +68,7 @@ const useSignupWithEmailAndPassword = () => {
           profilePicURL: "",
           // followers: [],
           // followings: [],
-          // posts: [],
+          // threads: [],
           // isPrivate: false,
           // isVerified: false,
           // threads: [],
