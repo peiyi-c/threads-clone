@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   Grid,
   Avatar,
@@ -11,28 +12,12 @@ import {
 } from "@chakra-ui/react";
 import { More, Reply, Repost, Share, UnLike } from "../../assets/logos";
 import FeedPostSlider from "./FeedPostSlider";
+import { timeAgo } from "../../utils/timeAgo";
+import useGetProfileById from "../../hooks/useGetProfileById";
 
-// test images
-const images = [
-  {
-    id: 1,
-    path: "https://picsum.photos/200/300",
-  },
-  {
-    id: 2,
-    path: "https://picsum.photos/200/200",
-  },
-  {
-    id: 3,
-    path: "https://picsum.photos/200/280",
-  },
-  {
-    id: 4,
-    path: "https://picsum.photos/200/220",
-  },
-];
+const FeedPost = ({ thread }) => {
+  const { isLoading, userProfile } = useGetProfileById(thread.createdBy);
 
-const FeedPost = () => {
   return (
     <>
       <Grid
@@ -40,22 +25,28 @@ const FeedPost = () => {
         templateColumns={"48px minmax(0, 1fr)"}
         templateRows={"21px 19px max-content max-content"}
       >
-        <Avatar
-          gridColumnStart={1}
-          gridColumnEnd={2}
-          gridRowStart={1}
-          gridRowEnd={3}
-          size="md"
-          name=""
-          src=""
-        />
+        {!isLoading && (
+          <Avatar
+            gridColumnStart={1}
+            gridColumnEnd={2}
+            gridRowStart={1}
+            gridRowEnd={3}
+            size="md"
+            name={userProfile?.username}
+            src={userProfile?.profilePicURL}
+          />
+        )}
+
         <HStack justifyContent={"space-between"}>
-          <Text as={"span"} fontSize={"15px"} fontWeight={"bold"} ml={2}>
-            username
-          </Text>
+          {!isLoading && (
+            <Text as={"span"} fontSize={"15px"} fontWeight={"bold"} ml={2}>
+              {userProfile.displayName}
+            </Text>
+          )}
+
           <HStack>
             <Text as={"span"} opacity={0.5}>
-              1d
+              {timeAgo(thread.createdAt)}
             </Text>
             <Button variant={"ghost"} size={"sm"}>
               <More />
@@ -71,16 +62,12 @@ const FeedPost = () => {
           gridRowStart={3}
           gridRowEnd={4}
         >
-          <Text>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde
-            facilis amet fuga dolore culpa officiis aliquid voluptates ratione
-            doloremque veniam laudantium inventore recusandae tempore sit ipsam
-            atque accusamus, repellat magnam!
-          </Text>
-
-          <Box my={"12px"} cursor={"pointer"}>
-            <FeedPostSlider images={images} isEdit={false} />
-          </Box>
+          <Text>{thread.text}</Text>
+          {thread.mediaURLs && (
+            <Box my={"12px"} cursor={"pointer"}>
+              <FeedPostSlider images={thread.mediaURLs} isEdit={false} />
+            </Box>
+          )}
 
           <HStack my={"12px"}>
             <Button variant={"ghost"} size={"sm"}>
@@ -163,11 +150,15 @@ const FeedPost = () => {
           opacity={0.5}
         >
           <Text as={"span"} cursor={"pointer"}>
-            3 replies
+            {thread.repliedBy ? thread.repliedBy?.length : 0}{" "}
+            {thread.repliedBy && thread.repliedBy?.length > 0
+              ? "replies"
+              : "reply"}
           </Text>{" "}
           {" · "}
           <Text as={"span"} cursor={"pointer"}>
-            118 likes
+            {thread.likedBy ? thread.likedBy?.length : 0}{" "}
+            {thread.likedBy && thread.likedBy?.length > 0 ? "likes" : "like"}
           </Text>
         </Text>
       </Grid>

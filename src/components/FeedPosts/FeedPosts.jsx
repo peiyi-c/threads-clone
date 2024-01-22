@@ -1,13 +1,13 @@
-import FeedPostForm from "./FeedPostForm";
+/* eslint-disable react/prop-types */
 import FeedPost from "./FeedPost";
 
-const FeedPosts = () => {
+const FeedPosts = ({ threads }) => {
   return (
-    <section>
-      <FeedPostForm />
-      <FeedPost />
-      <FeedPost />
-    </section>
+    <>
+      {threads.map((thread, index) => (
+        <FeedPost key={index} thread={thread} />
+      ))}
+    </>
   );
 };
 
