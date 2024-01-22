@@ -3,7 +3,6 @@ import useAuthStore from "../store/authStore";
 import usePostStore from "../store/postStore";
 import useUserProfileStore from "../store/userProfileStore";
 import useShowToast from "./useShowToast";
-import { useLocation } from "react-router-dom";
 import {
   addDoc,
   arrayUnion,
@@ -21,10 +20,14 @@ const useCreateThread = () => {
   const { createPost } = usePostStore();
   const { userProfile, addPost } = useUserProfileStore();
   const showToast = useShowToast();
-  const { pathname } = useLocation();
 
   const handleCreatePost = async (text, images) => {
     if (isLoading) return;
+    if (!text && !images) {
+      showToast("Error", "Please add text or image.", "error");
+      return;
+    }
+
     setIsLoading(true);
 
     const newThread = {
@@ -65,7 +68,7 @@ const useCreateThread = () => {
           }
         }
       };
-      uploadStrings(imageRefs, selectedFiles);
+      await uploadStrings(imageRefs, selectedFiles);
 
       const downloadImageURLs = async (imageRefs) => {
         let URLs = [];
@@ -75,15 +78,15 @@ const useCreateThread = () => {
         }
         return URLs;
       };
-      const downloadURLs = downloadImageURLs(imageRefs);
+      const downloadURLs = await downloadImageURLs(imageRefs);
       await updateDoc(postDocRef, { mediaURLs: downloadURLs });
 
       // update store
       newThread.mediaURLs = downloadURLs;
-      if (userProfile.uid === user.uid)
+      if (userProfile) {
         createPost({ ...newThread, id: postDocRef.id });
-      if (pathname !== "/" && userProfile.uid === user.uid)
         addPost({ ...newThread, id: postDocRef.id });
+      }
 
       showToast("Success", "Posted!", "success");
     } catch (error) {
