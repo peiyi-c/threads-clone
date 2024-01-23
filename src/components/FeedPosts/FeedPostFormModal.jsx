@@ -67,10 +67,6 @@ const FeedPostFormModal = ({ onClosePost, isOpenPost }) => {
     text || images ? onOpen() : onClosePost();
   };
 
-  const addFeedPostComment = () => {
-    console.log("addFeedPostComment");
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     await handleCreatePost(text, images);
@@ -81,182 +77,169 @@ const FeedPostFormModal = ({ onClosePost, isOpenPost }) => {
 
   return (
     <>
-      <>
-        <Modal
-          isCentered
-          isOpen={isOpenPost}
-          onClose={handleClosePost}
-          motionPreset="scale"
-          size={"lg"}
-          variant={"form"}
-        >
-          <ModalOverlay />
-          <form onSubmit={handleSubmit}>
-            <ModalContent>
-              <ModalHeader>
-                <Grid
-                  templateColumns={"minmax(64px,100px) 1fr minmax(64px,100px)"}
-                  alignItems={"center"}
-                >
-                  <Button
-                    onClick={handleClosePost}
-                    variant={"line"}
-                    fontWeight={"normal"}
-                    display={{ md: "none" }}
-                    textAlign={"left"}
-                    pl={0}
-                  >
-                    Cancel
-                  </Button>
-                  <Text
-                    gridColumnStart={2}
-                    gridColumnEnd={3}
-                    as={"span"}
-                    justifySelf={"center"}
-                  >
-                    New thread
-                  </Text>
-                </Grid>
-              </ModalHeader>
-
-              <ModalBody>
-                <Grid
-                  templateColumns={"48px minmax(0, 1fr)"}
-                  templateRows={"21px repeat(max-content, 3)"}
-                  columnGap={"0.65rem"}
-                >
-                  <Avatar
-                    gridColumnStart={1}
-                    gridColumnEnd={2}
-                    gridRowStart={1}
-                    gridRowEnd={3}
-                    size="md"
-                    name={user.username}
-                    src={user.profilePicURL}
-                  />
-                  <Text as={"span"} fontSize={"15px"} fontWeight={"bold"}>
-                    {user && user?.username}
-                  </Text>
-                  <Box>
-                    <Textarea
-                      ref={textRef}
-                      value={text}
-                      resize={"none"}
-                      onChange={handleInputChange}
-                      size={"sm"}
-                      minHeight={MIN_TEXTAREA_HEIGHT}
-                      overflowY={"hidden"}
-                      variant={"standard"}
-                      gridColumnStart={2}
-                      gridColumnEnd={3}
-                      gridRowStart={2}
-                      placeholder={"Start a thread..."}
-                      mb={2}
-                    />
-                    {images && (
-                      <Box
-                        gridColumnStart={2}
-                        gridColumnEnd={3}
-                        gridRowStart={2}
-                      >
-                        <FeedPostSlider
-                          images={images}
-                          setImages={setImages}
-                          isEdit={true}
-                        />
-                      </Box>
-                    )}
-                  </Box>
-
-                  <Flex
-                    pt={"33px"}
-                    justifyContent={"center"}
-                    gridColumnStart={1}
-                    gridColumnEnd={2}
-                    gridRowStart={2}
-                    gridRowEnd={4}
-                  >
-                    <Divider orientation="vertical" variant={"vertical"} />
-                  </Flex>
-
-                  <HStack
-                    mt={"0.5rem"}
-                    columnGap={"0.75rem"}
-                    gridColumnStart={2}
-                    gridColumnEnd={3}
-                    gridRowStart={3}
-                    gridRowEnd={4}
-                  >
-                    <FormLabel
-                      htmlFor="image"
-                      m={0}
-                      cursor={"pointer"}
-                      _active={{
-                        transform: "scale(0.85)",
-                        transition: "transform 0.11s ease-in",
-                      }}
-                    >
-                      <AttachMedia />
-                    </FormLabel>
-                    <Tag />
-                    <Poll />
-                  </HStack>
-                  <Input
-                    type="file"
-                    id="image"
-                    hidden
-                    onChange={handleImgChange}
-                  />
-                  <ModalBodySub
-                    user={user}
-                    edit={text.trim().length}
-                    addFeedPostComment={addFeedPostComment}
-                  />
-                </Grid>
-              </ModalBody>
-
-              <ModalFooter display={"flex"} justifyContent={"space-between"}>
-                <Text
-                  as={"span"}
-                  color={useColorModeValue("#999999", "#777777")}
-                >
-                  Your followers can reply
-                </Text>
+      <Modal
+        isCentered
+        isOpen={isOpenPost}
+        onClose={handleClosePost}
+        motionPreset="scale"
+        size={"lg"}
+        variant={"form"}
+      >
+        <ModalOverlay />
+        <form onSubmit={handleSubmit}>
+          <ModalContent>
+            <ModalHeader>
+              <Grid
+                templateColumns={"minmax(64px,100px) 1fr minmax(64px,100px)"}
+                alignItems={"center"}
+              >
                 <Button
-                  isLoading={isLoading}
-                  size={"sm"}
-                  variant={"solid"}
-                  type="submit"
-                  ml={"auto"}
-                  isDisabled={!text}
-                  _disabled={{
+                  onClick={handleClosePost}
+                  variant={"line"}
+                  fontWeight={"normal"}
+                  display={{ md: "none" }}
+                  textAlign={"left"}
+                  pl={0}
+                >
+                  Cancel
+                </Button>
+                <Text
+                  gridColumnStart={2}
+                  gridColumnEnd={3}
+                  as={"span"}
+                  justifySelf={"center"}
+                >
+                  New thread
+                </Text>
+              </Grid>
+            </ModalHeader>
+
+            <ModalBody>
+              <Grid
+                templateColumns={"48px minmax(0, 1fr)"}
+                templateRows={"21px repeat(max-content, 3)"}
+                columnGap={"0.65rem"}
+              >
+                <Avatar
+                  gridColumnStart={1}
+                  gridColumnEnd={2}
+                  gridRowStart={1}
+                  gridRowEnd={3}
+                  size="md"
+                  name={user.username}
+                  src={user.profilePicURL}
+                />
+                <Text as={"span"} fontSize={"15px"} fontWeight={"bold"}>
+                  {user && user?.username}
+                </Text>
+                <Box>
+                  <Textarea
+                    ref={textRef}
+                    value={text}
+                    resize={"none"}
+                    onChange={handleInputChange}
+                    size={"sm"}
+                    minHeight={MIN_TEXTAREA_HEIGHT}
+                    overflowY={"hidden"}
+                    variant={"standard"}
+                    gridColumnStart={2}
+                    gridColumnEnd={3}
+                    gridRowStart={2}
+                    placeholder={"Start a thread..."}
+                    mb={2}
+                  />
+                  {images && (
+                    <Box gridColumnStart={2} gridColumnEnd={3} gridRowStart={2}>
+                      <FeedPostSlider
+                        images={images}
+                        setImages={setImages}
+                        isEdit={true}
+                      />
+                    </Box>
+                  )}
+                </Box>
+
+                <Flex
+                  pt={"33px"}
+                  justifyContent={"center"}
+                  gridColumnStart={1}
+                  gridColumnEnd={2}
+                  gridRowStart={2}
+                  gridRowEnd={4}
+                >
+                  <Divider orientation="vertical" variant={"vertical"} />
+                </Flex>
+
+                <HStack
+                  mt={"0.5rem"}
+                  columnGap={"0.75rem"}
+                  gridColumnStart={2}
+                  gridColumnEnd={3}
+                  gridRowStart={3}
+                  gridRowEnd={4}
+                >
+                  <FormLabel
+                    htmlFor="image"
+                    m={0}
+                    cursor={"pointer"}
+                    _active={{
+                      transform: "scale(0.85)",
+                      transition: "transform 0.11s ease-in",
+                    }}
+                  >
+                    <AttachMedia />
+                  </FormLabel>
+                  <Tag />
+                  <Poll />
+                </HStack>
+                <Input
+                  type="file"
+                  id="image"
+                  hidden
+                  onChange={handleImgChange}
+                />
+                <ModalBodySub user={user} edit={text.trim().length} />
+              </Grid>
+            </ModalBody>
+
+            <ModalFooter display={"flex"} justifyContent={"space-between"}>
+              <Text as={"span"} color={useColorModeValue("#999999", "#777777")}>
+                Your followers can reply
+              </Text>
+              <Button
+                isLoading={isLoading}
+                size={"sm"}
+                variant={"solid"}
+                type="submit"
+                ml={"auto"}
+                isDisabled={!text || !images}
+                _disabled={{
+                  bg: useColorModeValue("#000000", "#FFFFFF"),
+                  color: useColorModeValue("#FFFFFF", "#000000"),
+                  opacity: 0.25,
+                  _hover: {
                     bg: useColorModeValue("#000000", "#FFFFFF"),
                     color: useColorModeValue("#FFFFFF", "#000000"),
                     opacity: 0.25,
-                    _hover: {
-                      bg: useColorModeValue("#000000", "#FFFFFF"),
-                      color: useColorModeValue("#FFFFFF", "#000000"),
-                      opacity: 0.25,
-                      cursor: "not-allowed",
-                    },
-                  }}
-                >
-                  Post
-                </Button>
-              </ModalFooter>
-            </ModalContent>
-          </form>
-        </Modal>
-        {isOpen ? (
-          <FeedPostFormModalAlert
-            onClosePostAlert={onClose}
-            isOpenPostAlert={isOpen}
-            onClosePost={onClosePost}
-          />
-        ) : (
-          ""
-        )}
-      </>
+                    cursor: "not-allowed",
+                  },
+                }}
+              >
+                Post
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </form>
+      </Modal>
+      {isOpen ? (
+        <FeedPostFormModalAlert
+          onClosePostAlert={onClose}
+          isOpenPostAlert={isOpen}
+          onClosePost={onClosePost}
+        />
+      ) : (
+        ""
+      )}
     </>
   );
 };
