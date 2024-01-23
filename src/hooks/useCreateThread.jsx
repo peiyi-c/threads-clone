@@ -18,7 +18,7 @@ const useCreateThread = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useAuthStore();
   const { createThread } = useThreadStore();
-  const { userProfile, addPost } = useUserProfileStore();
+  const { userProfile, addThread } = useUserProfileStore();
   const showToast = useShowToast();
 
   const handleCreatePost = async (text, images) => {
@@ -86,7 +86,7 @@ const useCreateThread = () => {
       newThread.mediaURLs = downloadURLs;
       if (userProfile) {
         createThread({ ...newThread, id: postDocRef.id });
-        addPost({ ...newThread, id: postDocRef.id });
+        addThread({ ...newThread, id: postDocRef.id });
       }
 
       showToast("Success", "Posted!", "success");
