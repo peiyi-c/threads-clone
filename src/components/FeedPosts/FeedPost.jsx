@@ -9,17 +9,20 @@ import {
   Button,
   Divider,
   useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { More, Reply, Repost, Share, UnLike, Like } from "../../assets/logos";
 import FeedPostSlider from "./FeedPostSlider";
 import { timeAgo } from "../../utils/timeAgo";
 import useGetProfileById from "../../hooks/useGetProfileById";
 import useLikeThread from "../../hooks/useLikeThread";
+import FeedPostComment from "./FeedPostComment";
 
 const FeedPost = ({ thread }) => {
   const { isLoading, userProfile } = useGetProfileById(thread.createdBy);
   const { isLiked, likes, handleLikeThread } = useLikeThread(thread);
 
+  const { onOpen, isOpen, onClose } = useDisclosure();
   return (
     <>
       <Grid
@@ -75,7 +78,7 @@ const FeedPost = ({ thread }) => {
             <Button onClick={handleLikeThread} variant={"ghost"} size={"sm"}>
               {isLiked ? <Like /> : <UnLike />}
             </Button>
-            <Button variant={"ghost"} size={"sm"}>
+            <Button onClick={onOpen} variant={"ghost"} size={"sm"}>
               <Reply />
             </Button>
             <Button variant={"ghost"} size={"sm"}>
@@ -152,10 +155,8 @@ const FeedPost = ({ thread }) => {
           opacity={0.5}
         >
           <Text as={"span"} cursor={"pointer"}>
-            {thread.repliedBy ? thread.repliedBy?.length : 0}{" "}
-            {thread.repliedBy && thread.repliedBy?.length > 0
-              ? "replies"
-              : "reply"}
+            {thread.replies ? thread.replies?.length : 0}{" "}
+            {thread.replies && thread.replies?.length > 0 ? "replies" : "reply"}
           </Text>{" "}
           {" · "}
           <Text as={"span"} cursor={"pointer"}>
@@ -164,6 +165,15 @@ const FeedPost = ({ thread }) => {
         </Text>
       </Grid>
       <Divider orientation="horizontal" variant={"standard"} />
+
+      {isOpen && (
+        <FeedPostComment
+          onCloseComment={onClose}
+          isOpenComment={isOpen}
+          thread={thread}
+          userProfile={userProfile}
+        />
+      )}
     </>
   );
 };

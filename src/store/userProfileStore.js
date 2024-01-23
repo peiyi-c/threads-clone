@@ -3,11 +3,18 @@ import { create } from "zustand";
 const useUserProfileStore = create((set) => ({
   userProfile: null,
   setUserProfile: (userProfile) => set({ userProfile }),
-  addPost: (post) =>
+  addThread: (thread) =>
     set((state) => ({
       userProfile: {
         ...state.userProfile,
-        posts: [post.id, ...state.userProfile.posts],
+        threads: [thread.id, ...state.userProfile.threads],
+      },
+    })),
+  createReply: (threadId) =>
+    set((state) => ({
+      userProfile: {
+        ...state.userProfile,
+        replies: [threadId, ...state.userProfile.replies],
       },
     })),
 }));
