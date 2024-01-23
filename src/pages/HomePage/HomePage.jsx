@@ -1,8 +1,8 @@
 import FeedPostForm from "../../components/FeedPosts/FeedPostForm";
 import FeedPosts from "../../components/FeedPosts/FeedPosts";
-import useGetFeedPosts from "../../hooks/useGetFeedPosts";
+import useGetFeedThreads from "../../hooks/useGetFeedThreads";
 const HomePage = () => {
-  const { isLoading, threads } = useGetFeedPosts();
+  const { isLoading, threads } = useGetFeedThreads();
   return (
     <section>
       <FeedPostForm />

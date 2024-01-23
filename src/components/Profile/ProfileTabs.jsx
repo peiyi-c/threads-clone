@@ -1,5 +1,5 @@
 import { Tabs, Tab, TabList, TabPanels, TabPanel } from "@chakra-ui/react";
-import useGetUserThreads from "../../hooks/useGetUserPosts";
+import useGetUserThreads from "../../hooks/useGetUserThreads";
 import FeedPosts from "../FeedPosts/FeedPosts";
 
 const ProfileTabs = () => {

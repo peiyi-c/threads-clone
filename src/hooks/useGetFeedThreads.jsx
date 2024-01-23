@@ -6,7 +6,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { firestore } from "../firebase/firebase";
 import useShowToast from "./useShowToast";
 
-const useGetFeedPosts = () => {
+const useGetFeedThreads = () => {
   const [isLoading, setIsLoading] = useState();
   const { threads, setThreads } = useThreadStore();
   const { user } = useAuthStore();
@@ -50,4 +50,4 @@ const useGetFeedPosts = () => {
   return { isLoading, threads };
 };
 
-export default useGetFeedPosts;
+export default useGetFeedThreads;
