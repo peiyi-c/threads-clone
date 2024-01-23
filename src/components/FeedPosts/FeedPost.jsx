@@ -10,13 +10,15 @@ import {
   Divider,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { More, Reply, Repost, Share, UnLike } from "../../assets/logos";
+import { More, Reply, Repost, Share, UnLike, Like } from "../../assets/logos";
 import FeedPostSlider from "./FeedPostSlider";
 import { timeAgo } from "../../utils/timeAgo";
 import useGetProfileById from "../../hooks/useGetProfileById";
+import useLikeThread from "../../hooks/useLikeThread";
 
 const FeedPost = ({ thread }) => {
   const { isLoading, userProfile } = useGetProfileById(thread.createdBy);
+  const { isLiked, likes, handleLikeThread } = useLikeThread(thread);
 
   return (
     <>
@@ -70,8 +72,8 @@ const FeedPost = ({ thread }) => {
           )}
 
           <HStack my={"12px"}>
-            <Button variant={"ghost"} size={"sm"}>
-              <UnLike />
+            <Button onClick={handleLikeThread} variant={"ghost"} size={"sm"}>
+              {isLiked ? <Like /> : <UnLike />}
             </Button>
             <Button variant={"ghost"} size={"sm"}>
               <Reply />
@@ -157,8 +159,7 @@ const FeedPost = ({ thread }) => {
           </Text>{" "}
           {" · "}
           <Text as={"span"} cursor={"pointer"}>
-            {thread.likedBy ? thread.likedBy?.length : 0}{" "}
-            {thread.likedBy && thread.likedBy?.length > 0 ? "likes" : "like"}
+            {likes} {likes > 0 ? "likes" : "like"}
           </Text>
         </Text>
       </Grid>
