@@ -10,6 +10,7 @@ import SearchPage from "./pages/SearchPage/SearchPage";
 import ActivityPage from "./pages/ActivityPage/ActivityPage";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import ThreadPage from "./pages/ThreadPage/ThreadPage";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
 
@@ -27,6 +28,7 @@ function App() {
             </Route>
             {/* for authUser and !authUser */}
             <Route path="/:ausername" element={<ProfilePage />} />
+            <Route path="/:ausername/post/:postId" element={<ThreadPage />} />
           </Route>
           {/* only for !authUser */}
           <Route element={<PublicRoute />}>
