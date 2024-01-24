@@ -32,7 +32,7 @@ const useGetUserThreads = () => {
         threads.sort((a, b) => b.createdAt - a.createdAt);
         setThreads(threads);
       } catch (error) {
-        showToast("Error", error.messagem, "error");
+        showToast("Error", error.message, "error");
         setThreads([]);
       } finally {
         setIsLoading(false);
