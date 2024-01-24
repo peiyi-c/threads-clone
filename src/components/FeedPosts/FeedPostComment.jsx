@@ -189,7 +189,7 @@ const FeedPostComment = ({
                   gridRowEnd={5}
                 ></Flex>
               </Grid>
-              {/* New Thread Comment Field */}
+              {/* New Thread Reply Field */}
               <Grid
                 templateColumns={"48px minmax(0, 1fr)"}
                 templateRows={"21px repeat(max-content, 3)"}

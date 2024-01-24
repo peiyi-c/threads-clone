@@ -1,5 +1,5 @@
 import { create } from "zustand";
-
+// store which threads we're checking
 const useThreadStore = create((set) => ({
   threads: [],
   setThreads: (threads) => set({ threads }),

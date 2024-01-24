@@ -16,6 +16,7 @@ const useGetFeedThreads = () => {
   useEffect(() => {
     const getFeedThreads = async () => {
       setIsLoading(true);
+
       if (user.followings.length === 0) {
         setIsLoading(false);
         setThreads([]);

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-// store which profile page we're checking
+// store which profile we're checking
 const useUserProfileStore = create((set) => ({
   userProfile: null,
   setUserProfile: (userProfile) => set({ userProfile }),
