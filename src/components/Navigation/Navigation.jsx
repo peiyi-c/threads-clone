@@ -16,7 +16,7 @@ import useUserProfileStore from "../../store/userProfileStore";
 
 const Navigation = () => {
   const hoverBgColor = useColorModeValue("#0000000a", "#ffffff0d");
-  const { content, setContent } = useContext(ContentContext);
+  const { setContent, content } = useContext(ContentContext);
   const { onOpen, isOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
   const { user } = useAuthStore();
@@ -30,6 +30,10 @@ const Navigation = () => {
   useEffect(() => {
     const changePage = () => {
       if (!user) {
+        if (pathname.startsWith("/@")) {
+          navigate(pathname);
+          return;
+        }
         switch (pathname) {
           case "/":
           case "/search":
@@ -37,7 +41,6 @@ const Navigation = () => {
             navigate("/login");
             break;
         }
-        pathname.startsWith("/@") ? navigate(pathname) : navigate("/login");
       }
       if (user) {
         switch (content) {

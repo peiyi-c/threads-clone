@@ -17,12 +17,22 @@ import { timeAgo } from "../../utils/timeAgo";
 import useGetProfileById from "../../hooks/useGetProfileById";
 import useLikeThread from "../../hooks/useLikeThread";
 import FeedPostComment from "./FeedPostComment";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { ContentContext } from "../../contexts/contentContext";
 
 const FeedPost = ({ thread }) => {
   const { isLoading, userProfile } = useGetProfileById(thread.createdBy);
   const { isLiked, likes, handleLikeThread } = useLikeThread(thread);
-
+  const navigate = useNavigate();
+  const { setContent } = useContext(ContentContext);
   const { onOpen, isOpen, onClose } = useDisclosure();
+
+  const openThreadPage = () => {
+    setContent("thread");
+    navigate(`/@${userProfile.username}/post/${thread.id}`);
+  };
+
   return (
     <>
       <Grid
@@ -45,7 +55,7 @@ const FeedPost = ({ thread }) => {
         <HStack justifyContent={"space-between"}>
           {!isLoading && (
             <Text as={"span"} fontSize={"15px"} fontWeight={"bold"} ml={2}>
-              {userProfile.displayName}
+              {userProfile?.displayName}
             </Text>
           )}
 
@@ -154,7 +164,7 @@ const FeedPost = ({ thread }) => {
           alignSelf={"center"}
           opacity={0.5}
         >
-          <Text as={"span"} cursor={"pointer"}>
+          <Text as={"span"} cursor={"pointer"} onClick={openThreadPage}>
             {thread.replies ? thread.replies?.length : 0}{" "}
             {thread.replies && thread.replies?.length > 0 ? "replies" : "reply"}
           </Text>{" "}
