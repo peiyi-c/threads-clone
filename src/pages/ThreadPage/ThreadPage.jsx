@@ -1,48 +1,59 @@
 /* eslint-disable react/prop-types */
+import FeedPost from "../../components/FeedPosts/FeedPost";
+import useGetThreadReplies from "../../hooks/useGetThreadReplies";
 import {
   Grid,
   Avatar,
   Text,
   Box,
   Flex,
-  HStack,
-  Button,
   Divider,
   useColorModeValue,
+  HStack,
+  Button,
   useDisclosure,
 } from "@chakra-ui/react";
-import { More, Reply, Repost, Share, UnLike, Like } from "../../assets/logos";
-import FeedPostSlider from "./FeedPostSlider";
-import { timeAgo } from "../../utils/timeAgo";
+import FeedPostSlider from "../../components/FeedPosts/FeedPostSlider";
+import FeedPostComment from "../../components/FeedPosts/FeedPostComment";
+import { UnLike, Repost, Reply, Share, Like, More } from "../../assets/logos";
 import useGetProfileById from "../../hooks/useGetProfileById";
-import useLikeThread from "../../hooks/useLikeThread";
-import FeedPostComment from "./FeedPostComment";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { ContentContext } from "../../contexts/contentContext";
+import { useLocation } from "react-router-dom";
+import useGetThreadById from "../../hooks/useGetThreadById";
+import useLikeReply from "../../hooks/useLikeReply";
+import { timeAgo } from "../../utils/timeAgo";
 
-const FeedPost = ({ thread }) => {
-  const { isLoading, userProfile } = useGetProfileById(thread?.createdBy);
-  const { isLiked, likes, handleLikeThread } = useLikeThread(thread);
-  const navigate = useNavigate();
-  const { content, setContent } = useContext(ContentContext);
+const ThreadPage = () => {
+  const { pathname } = useLocation();
+  const threadId = pathname.slice(pathname.indexOf("/post/") + "/post/".length);
+  const { isLoading, thread } = useGetThreadById(threadId);
+  const { replies } = useGetThreadReplies(threadId);
+
+  return (
+    <>
+      {/* Thread Post */}
+      {!isLoading && <FeedPost thread={thread} />}
+      {/* Thread Replies */}
+      {replies &&
+        replies.map((reply, index) => (
+          <ThreadReply key={index} reply={reply} />
+        ))}
+    </>
+  );
+};
+export default ThreadPage;
+
+const ThreadReply = ({ reply }) => {
+  const { isLoading, userProfile } = useGetProfileById(reply.createdBy);
+  const { isLiked, likes, handleLikeReply } = useLikeReply(reply);
   const { onOpen, isOpen, onClose } = useDisclosure();
-
-  const openThreadPage = () => {
-    if (content === "thread" || !content) {
-      return;
-    } else {
-      setContent("thread");
-      navigate(`/@${userProfile.username}/post/${thread.id}`);
-    }
-  };
 
   return (
     <>
       <Grid
-        my={"12px"}
+        my={3}
         templateColumns={"48px minmax(0, 1fr)"}
-        templateRows={"21px 19px max-content max-content"}
+        templateRows={"21px repeat(max-content, 3)"}
+        columnGap={"0.65rem"}
       >
         {!isLoading && (
           <Avatar
@@ -65,7 +76,7 @@ const FeedPost = ({ thread }) => {
 
           <HStack>
             <Text as={"span"} opacity={0.5}>
-              {timeAgo(thread.createdAt)}
+              {timeAgo(reply.createdAt)}
             </Text>
             <Button variant={"ghost"} size={"sm"}>
               <More />
@@ -73,23 +84,26 @@ const FeedPost = ({ thread }) => {
           </HStack>
         </HStack>
 
-        <Box
-          ml={2}
-          mt={-19}
-          gridColumnStart={2}
-          gridColumnEnd={3}
-          gridRowStart={3}
-          gridRowEnd={4}
-        >
-          <Text>{thread.text}</Text>
-          {thread.mediaURLs && (
-            <Box my={"12px"} cursor={"pointer"}>
-              <FeedPostSlider images={thread.mediaURLs} isEdit={false} />
+        <Box>
+          <Text
+            resize={"none"}
+            size={"sm"}
+            minHeight={"max-content"}
+            overflowY={"hidden"}
+            variant={"standard"}
+            gridColumnStart={2}
+            gridColumnEnd={3}
+            gridRowStart={2}
+          >
+            {reply.text}
+          </Text>
+          {reply.mediaURLs && (
+            <Box my={2} gridColumnStart={2} gridColumnEnd={3} gridRowStart={2}>
+              <FeedPostSlider images={reply.mediaURLs} isEdit={false} />
             </Box>
           )}
-
           <HStack my={"12px"}>
-            <Button onClick={handleLikeThread} variant={"ghost"} size={"sm"}>
+            <Button onClick={handleLikeReply} variant={"ghost"} size={"sm"}>
               {isLiked ? <Like /> : <UnLike />}
             </Button>
             <Button onClick={onOpen} variant={"ghost"} size={"sm"}>
@@ -105,18 +119,15 @@ const FeedPost = ({ thread }) => {
         </Box>
 
         <Flex
-          mt={"18px"}
-          mb={"6px"}
+          pt={"33px"}
+          justifyContent={"center"}
           gridColumnStart={1}
           gridColumnEnd={2}
-          gridRowStart={3}
+          gridRowStart={2}
           gridRowEnd={4}
-          justifyContent={"center"}
-          alignItems={"center"}
         >
           <Divider orientation="vertical" variant={"vertical"} />
         </Flex>
-
         <Flex
           justifyContent={"center"}
           gridColumnStart={1}
@@ -168,28 +179,23 @@ const FeedPost = ({ thread }) => {
           alignSelf={"center"}
           opacity={0.5}
         >
-          <Text as={"span"} cursor={"pointer"} onClick={openThreadPage}>
-            {thread.replies ? thread.replies?.length : 0}{" "}
-            {thread.replies && thread.replies?.length > 0 ? "replies" : "reply"}
+          <Text as={"span"} cursor={"pointer"}>
+            {reply.replies && reply.replies?.length > 0 ? "replies · " : ""}{" "}
           </Text>{" "}
-          {" · "}
           <Text as={"span"} cursor={"pointer"}>
             {likes} {likes > 1 ? "likes" : "like"}
           </Text>
         </Text>
       </Grid>
       <Divider orientation="horizontal" variant={"standard"} />
-
       {isOpen && (
         <FeedPostComment
           onCloseComment={onClose}
           isOpenComment={isOpen}
-          thread={thread}
+          thread={reply}
           userProfile={userProfile}
         />
       )}
     </>
   );
 };
-
-export default FeedPost;
