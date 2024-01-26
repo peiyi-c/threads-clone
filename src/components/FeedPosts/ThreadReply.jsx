@@ -14,6 +14,7 @@ import {
 import FeedPostSlider from "../../components/FeedPosts/FeedPostSlider";
 import FeedPostComment from "../../components/FeedPosts/FeedPostComment";
 import { UnLike, Repost, Reply, Share, Like, More } from "../../assets/logos";
+import useGetReplyReplies from "../../hooks/useGetReplyReplies";
 import useGetProfileById from "../../hooks/useGetProfileById";
 import useLikeReply from "../../hooks/useLikeReply";
 import { timeAgo } from "../../utils/timeAgo";
@@ -22,6 +23,7 @@ const ThreadReply = ({ reply }) => {
   const { isLoading, userProfile } = useGetProfileById(reply.createdBy);
   const { isLiked, likes, handleLikeReply } = useLikeReply(reply);
   const { onOpen, isOpen, onClose } = useDisclosure();
+  const { replies } = useGetReplyReplies(reply.id);
 
   return (
     <>
@@ -164,11 +166,21 @@ const ThreadReply = ({ reply }) => {
         </Text>
       </Grid>
       <Divider orientation="horizontal" variant={"standard"} />
+
+      {/* subreplies */}
+      {replies &&
+        replies.map((reply) => (
+          <Box key={reply.id} pl={5}>
+            <ThreadReply reply={reply} />
+          </Box>
+        ))}
+
+      {/* comment modal */}
       {isOpen && (
         <FeedPostComment
           onCloseComment={onClose}
           isOpenComment={isOpen}
-          thread={reply}
+          reply={reply}
           userProfile={userProfile}
         />
       )}

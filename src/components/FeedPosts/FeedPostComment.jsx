@@ -28,11 +28,13 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import usePreviewImg from "../../hooks/usePreviewImg";
 import FeedPostCommentAlert from "./FeedPostCommentAlert";
 import useReplyThread from "../../hooks/useReplyThread";
+import useReplyReply from "../../hooks/useReplyReply";
 
 const FeedPostComment = ({
   onCloseComment,
   isOpenComment,
   thread,
+  reply,
   userProfile,
 }) => {
   const [text, setText] = useState("");
@@ -43,6 +45,7 @@ const FeedPostComment = ({
   const { user } = useAuthStore();
   const { handleImgChange, selectedFile, setSelectedFile } = usePreviewImg();
   const { isUpdating, handleThreadReply } = useReplyThread();
+  const { isCommenting, handleReplyReply } = useReplyReply();
 
   const MIN_TEXTAREA_HEIGHT = 12;
 
@@ -72,7 +75,11 @@ const FeedPostComment = ({
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await handleThreadReply(thread.id, text, images);
+    if (thread) {
+      await handleThreadReply(thread.id, text, images);
+    } else if (reply) {
+      await handleReplyReply(reply.id, text, images);
+    }
     setText("");
     setImages([]);
     onCloseComment();
@@ -118,7 +125,7 @@ const FeedPostComment = ({
             </ModalHeader>
 
             <ModalBody>
-              {/* Original Thread Post */}
+              {/* Original Thread Post / Thread Reply */}
               <Grid
                 my={"12px"}
                 templateColumns={"48px minmax(0, 1fr)"}
@@ -145,7 +152,8 @@ const FeedPostComment = ({
                   </Text>
 
                   <Text as={"span"} opacity={0.5}>
-                    {timeAgo(thread.createdAt)}
+                    {thread && timeAgo(thread.createdAt)}
+                    {reply && timeAgo(reply.createdAt)}
                   </Text>
                 </HStack>
 
@@ -157,13 +165,21 @@ const FeedPostComment = ({
                   gridRowStart={3}
                   gridRowEnd={4}
                 >
-                  <Text>{thread.text}</Text>
-                  {thread.mediaURLs && (
+                  <Text>
+                    {thread && thread.text}
+                    {reply && reply.text}
+                  </Text>
+                  {thread && thread.mediaURLs && (
                     <Box my={"12px"} cursor={"pointer"}>
                       <FeedPostSlider
                         images={thread.mediaURLs}
                         isEdit={false}
                       />
+                    </Box>
+                  )}
+                  {reply && reply.mediaURLs && (
+                    <Box my={"12px"} cursor={"pointer"}>
+                      <FeedPostSlider images={reply.mediaURLs} isEdit={false} />
                     </Box>
                   )}
                 </Box>
@@ -280,7 +296,7 @@ const FeedPostComment = ({
                 Your followers can reply
               </Text>
               <Button
-                isLoading={isUpdating}
+                isLoading={thread ? isUpdating : reply ? isCommenting : ""}
                 size={"sm"}
                 variant={"solid"}
                 type="submit"

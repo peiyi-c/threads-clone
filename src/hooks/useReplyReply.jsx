@@ -1,6 +1,5 @@
 import { useState } from "react";
 import useAuthStore from "../store/authStore";
-import useThreadStore from "../store/threadStore";
 import useUserProfileStore from "../store/userProfileStore";
 import useShowToast from "./useShowToast";
 import {
@@ -15,23 +14,22 @@ import { ref } from "firebase/storage";
 import { uploadStrings } from "../utils/uploadStrings";
 import { downloadImageURLs } from "../utils/downloadURLs";
 
-const useReplyThread = () => {
-  const [isUpdating, setIsUpdating] = useState(false);
+const useReplyReply = () => {
+  const [isCommenting, setIsCommenting] = useState(false);
   const { user } = useAuthStore();
-  const { addReply } = useThreadStore();
   const { userProfile, createReply } = useUserProfileStore();
   const showToast = useShowToast();
 
-  const handleThreadReply = async (threadId, text, images) => {
-    if (isUpdating) return;
+  const handleReplyReply = async (replyId, text, images) => {
+    if (isCommenting) return;
     if (!user) return showToast("Error", "You must login to comment!", "error");
 
-    setIsUpdating(true);
-    const newReply = {
+    setIsCommenting(true);
+    const subReply = {
       // id: "",
       createdAt: Date.now(),
       createdBy: user.uid,
-      threadId,
+      replyId,
       text,
       mediaURLs: [],
       // mentioned: [],
@@ -46,49 +44,49 @@ const useReplyThread = () => {
     };
     try {
       // update firebase
-      // ** create reply //
-      const replyDocRef = await addDoc(
+      // ** create subreply (shares the same collection with replies) //
+      const subreplyRef = await addDoc(
         collection(firestore, "replies"),
-        newReply
+        subReply
       );
+
       // ** update user //
       const userDocRef = doc(firestore, "users", user.uid);
-      await updateDoc(userDocRef, { replies: arrayUnion(threadId) });
+      await updateDoc(userDocRef, { replies: arrayUnion(subreplyRef.id) });
 
-      // ** update thread //
-      const threadDocRef = doc(firestore, "threads", threadId);
-      await updateDoc(threadDocRef, {
+      // ** update main reply //
+      const replyRef = doc(firestore, "replies", replyId);
+      await updateDoc(replyRef, {
         repliedBy: user.uid,
-        replies: arrayUnion(replyDocRef.id),
+        replies: arrayUnion(subreplyRef.id),
       });
 
       // upload image strings, download image urls
       const imageRefs = images.map((image) =>
-        ref(storage, `threads/${threadId}/${replyDocRef.id}/${image.id}`)
+        ref(storage, `replies/${replyId}/${image.id}`)
       );
       const selectedFiles = images.map((image) => image.path);
       await uploadStrings(imageRefs, selectedFiles);
       const downloadURLs = await downloadImageURLs(imageRefs);
 
-      // ** update reply //
-      await updateDoc(replyDocRef, {
-        id: replyDocRef.id,
+      // ** update subreply //
+      await updateDoc(subreplyRef, {
+        id: subreplyRef.id,
         mediaURLs: downloadURLs,
       });
 
       // update store
       if (userProfile) {
-        addReply(threadId, replyDocRef.id);
-        createReply(threadId);
+        createReply(replyId);
       }
     } catch (error) {
       showToast("Error", error.message, "error");
     } finally {
-      setIsUpdating(false);
+      setIsCommenting(false);
     }
   };
 
-  return { isUpdating, handleThreadReply };
+  return { isCommenting, handleReplyReply };
 };
 
-export default useReplyThread;
+export default useReplyReply;
