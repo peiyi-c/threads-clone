@@ -11,7 +11,9 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { firestore, storage } from "../firebase/firebase";
-import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import { ref } from "firebase/storage";
+import { uploadStrings } from "../utils/uploadStrings";
+import { downloadImageURLs } from "../utils/downloadURLs";
 // import { addHours } from "../utils/addHours";
 
 const useCreateThread = () => {
@@ -60,27 +62,13 @@ const useCreateThread = () => {
         ref(storage, `threads/${postDocRef.id}/${image.id}`)
       );
       const selectedFiles = images.map((image) => image.path);
-
-      const uploadStrings = async (imageRefs, selectedFiles) => {
-        for (let i = 0; i < imageRefs.length; i++) {
-          await uploadString(imageRefs[i], selectedFiles[i], "data_url");
-        }
-      };
       await uploadStrings(imageRefs, selectedFiles);
 
-      const downloadImageURLs = async (imageRefs) => {
-        let URLs = [];
-        for (let i = 0; i < imageRefs.length; i++) {
-          const downloadURL = await getDownloadURL(imageRefs[i]);
-          URLs.push({
-            id: i,
-            path: downloadURL,
-          });
-        }
-        return URLs;
-      };
       const downloadURLs = await downloadImageURLs(imageRefs);
-      await updateDoc(postDocRef, { mediaURLs: downloadURLs });
+      await updateDoc(postDocRef, {
+        id: postDocRef.id,
+        mediaURLs: downloadURLs,
+      });
 
       // update store
       newThread.mediaURLs = downloadURLs;
