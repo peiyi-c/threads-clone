@@ -25,6 +25,8 @@ const useReplyReply = () => {
     if (!user) return showToast("Error", "You must login to comment!", "error");
 
     setIsCommenting(true);
+    showToast("Loading", "Posting...", "loading");
+
     const subReply = {
       // id: "",
       createdAt: Date.now(),
@@ -57,7 +59,7 @@ const useReplyReply = () => {
       // ** update main reply //
       const replyRef = doc(firestore, "replies", replyId);
       await updateDoc(replyRef, {
-        repliedBy: user.uid,
+        repliedBy: arrayUnion(user.uid),
         replies: arrayUnion(subreplyRef.id),
       });
 
@@ -79,6 +81,7 @@ const useReplyReply = () => {
       if (userProfile) {
         createReply(replyId);
       }
+      showToast("Success", "Posted!", "success");
     } catch (error) {
       showToast("Error", error.message, "error");
     } finally {

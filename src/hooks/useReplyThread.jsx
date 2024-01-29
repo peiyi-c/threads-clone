@@ -27,6 +27,8 @@ const useReplyThread = () => {
     if (!user) return showToast("Error", "You must login to comment!", "error");
 
     setIsUpdating(true);
+    showToast("Loading", "Posting...", "loading");
+
     const newReply = {
       // id: "",
       createdAt: Date.now(),
@@ -58,7 +60,7 @@ const useReplyThread = () => {
       // ** update thread //
       const threadDocRef = doc(firestore, "threads", threadId);
       await updateDoc(threadDocRef, {
-        repliedBy: user.uid,
+        repliedBy: arrayUnion(user.uid),
         replies: arrayUnion(replyDocRef.id),
       });
 
@@ -81,6 +83,7 @@ const useReplyThread = () => {
         addReply(threadId, replyDocRef.id);
         createReply(threadId);
       }
+      showToast("Success", "Posted!", "success");
     } catch (error) {
       showToast("Error", error.message, "error");
     } finally {
