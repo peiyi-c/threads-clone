@@ -6,7 +6,6 @@ import {
   Box,
   Flex,
   Divider,
-  useColorModeValue,
   HStack,
   Button,
   useDisclosure,
@@ -18,12 +17,16 @@ import useGetReplyReplies from "../../hooks/useGetReplyReplies";
 import useGetProfileById from "../../hooks/useGetProfileById";
 import useLikeReply from "../../hooks/useLikeReply";
 import { timeAgo } from "../../utils/timeAgo";
+import { AvatarGroup2, AvatarGroup3 } from "./AvatarGroup";
 
 const ThreadReply = ({ reply }) => {
   const { isLoading, userProfile } = useGetProfileById(reply.createdBy);
   const { isLiked, likes, handleLikeReply } = useLikeReply(reply);
   const { onOpen, isOpen, onClose } = useDisclosure();
   const { replies } = useGetReplyReplies(reply.id);
+
+  const threadLength =
+    reply.replies && reply.replies?.length > 0 ? reply.replies.length : "";
 
   return (
     <>
@@ -33,6 +36,7 @@ const ThreadReply = ({ reply }) => {
         templateRows={"21px repeat(max-content, 3)"}
         columnGap={"0.65rem"}
       >
+        {/* thread author avatar */}
         {!isLoading && (
           <Avatar
             gridColumnStart={1}
@@ -44,7 +48,7 @@ const ThreadReply = ({ reply }) => {
             src={userProfile?.profilePicURL}
           />
         )}
-
+        {/* thread author name */}
         <HStack justifyContent={"space-between"}>
           {!isLoading && (
             <Text as={"span"} fontSize={"15px"} fontWeight={"bold"} ml={2}>
@@ -53,33 +57,37 @@ const ThreadReply = ({ reply }) => {
           )}
 
           <HStack>
+            {/* thread created at */}
             <Text as={"span"} opacity={0.5}>
               {timeAgo(reply.createdAt)}
             </Text>
+
+            {/* more button */}
             <Button variant={"ghost"} size={"sm"}>
               <More />
             </Button>
           </HStack>
         </HStack>
 
-        <Box>
-          <Text
-            resize={"none"}
-            size={"sm"}
-            minHeight={"max-content"}
-            overflowY={"hidden"}
-            variant={"standard"}
-            gridColumnStart={2}
-            gridColumnEnd={3}
-            gridRowStart={2}
-          >
-            {reply.text}
-          </Text>
+        <Box
+          ml={2}
+          mt={-17}
+          gridColumnStart={2}
+          gridColumnEnd={3}
+          gridRowStart={3}
+          gridRowEnd={4}
+        >
+          {/* reply text */}
+          <Text>{reply.text}</Text>
+
+          {/* reply images */}
           {reply.mediaURLs && (
             <Box my={2} gridColumnStart={2} gridColumnEnd={3} gridRowStart={2}>
               <FeedPostSlider images={reply.mediaURLs} isEdit={false} />
             </Box>
           )}
+
+          {/* reply like, reply, repost, share button */}
           <HStack my={"12px"}>
             <Button onClick={handleLikeReply} variant={"ghost"} size={"sm"}>
               {isLiked ? <Like /> : <UnLike />}
@@ -96,16 +104,22 @@ const ThreadReply = ({ reply }) => {
           </HStack>
         </Box>
 
-        <Flex
-          pt={"33px"}
-          justifyContent={"center"}
-          gridColumnStart={1}
-          gridColumnEnd={2}
-          gridRowStart={2}
-          gridRowEnd={4}
-        >
-          <Divider orientation="vertical" variant={"vertical"} />
-        </Flex>
+        {/* thread line */}
+        {reply.replies && reply.replies.length > 0 && (
+          <Flex
+            my={"12px"}
+            gridColumnStart={1}
+            gridColumnEnd={2}
+            gridRowStart={3}
+            gridRowEnd={4}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
+            <Divider orientation="vertical" variant={"vertical"} />
+          </Flex>
+        )}
+
+        {/* reply repliers avatar */}
         <Flex
           justifyContent={"center"}
           gridColumnStart={1}
@@ -113,41 +127,17 @@ const ThreadReply = ({ reply }) => {
           gridRowStart={4}
           gridRowEnd={5}
         >
-          {/* 1-3 replies */}
-          {/* <Avatar size="2xs" name="" src="" /> */}
+          {/* 1 reply */}
+          {reply.replies && reply.replies.length === 1 && (
+            <Avatar size="xs" src="" />
+          )}
+          {/* 2 replies */}
+          {reply.replies && reply.replies.length === 2 && <AvatarGroup2 />}
           {/* 3-10 replies */}
-          <Avatar
-            size="2xs"
-            name=""
-            src=""
-            position={"relative"}
-            left={"3px"}
-            border={`1.5px solid ${useColorModeValue(
-              "#00000026",
-              "#f3f5f726"
-            )}`}
-            outline={`0.5px solid ${useColorModeValue(
-              "transparent",
-              "#101010"
-            )}`}
-          />
-          <Avatar
-            size="xs"
-            name=""
-            src=""
-            position={"relative"}
-            right={"3px"}
-            border={`1.5px solid ${useColorModeValue(
-              "#00000026",
-              "#f3f5f726"
-            )}`}
-            outline={`0.5px solid ${useColorModeValue(
-              "transparent",
-              "#101010"
-            )}`}
-            backgroundColor={useColorModeValue("")}
-          />
+          {reply.replies && reply.replies.length >= 3 && <AvatarGroup3 />}
         </Flex>
+
+        {/* reply replies and likes count */}
         <Text
           ml={2}
           gridColumnStart={2}
@@ -158,13 +148,20 @@ const ThreadReply = ({ reply }) => {
           opacity={0.5}
         >
           <Text as={"span"} cursor={"pointer"}>
-            {reply.replies && reply.replies?.length > 0 ? "replies · " : ""}{" "}
+            {threadLength}{" "}
+            {reply.replies && reply.replies?.length > 1
+              ? "replies · "
+              : reply.replies?.length > 0
+              ? "reply · "
+              : ""}
           </Text>{" "}
           <Text as={"span"} cursor={"pointer"}>
-            {likes} {likes > 1 ? "likes" : "like"}
+            {likes && likes > 0 ? likes : ""}{" "}
+            {likes > 1 ? "likes" : likes > 0 ? "like" : ""}
           </Text>
         </Text>
       </Grid>
+      {/* thread button divider */}
       <Divider orientation="horizontal" variant={"standard"} />
 
       {/* subreplies */}
@@ -175,7 +172,7 @@ const ThreadReply = ({ reply }) => {
           </Box>
         ))}
 
-      {/* comment modal */}
+      {/* reply reply modal */}
       {isOpen && (
         <FeedPostComment
           onCloseComment={onClose}
