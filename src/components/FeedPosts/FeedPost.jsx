@@ -19,25 +19,21 @@ import FeedPostComment from "./FeedPostComment";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ContentContext } from "../../contexts/contentContext";
-import { AvatarGroup2, AvatarGroup3 } from "./AvatarGroup";
+import { AvatarGroup1, AvatarGroup2, AvatarGroup3 } from "./AvatarGroup";
 
 const FeedPost = ({ thread }) => {
   const { isLoading, userProfile } = useGetProfileById(thread?.createdBy);
   const { isLiked, likes, handleLikeThread } = useLikeThread(thread);
   const navigate = useNavigate();
-  const { content, setContent } = useContext(ContentContext);
+  const { setContent } = useContext(ContentContext);
   const { onOpen, isOpen, onClose } = useDisclosure();
 
   const threadLength =
     thread.replies && thread.replies?.length > 0 ? thread.replies.length : "";
 
   const openThreadPage = () => {
-    if (content === "thread" || !content) {
-      return;
-    } else {
-      setContent("thread");
-      navigate(`/@${userProfile.username}/post/${thread.id}`);
-    }
+    setContent("thread");
+    navigate(`/@${userProfile.username}/post/${thread.id}`);
   };
 
   return (
@@ -139,13 +135,17 @@ const FeedPost = ({ thread }) => {
           gridRowEnd={5}
         >
           {/* 1 reply */}
-          {thread.replies && thread.replies.length === 1 && (
-            <Avatar size="xs" src="" />
+          {thread.repliedBy && thread.repliedBy.length === 1 && (
+            <AvatarGroup1 repliedBy={thread.repliedBy} />
           )}
           {/* 2 replies */}
-          {thread.replies && thread.replies.length === 2 && <AvatarGroup2 />}
+          {thread.repliedBy && thread.repliedBy.length === 2 && (
+            <AvatarGroup2 repliedBy={thread.repliedBy} />
+          )}
           {/* 3-10 replies */}
-          {thread.replies && thread.replies.length >= 3 && <AvatarGroup3 />}
+          {thread.repliedBy && thread.repliedBy.length >= 3 && (
+            <AvatarGroup3 repliedBy={thread.repliedBy} />
+          )}
         </Flex>
 
         {/* thread replies and likes count */}

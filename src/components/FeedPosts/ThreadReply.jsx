@@ -17,7 +17,7 @@ import useGetReplyReplies from "../../hooks/useGetReplyReplies";
 import useGetProfileById from "../../hooks/useGetProfileById";
 import useLikeReply from "../../hooks/useLikeReply";
 import { timeAgo } from "../../utils/timeAgo";
-import { AvatarGroup2, AvatarGroup3 } from "./AvatarGroup";
+import { AvatarGroup1, AvatarGroup2, AvatarGroup3 } from "./AvatarGroup";
 
 const ThreadReply = ({ reply }) => {
   const { isLoading, userProfile } = useGetProfileById(reply.createdBy);
@@ -128,13 +128,17 @@ const ThreadReply = ({ reply }) => {
           gridRowEnd={5}
         >
           {/* 1 reply */}
-          {reply.replies && reply.replies.length === 1 && (
-            <Avatar size="xs" src="" />
+          {reply.repliedBy && reply.repliedBy.length === 1 && (
+            <AvatarGroup1 repliedBy={reply.repliedBy} />
           )}
           {/* 2 replies */}
-          {reply.replies && reply.replies.length === 2 && <AvatarGroup2 />}
+          {reply.repliedBy && reply.repliedBy.length === 2 && (
+            <AvatarGroup2 repliedBy={reply.repliedBy} />
+          )}
           {/* 3-10 replies */}
-          {reply.replies && reply.replies.length >= 3 && <AvatarGroup3 />}
+          {reply.repliedBy && reply.repliedBy.length >= 3 && (
+            <AvatarGroup3 repliedBy={reply.repliedBy} />
+          )}
         </Flex>
 
         {/* reply replies and likes count */}
