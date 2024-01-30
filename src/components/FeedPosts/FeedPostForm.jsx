@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import FeedPostFormModal from "./FeedPostFormModal";
 
-const FeedPostForm = () => {
+const FeedPostForm = ({ user }) => {
   const color = useColorModeValue("#999999", "#777777");
   const { onOpen, isOpen, onClose } = useDisclosure();
 
@@ -23,7 +23,7 @@ const FeedPostForm = () => {
         justifyContent={"space-between"}
         alignItems={"center"}
       >
-        <Avatar mr={"8px"} size="md" name="" src="" />
+        <Avatar mr={"8px"} size="md" name="" src={user && user.profilePicURL} />
         <Text onClick={onOpen} mr={"auto"} fontSize={"15px"} color={color}>
           Start a thread...
         </Text>
