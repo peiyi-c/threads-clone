@@ -36,15 +36,17 @@ const Header = () => {
             <Threads />
           </GridItem>
 
+          {/* Navigation */}
           <GridItem
             display={{ base: "none", md: "block" }}
             colStart={{ md: 2 }}
             colEnd={{ md: 3 }}
             justifySelf={"stretch"}
-            // px={"70px"}
           >
             <Navigation />
           </GridItem>
+
+          {/* Menu or Login Button */}
           <GridItem
             colStart={3}
             colEnd={4}
