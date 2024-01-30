@@ -44,7 +44,7 @@ const HeaderMenu = () => {
       <GridItem colStart={1} colEnd={2} rowStart={1} rowEnd={1}>
         <Menu closeOnSelect={true} size={"sm"}>
           <MenuButton as={Button} ref={buttonRef} opacity={0} aria-hidden>
-            Menu
+            HeaderMenu
           </MenuButton>
           <MenuList minW="0" w={"fit-content"}>
             <MenuItem hidden aria-hidden></MenuItem>
