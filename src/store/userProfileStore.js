@@ -10,6 +10,13 @@ const useUserProfileStore = create((set) => ({
         threads: [thread.id, ...state.userProfile.threads],
       },
     })),
+  removeThread: (id) =>
+    set((state) => ({
+      userProfile: {
+        ...state.userProfile,
+        threads: state.userProfile.threads.filter((thread) => thread.id !== id),
+      },
+    })),
   createReply: (threadId) =>
     set((state) => ({
       userProfile: {
