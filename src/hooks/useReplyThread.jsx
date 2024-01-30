@@ -68,10 +68,9 @@ const useReplyThread = () => {
       const imageRefs = images.map((image) =>
         ref(storage, `threads/${threadId}/${replyDocRef.id}/${image.id}`)
       );
-      const selectedFiles = images.map((image) => image.path);
-      await uploadStrings(imageRefs, selectedFiles);
-      const downloadURLs = await downloadImageURLs(imageRefs);
+      await uploadStrings(imageRefs, images);
 
+      const downloadURLs = await downloadImageURLs(imageRefs, images);
       // ** update reply //
       await updateDoc(replyDocRef, {
         id: replyDocRef.id,

@@ -54,6 +54,7 @@ const useCreateThread = () => {
         collection(firestore, "threads"),
         newThread
       );
+      // upload user
       const userDocRef = doc(firestore, "users", user.uid);
       await updateDoc(userDocRef, { threads: arrayUnion(postDocRef.id) });
 
@@ -61,10 +62,9 @@ const useCreateThread = () => {
       const imageRefs = images.map((image) =>
         ref(storage, `threads/${postDocRef.id}/${image.id}`)
       );
-      const selectedFiles = images.map((image) => image.path);
-      await uploadStrings(imageRefs, selectedFiles);
+      await uploadStrings(imageRefs, images);
 
-      const downloadURLs = await downloadImageURLs(imageRefs);
+      const downloadURLs = await downloadImageURLs(imageRefs, images);
       await updateDoc(postDocRef, {
         id: postDocRef.id,
         mediaURLs: downloadURLs,

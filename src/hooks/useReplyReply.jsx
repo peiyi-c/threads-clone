@@ -67,10 +67,10 @@ const useReplyReply = () => {
       const imageRefs = images.map((image) =>
         ref(storage, `replies/${replyId}/${image.id}`)
       );
-      const selectedFiles = images.map((image) => image.path);
-      await uploadStrings(imageRefs, selectedFiles);
-      const downloadURLs = await downloadImageURLs(imageRefs);
 
+      await uploadStrings(imageRefs, images);
+
+      const downloadURLs = await downloadImageURLs(imageRefs, images);
       // ** update subreply //
       await updateDoc(subreplyRef, {
         id: subreplyRef.id,
