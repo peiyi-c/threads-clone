@@ -10,7 +10,7 @@ import {
   Divider,
   useDisclosure,
 } from "@chakra-ui/react";
-import { More, Reply, Repost, Share, UnLike, Like } from "../../assets/logos";
+import { Reply, Repost, Share, UnLike, Like } from "../../assets/logos";
 import FeedPostSlider from "./FeedPostSlider";
 import { timeAgo } from "../../utils/timeAgo";
 import useGetProfileById from "../../hooks/useGetProfileById";
@@ -20,6 +20,8 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ContentContext } from "../../contexts/contentContext";
 import { AvatarGroup1, AvatarGroup2, AvatarGroup3 } from "./AvatarGroup";
+import { FeedPostMenuSelf, FeedPostMenuOther } from "./FeedPostMenu";
+import useAuthStore from "../../store/authStore";
 
 const FeedPost = ({ thread }) => {
   const { isLoading, userProfile } = useGetProfileById(thread?.createdBy);
@@ -27,6 +29,7 @@ const FeedPost = ({ thread }) => {
   const navigate = useNavigate();
   const { setContent } = useContext(ContentContext);
   const { onOpen, isOpen, onClose } = useDisclosure();
+  const { user } = useAuthStore();
 
   const threadLength =
     thread.replies && thread.replies?.length > 0 ? thread.replies.length : "";
@@ -70,9 +73,12 @@ const FeedPost = ({ thread }) => {
             </Text>
 
             {/* more button */}
-            <Button variant={"ghost"} size={"sm"}>
-              <More />
-            </Button>
+            {user && user.uid === thread.createdBy && (
+              <FeedPostMenuSelf thread={thread} user={user} />
+            )}
+            {user && user.uid !== thread.createdBy && (
+              <FeedPostMenuOther thread={thread} user={user} />
+            )}
           </HStack>
         </HStack>
 
