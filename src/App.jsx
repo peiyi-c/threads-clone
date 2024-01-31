@@ -4,7 +4,7 @@ import "swiper/css/navigation";
 
 import { ContentMessage } from "./contexts/contentContext";
 import { Route, Routes } from "react-router-dom";
-import GeneralLayout from "./layouts/PageLayout";
+import GeneralLayout from "./layouts/GeneralLayout";
 import HomePage from "./pages/HomePage/HomePage";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import ActivityPage from "./pages/ActivityPage/ActivityPage";
