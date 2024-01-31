@@ -15,7 +15,6 @@ export const AvatarGroup1 = ({ repliedBy }) => {
 export const AvatarGroup2 = ({ repliedBy }) => {
   const borderOne = useColorModeValue("#00000026", "#f3f5f726");
   const borderTwo = useColorModeValue("transparent", "#101010");
-  repliedBy = repliedBy.reverse();
   return (
     <>
       <Avatar
@@ -41,7 +40,6 @@ export const AvatarGroup2 = ({ repliedBy }) => {
 export const AvatarGroup3 = ({ repliedBy }) => {
   const borderOne = useColorModeValue("#00000026", "#f3f5f726");
   const borderTwo = useColorModeValue("transparent", "#101010");
-  repliedBy = repliedBy.reverse();
   return (
     <>
       <Avatar
