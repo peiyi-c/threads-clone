@@ -7,60 +7,40 @@ import { Activity } from "../../assets/logos";
 import { Profile } from "../../assets/logos";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { useColorModeValue, useDisclosure } from "@chakra-ui/react";
-import { useContext, useEffect } from "react";
-import { ContentContext } from "../../contexts/contentContext";
 import { useNavigate } from "react-router-dom";
 import FeedPostFormModal from "../FeedPosts/FeedPostFormModal";
 import useAuthStore from "../../store/authStore";
-import useUserProfileStore from "../../store/userProfileStore";
+import { useContext } from "react";
+import { ContentContext } from "../../contexts/contentContext";
 
 const Navigation = () => {
   const hoverBgColor = useColorModeValue("#0000000a", "#ffffff0d");
-  const { setContent, content } = useContext(ContentContext);
   const { onOpen, isOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
   const { user } = useAuthStore();
-  const { pathname } = useLocation();
+  const { setContent } = useContext(ContentContext);
 
   const handleNavClick = (e) => {
     let value = e.target?.closest("svg")?.ariaLabel || e.target.title;
-    setContent((prev) => value);
+    switch (value) {
+      case "home":
+        navigate("/");
+        setContent(value);
+        return;
+      case "search":
+      case "activity":
+        navigate(value);
+        setContent(value);
+        return;
+      case "create":
+        setContent(value);
+        return;
+      case "profile":
+        navigate("@" + user.username);
+        setContent(value);
+        return;
+    }
   };
-
-  useEffect(() => {
-    const changePage = () => {
-      if (!user) {
-        if (pathname.startsWith("/@")) {
-          navigate(pathname);
-          return;
-        }
-        switch (pathname) {
-          case "/":
-          case "/search":
-          case "/activity":
-            navigate("/login");
-            break;
-        }
-      }
-      if (user) {
-        switch (content) {
-          case "home":
-            navigate("/");
-            break;
-          case "search":
-          case "activity":
-            navigate(content);
-            break;
-          case "create":
-            return;
-          case "profile":
-            navigate(`@${user.username}`);
-            return;
-        }
-      }
-    };
-    changePage();
-  }, [content, user, navigate, pathname]);
 
   return (
     <nav
@@ -162,7 +142,7 @@ const Navigation = () => {
           alignItems={"center"}
           justifyContent={"center"}
         >
-          <Link to="/profile" as={RouterLink}>
+          <Link>
             <Profile />
           </Link>
         </GridItem>

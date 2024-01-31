@@ -1,15 +1,21 @@
 import { Box, Grid, GridItem, Button } from "@chakra-ui/react";
-import { Threads } from "../../assets/logos";
+import { Back, Threads } from "../../assets/logos";
 import Navigation from "../Navigation/Navigation";
 import HeaderMenu from "./HeaderMenu";
 import useAuthStore from "../../store/authStore";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ContentContext } from "../../contexts/contentContext";
 
 const Header = () => {
   const { user } = useAuthStore();
-  const { setContent } = useContext(ContentContext);
+  const { setContent, content } = useContext(ContentContext);
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
     <header
       style={{
@@ -20,7 +26,7 @@ const Header = () => {
     >
       <Box h={{ base: "60px", md: "74px" }}>
         <Grid
-          templateColumns={"1fr 50vw 1fr"}
+          templateColumns={"1fr  50vw 1fr"}
           h={"full"}
           w={"full"}
           alignContent={"stretch"}
@@ -36,13 +42,27 @@ const Header = () => {
             <Threads />
           </GridItem>
 
-          {/* Navigation */}
           <GridItem
             display={{ base: "none", md: "block" }}
             colStart={{ md: 2 }}
             colEnd={{ md: 3 }}
             justifySelf={"stretch"}
           >
+            {/* Previous Page Button */}
+            {content !== null && (
+              <Button
+                onClick={goBack}
+                display={{ base: "none", md: "block" }}
+                variant={"ghost"}
+                size={"md"}
+                position={"absolute"}
+                left={"20%"}
+                top={4}
+              >
+                <Back />
+              </Button>
+            )}
+            {/* Navigation */}
             <Navigation />
           </GridItem>
 

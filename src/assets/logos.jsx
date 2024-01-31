@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useColorModeValue } from "@chakra-ui/react";
-import { Box, Button } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { useContext } from "react";
 import { ContentContext } from "../contexts/contentContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
+import useAuthStore from "../store/authStore";
+
 // Header
 export const Threads = ({ h = 32, w = 32 }) => {
   const color = useColorModeValue("#000000", "#F3F5F7");
@@ -29,59 +31,59 @@ export const Threads = ({ h = 32, w = 32 }) => {
     </Box>
   );
 };
+
 // Navigation
 export const Back = () => {
   const color = useColorModeValue("#000000", "#F3F5F7");
   const navigate = useNavigate();
 
   return (
-    <Button>
-      <svg
-        aria-label="Back"
-        role="img"
-        viewBox="0 0 24 24"
+    <svg
+      aria-label="Back"
+      role="img"
+      viewBox="0 0 24 24"
+      style={{
+        fill: `${color}`,
+        height: 26,
+        width: 26,
+        marginLeft: "6px",
+      }}
+      onClick={() => navigate(-1)}
+    >
+      <title>Back</title>
+      <line
         style={{
-          fill: `${color}`,
-          height: 26,
-          width: 26,
+          fill: "transparent",
+          stroke: `${color}`,
+          strokeWidth: 1.7,
+          strokeLinecap: "round",
         }}
-        onClick={() => navigate(-1)}
-      >
-        <title>Back</title>
-        <line
-          style={{
-            fill: "transparent",
-            stroke: `${color}`,
-            strokeWidth: 1.7,
-            strokeLinecap: "round",
-          }}
-          x1={2.909}
-          x2={22.001}
-          y1={12.004}
-          y2={12.004}
-        />
-        <polyline
-          style={{
-            fill: "transparent",
-            stroke: `${color}`,
-            strokeWidth: 1.7,
-            strokeLinecap: "round",
-          }}
-          points="9.276 4.726 2.001 12.004 9.276 19.274"
-        />
-      </svg>
-    </Button>
+        x1={2.909}
+        x2={22.001}
+        y1={12.004}
+        y2={12.004}
+      />
+      <polyline
+        style={{
+          fill: "transparent",
+          stroke: `${color}`,
+          strokeWidth: 1.7,
+          strokeLinecap: "round",
+        }}
+        points="9.276 4.726 2.001 12.004 9.276 19.274"
+      />
+    </svg>
   );
 };
 export const Home = () => {
   const color = useColorModeValue("#B8B8B8", "#4D4D4D");
   const colorFill = useColorModeValue("#000000", "#F3F5F7");
-  const { content } = useContext(ContentContext);
+  const { pathname } = useLocation();
 
   return (
     <Box
       style={{
-        color: content !== "home" ? color : colorFill,
+        color: pathname !== "/" ? color : colorFill,
       }}
     >
       <svg
@@ -97,7 +99,7 @@ export const Home = () => {
         <title>home</title>
         <path
           d="M2.25 12.8855V20.7497C2.25 21.8543 3.14543 22.7497 4.25 22.7497H9.25C9.52614 22.7497 9.75 22.5258 9.75 22.2497V17.6822V16.4997C9.75 14.7048 11.2051 13.2497 13 13.2497C14.7949 13.2497 16.25 14.7048 16.25 16.4997V17.6822V22.2497C16.25 22.5258 16.4739 22.7497 16.75 22.7497H21.75C22.8546 22.7497 23.75 21.8543 23.75 20.7497V12.8855C23.75 11.3765 23.0685 9.94814 21.8954 8.99882L16.1454 4.34539C14.3112 2.86094 11.6888 2.86094 9.85455 4.34539L4.10455 8.99882C2.93153 9.94814 2.25 11.3765 2.25 12.8855Z"
-          fill={content !== "home" ? "transparent" : "currentColor"}
+          fill={pathname !== "/" ? "transparent" : "currentColor"}
           stroke="currentColor"
           strokeLinecap="round"
           strokeWidth={2.5}
@@ -109,11 +111,12 @@ export const Home = () => {
 export const Search = () => {
   const color = useColorModeValue("#B8B8B8", "#4D4D4D");
   const colorFill = useColorModeValue("#000000", "#F3F5F7");
-  const { content } = useContext(ContentContext);
+  const { pathname } = useLocation();
+
   return (
     <Box
       style={{
-        color: content !== "search" ? color : colorFill,
+        color: pathname !== "/search" ? color : colorFill,
       }}
     >
       <svg
@@ -178,7 +181,8 @@ export const Create = () => {
 export const Activity = () => {
   const color = useColorModeValue("#B8B8B8", "#4D4D4D");
   const colorFill = useColorModeValue("#000000", "#F3F5F7");
-  const { content } = useContext(ContentContext);
+  const { pathname } = useLocation();
+
   return (
     <Box
       style={{
@@ -193,12 +197,12 @@ export const Activity = () => {
           height: 26,
           width: 26,
         }}
-        fill={content !== "activity" ? "transparent" : `${colorFill}`}
+        fill={pathname !== "/activity" ? "transparent" : `${colorFill}`}
       >
         <title>activity</title>
         <path
           d="M2.5 9.85683C2.5 14.224 6.22178 18.5299 12.0332 22.2032C12.3554 22.397 12.7401 22.5909 13 22.5909C13.2703 22.5909 13.655 22.397 13.9668 22.2032C19.7782 18.5299 23.5 14.224 23.5 9.85683C23.5 6.11212 20.8698 3.5 17.4599 3.5C15.4847 3.5 13.9356 4.39792 13 5.74479C12.0851 4.40812 10.5257 3.5 8.5401 3.5C5.14059 3.5 2.5 6.11212 2.5 9.85683Z"
-          stroke={content !== "activity" ? "currentColor" : `${colorFill}`}
+          stroke={pathname !== "/activity" ? "currentColor" : `${colorFill}`}
           strokeWidth={2.5}
         />
       </svg>
@@ -208,7 +212,10 @@ export const Activity = () => {
 export const Profile = () => {
   const color = useColorModeValue("#B8B8B8", "#4D4D4D");
   const colorFill = useColorModeValue("#000000", "#F3F5F7");
-  const { content } = useContext(ContentContext);
+  const { ausername } = useParams();
+  const username = ausername?.slice(1);
+  const { user } = useAuthStore();
+
   return (
     <Box
       style={{
@@ -223,19 +230,19 @@ export const Profile = () => {
           height: 26,
           width: 26,
         }}
-        fill={content !== "profile" ? "transparent" : `${colorFill}`}
+        fill={username !== user.username ? "transparent" : `${colorFill}`}
       >
         <title>profile</title>
         <circle
           cx={13}
           cy={7.25}
           r={4}
-          stroke={content !== "profile" ? "currentColor" : `${colorFill}`}
+          stroke={username !== user.username ? "currentColor" : `${colorFill}`}
           strokeWidth={2.5}
         />
         <path
           d="M6.26678 23.75H19.744C21.603 23.75 22.5 23.2186 22.5 22.0673C22.5 19.3712 18.8038 15.75 13 15.75C7.19625 15.75 3.5 19.3712 3.5 22.0673C3.5 23.2186 4.39704 23.75 6.26678 23.75Z"
-          stroke={content !== "profile" ? "currentColor" : `${colorFill}`}
+          stroke={username !== user.username ? "currentColor" : `${colorFill}`}
           strokeWidth={2.5}
         />
       </svg>
@@ -245,6 +252,7 @@ export const Profile = () => {
 export const Menu = ({ handleClick }) => {
   const color = useColorModeValue("#B8B8B8", "#4D4D4D");
   const hoverColor = useColorModeValue("#000000", "#F3F5F7");
+
   return (
     <Box
       _hover={{
@@ -302,6 +310,7 @@ export const Menu = ({ handleClick }) => {
 // Comment
 export const VerticalLine = ({ h }) => {
   const color = useColorModeValue("#e5e5e5", "#333638");
+
   return (
     <Box color={color} m={"12px 0 0 6px"}>
       <svg
@@ -326,6 +335,7 @@ export const VerticalLine = ({ h }) => {
 };
 export const AttachMedia = () => {
   const color = useColorModeValue("#999999", "#777777");
+
   return (
     <Box color={color}>
       <svg
