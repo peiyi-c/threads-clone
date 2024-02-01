@@ -4,7 +4,6 @@ import { Box } from "@chakra-ui/react";
 import { useContext } from "react";
 import { ContentContext } from "../contexts/contentContext";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
-import useAuthStore from "../store/authStore";
 
 // Header
 export const Threads = ({ h = 32, w = 32 }) => {
@@ -213,8 +212,6 @@ export const Profile = () => {
   const color = useColorModeValue("#B8B8B8", "#4D4D4D");
   const colorFill = useColorModeValue("#000000", "#F3F5F7");
   const { ausername } = useParams();
-  const username = ausername?.slice(1);
-  const { user } = useAuthStore();
 
   return (
     <Box
@@ -230,19 +227,19 @@ export const Profile = () => {
           height: 26,
           width: 26,
         }}
-        fill={username !== user.username ? "transparent" : `${colorFill}`}
+        fill={ausername ? `${colorFill}` : "transparent"}
       >
         <title>profile</title>
         <circle
           cx={13}
           cy={7.25}
           r={4}
-          stroke={username !== user.username ? "currentColor" : `${colorFill}`}
+          stroke={ausername ? `${colorFill}` : "currentColor"}
           strokeWidth={2.5}
         />
         <path
           d="M6.26678 23.75H19.744C21.603 23.75 22.5 23.2186 22.5 22.0673C22.5 19.3712 18.8038 15.75 13 15.75C7.19625 15.75 3.5 19.3712 3.5 22.0673C3.5 23.2186 4.39704 23.75 6.26678 23.75Z"
-          stroke={username !== user.username ? "currentColor" : `${colorFill}`}
+          stroke={ausername ? `${colorFill}` : "currentColor"}
           strokeWidth={2.5}
         />
       </svg>
