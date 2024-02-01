@@ -17,9 +17,7 @@ const ThreadPage = () => {
       {!isLoading && <FeedPost thread={thread} />}
       {/* Thread Replies */}
       {replies &&
-        replies.map((reply, index) => (
-          <ThreadReply key={index} reply={reply} />
-        ))}
+        replies.map((reply) => <ThreadReply key={reply.id} reply={reply} />)}
     </>
   );
 };
