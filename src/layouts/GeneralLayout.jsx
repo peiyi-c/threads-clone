@@ -34,7 +34,7 @@ const GeneralLayout = () => {
     <>
       <Header />
       <main>
-        <Container maxW={["520px", "620px"]}>
+        <Container maxW={["520px", "620px"]} pb={10}>
           <Outlet />
         </Container>
       </main>
