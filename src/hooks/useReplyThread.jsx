@@ -22,7 +22,7 @@ const useReplyThread = () => {
   const { userProfile, createReply } = useUserProfileStore();
   const showToast = useShowToast();
 
-  const handleThreadReply = async (threadId, text, images) => {
+  const handleFeedPostReply = async (threadId, text, images) => {
     if (isUpdating) return;
     if (!user) return showToast("Error", "You must login to comment!", "error");
 
@@ -89,7 +89,7 @@ const useReplyThread = () => {
     }
   };
 
-  return { isUpdating, handleThreadReply };
+  return { isUpdating, handleFeedPostReply };
 };
 
 export default useReplyThread;

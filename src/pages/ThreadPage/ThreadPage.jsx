@@ -3,7 +3,7 @@ import FeedPost from "../../components/FeedPosts/FeedPost";
 import useGetThreadReplies from "../../hooks/useGetThreadReplies";
 import { useLocation } from "react-router-dom";
 import useGetThreadById from "../../hooks/useGetThreadById";
-import ThreadReply from "../../components/FeedPosts/ThreadReply";
+import FeedPostReply from "../../components/FeedPosts/FeedPostReply";
 
 const ThreadPage = () => {
   const { pathname } = useLocation();
@@ -17,7 +17,7 @@ const ThreadPage = () => {
       {!isLoading && <FeedPost thread={thread} />}
       {/* Thread Replies */}
       {replies &&
-        replies.map((reply) => <ThreadReply key={reply.id} reply={reply} />)}
+        replies.map((reply) => <FeedPostReply key={reply.id} reply={reply} />)}
     </>
   );
 };

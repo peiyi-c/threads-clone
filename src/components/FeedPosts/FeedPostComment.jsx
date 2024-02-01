@@ -44,7 +44,7 @@ const FeedPostComment = ({
   const { onOpen, isOpen, onClose } = useDisclosure();
   const { user } = useAuthStore();
   const { handleImgChange, selectedFile, setSelectedFile } = usePreviewImg();
-  const { isUpdating, handleThreadReply } = useReplyThread();
+  const { isUpdating, handleFeedPostReply } = useReplyThread();
   const { isCommenting, handleReplyReply } = useReplyReply();
 
   const MIN_TEXTAREA_HEIGHT = 12;
@@ -76,7 +76,7 @@ const FeedPostComment = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (thread) {
-      await handleThreadReply(thread.id, text, images);
+      await handleFeedPostReply(thread.id, text, images);
     } else if (reply) {
       await handleReplyReply(reply.id, text, images);
     }

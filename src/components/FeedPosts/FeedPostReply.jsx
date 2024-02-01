@@ -10,8 +10,8 @@ import {
   Button,
   useDisclosure,
 } from "@chakra-ui/react";
-import FeedPostSlider from "../../components/FeedPosts/FeedPostSlider";
-import FeedPostComment from "../../components/FeedPosts/FeedPostComment";
+import FeedPostSlider from "./FeedPostSlider";
+import FeedPostComment from "./FeedPostComment";
 import { UnLike, Repost, Reply, Share, Like } from "../../assets/logos";
 import useGetReplyReplies from "../../hooks/useGetReplyReplies";
 import useGetProfileById from "../../hooks/useGetProfileById";
@@ -21,7 +21,7 @@ import { AvatarGroup1, AvatarGroup2, AvatarGroup3 } from "./AvatarGroup";
 import { FeedPostMenuOther, FeedPostMenuSelf } from "./FeedPostMenu";
 import useAuthStore from "../../store/authStore";
 
-const ThreadReply = ({ reply }) => {
+const FeedPostReply = ({ reply }) => {
   const { isLoading, userProfile } = useGetProfileById(reply.createdBy);
   const { isLiked, likes, handleLikeReply } = useLikeReply(reply);
   const { onOpen, isOpen, onClose } = useDisclosure();
@@ -177,7 +177,7 @@ const ThreadReply = ({ reply }) => {
       {replies &&
         replies.map((reply) => (
           <Box key={reply.id} pl={5}>
-            <ThreadReply reply={reply} />
+            <FeedPostReply reply={reply} />
           </Box>
         ))}
 
@@ -194,4 +194,4 @@ const ThreadReply = ({ reply }) => {
   );
 };
 
-export default ThreadReply;
+export default FeedPostReply;
