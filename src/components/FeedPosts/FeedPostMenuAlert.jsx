@@ -13,16 +13,23 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import useDeleteThread from "../../hooks/useDeleteThread";
+import useDeleteReply from "../../hooks/useDeleteReply";
 
 const FeedPostMenuSelfAlert = ({
   thread,
+  reply,
   onCloseMenuAlert,
   isOpenMenuAlert,
 }) => {
   const { handleDeleteThread } = useDeleteThread();
-
+  const { handleDeleteReply } = useDeleteReply();
   const handleDelete = async () => {
-    await handleDeleteThread(thread);
+    if (thread) {
+      await handleDeleteThread(thread);
+    }
+    if (reply) {
+      await handleDeleteReply(reply);
+    }
     onCloseMenuAlert();
   };
 

@@ -12,19 +12,21 @@ import {
 } from "@chakra-ui/react";
 import FeedPostSlider from "../../components/FeedPosts/FeedPostSlider";
 import FeedPostComment from "../../components/FeedPosts/FeedPostComment";
-import { UnLike, Repost, Reply, Share, Like, More } from "../../assets/logos";
+import { UnLike, Repost, Reply, Share, Like } from "../../assets/logos";
 import useGetReplyReplies from "../../hooks/useGetReplyReplies";
 import useGetProfileById from "../../hooks/useGetProfileById";
 import useLikeReply from "../../hooks/useLikeReply";
 import { timeAgo } from "../../utils/timeAgo";
 import { AvatarGroup1, AvatarGroup2, AvatarGroup3 } from "./AvatarGroup";
+import { FeedPostMenuOther, FeedPostMenuSelf } from "./FeedPostMenu";
+import useAuthStore from "../../store/authStore";
 
 const ThreadReply = ({ reply }) => {
   const { isLoading, userProfile } = useGetProfileById(reply.createdBy);
   const { isLiked, likes, handleLikeReply } = useLikeReply(reply);
   const { onOpen, isOpen, onClose } = useDisclosure();
   const { replies } = useGetReplyReplies(reply.id);
-
+  const { user } = useAuthStore();
   const threadLength =
     reply.replies && reply.replies?.length > 0 ? reply.replies.length : "";
 
@@ -63,9 +65,12 @@ const ThreadReply = ({ reply }) => {
             </Text>
 
             {/* more button */}
-            <Button variant={"ghost"} size={"sm"}>
-              <More />
-            </Button>
+            {user && user.uid === reply.createdBy && (
+              <FeedPostMenuSelf reply={reply} />
+            )}
+            {user && user.uid !== reply.createdBy && (
+              <FeedPostMenuOther reply={reply} />
+            )}
           </HStack>
         </HStack>
 

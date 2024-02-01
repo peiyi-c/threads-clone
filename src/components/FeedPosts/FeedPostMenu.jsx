@@ -15,7 +15,7 @@ import {
 import { More } from "../../assets/logos";
 import FeedPostMenuSelfAlert from "./FeedPostMenuAlert";
 
-export const FeedPostMenuSelf = ({ thread, user }) => {
+export const FeedPostMenuSelf = ({ thread, reply }) => {
   const { onOpen, isOpen, onClose } = useDisclosure();
   const buttonRef = useRef(null);
   const handleClick = () => {
@@ -65,6 +65,7 @@ export const FeedPostMenuSelf = ({ thread, user }) => {
       </Grid>
       {isOpen && (
         <FeedPostMenuSelfAlert
+          reply={reply}
           thread={thread}
           onCloseMenuAlert={onClose}
           isOpenMenuAlert={isOpen}
@@ -74,7 +75,7 @@ export const FeedPostMenuSelf = ({ thread, user }) => {
   );
 };
 
-export const FeedPostMenuOther = ({ thread, user }) => {
+export const FeedPostMenuOther = ({ thread, reply }) => {
   const buttonRef = useRef(null);
   const handleClick = () => {
     buttonRef.current.click();
