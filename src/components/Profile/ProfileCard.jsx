@@ -44,7 +44,7 @@ const ProfileCard = ({ user, isLoading }) => {
             {user.followers.length}{" "}
             {user.followers.length > 1 ? "Followers" : "Follower"}
             <Text as={"span"}> · </Text>
-            <Link to={user.bioLink}>
+            <Link target="_blank" to={user.bioLink}>
               {user.bioLink
                 .replace("https://www.", "")
                 .replace("http://www.", "")
