@@ -25,8 +25,6 @@ const useReplyReply = () => {
     if (!user) return showToast("Error", "You must login to comment!", "error");
 
     setIsCommenting(true);
-    showToast("Loading", "Posting...", "loading");
-
     const subReply = {
       // id: "",
       createdAt: Date.now(),

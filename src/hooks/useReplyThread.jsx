@@ -27,7 +27,6 @@ const useReplyThread = () => {
     if (!user) return showToast("Error", "You must login to comment!", "error");
 
     setIsUpdating(true);
-    showToast("Loading", "Posting...", "loading");
 
     const newReply = {
       // id: "",
