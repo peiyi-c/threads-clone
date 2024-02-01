@@ -15,7 +15,19 @@ const useThreadStore = create((set) => ({
         if (thread.id === threadId) {
           return {
             ...thread,
-            replies: [replyId, ...thread.replies],
+            replies: [...thread.replies, replyId],
+          };
+        }
+        return thread;
+      }),
+    })),
+  deleteReply: (threadId, replyId) =>
+    set((state) => ({
+      threads: state.threads.map((thread) => {
+        if (thread.id === threadId) {
+          return {
+            ...thread,
+            replies: thread?.replies.filter((reply) => reply.id !== replyId),
           };
         }
         return thread;
