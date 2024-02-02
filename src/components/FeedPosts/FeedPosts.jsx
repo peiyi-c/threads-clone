@@ -4,8 +4,8 @@ import FeedPost from "./FeedPost";
 const FeedPosts = ({ threads }) => {
   return (
     <>
-      {threads.map((thread, index) => (
-        <FeedPost key={index} thread={thread} />
+      {threads.map((thread) => (
+        <FeedPost key={thread.id} thread={thread} />
       ))}
     </>
   );
