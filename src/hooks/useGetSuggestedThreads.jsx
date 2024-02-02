@@ -26,7 +26,7 @@ const useGetSuggestedThreads = () => {
         querySnap.forEach((doc) => {
           threads.push({ ...doc.data(), id: doc.id });
         });
-
+        threads.sort((a, b) => b.createdAt - a.createdAt);
         setSuggestedThreads(threads);
       } catch (error) {
         showToast("Error", error.message, "error");
