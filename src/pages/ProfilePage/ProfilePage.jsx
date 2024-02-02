@@ -24,10 +24,11 @@ const ProfilePage = () => {
     !userProfile?.isPrivate ||
     (viewOthersProfileAndAuth &&
       userProfile?.isPrivate &&
-      user.followings.includes(userProfile.uid));
+      user?.followings.includes(userProfile.uid));
   const userNotFound = !isLoading && !userProfile;
 
   if (userNotFound && !viewOwnProfileAndAuth) return <NotFoundPage />;
+
   return (
     <>
       {/* Profile Card */}

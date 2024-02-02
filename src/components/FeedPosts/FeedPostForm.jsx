@@ -14,7 +14,6 @@ import {
   TabPanel,
 } from "@chakra-ui/react";
 import FeedPostFormModal from "./FeedPostFormModal";
-
 import FollowingPosts from "./FollowingPosts";
 import SuggestedPosts from "./SuggestedPosts";
 
