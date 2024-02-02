@@ -33,7 +33,7 @@ const FeedPost = ({ thread }) => {
 
   const threadLength =
     thread.replies && thread.replies?.length > 0 ? thread.replies.length : "";
-
+  const showDot = threadLength && likes > 0;
   const openThreadPage = () => {
     setContent("thread");
     navigate(`/@${userProfile.username}/post/${thread.id}`);
@@ -167,11 +167,12 @@ const FeedPost = ({ thread }) => {
           <Text as={"span"} cursor={"pointer"} onClick={openThreadPage}>
             {threadLength}{" "}
             {thread.replies && thread.replies?.length > 1
-              ? "replies · "
+              ? "replies"
               : thread.replies?.length > 0
-              ? "reply · "
+              ? "reply"
               : ""}
-          </Text>{" "}
+          </Text>
+          {showDot && " · "}
           <Text as={"span"} cursor={"pointer"}>
             {likes && likes > 0 ? likes : ""}{" "}
             {likes > 1 ? "likes" : likes > 0 ? "like" : ""}
