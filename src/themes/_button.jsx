@@ -65,6 +65,23 @@ const buttonStyle = {
         color: props.colorMode === "light" ? "#FFFFFF" : "#000000",
       },
     }),
+    cta: (props) => ({
+      p: "18px 24px",
+      fontSize: "16px",
+      lineHeight: "21px",
+      bg: props.colorMode === "light" ? "#FFFFFF" : "#000000",
+      color: props.colorMode === "light" ? "#000000" : "#FFFFFF",
+      border: "1px solid",
+      borderColor: props.colorMode === "light" ? "#0000000a" : "#ffffff0a",
+      borderRadius: "100px",
+      transform: "scale(0.95)",
+      _hover: {
+        bg: props.colorMode === "light" ? "#FFFFFF" : "#000000",
+        color: props.colorMode === "light" ? "#000000" : "#FFFFFF",
+        transform: "scale(1)",
+      },
+      boxShadow: "0 8px 24px 0 #00000014",
+    }),
   },
 };
 

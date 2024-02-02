@@ -7,9 +7,9 @@ import { firestore } from "../firebase/firebase";
 const useLikeThread = (thread) => {
   const { user } = useAuthStore();
   const [isUpdating, setIsUpdating] = useState(false);
-  const [likes, setLikes] = useState(thread.likedBy?.length || 0);
+  const [likes, setLikes] = useState(thread?.likedBy?.length || 0);
   const [isLiked, setIsLiked] = useState(
-    thread.likedBy?.includes(user?.uid) || false
+    thread?.likedBy?.includes(user?.uid) || false
   );
 
   const showToast = useShowToast();
