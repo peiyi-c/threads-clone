@@ -69,7 +69,7 @@ const FeedPostReply = ({ reply }) => {
               <FeedPostMenuSelf reply={reply} />
             )}
             {user && user.uid !== reply.createdBy && (
-              <FeedPostMenuOther reply={reply} />
+              <FeedPostMenuOther post={reply} />
             )}
           </HStack>
         </HStack>

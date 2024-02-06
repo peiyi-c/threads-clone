@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { More } from "../../assets/logos";
 import FeedPostMenuSelfAlert from "./FeedPostMenuAlert";
+import useFollowUser from "../../hooks/useFollowUser";
 
 export const FeedPostMenuSelf = ({ thread, reply }) => {
   const { onOpen, isOpen, onClose } = useDisclosure();
@@ -75,8 +76,11 @@ export const FeedPostMenuSelf = ({ thread, reply }) => {
   );
 };
 
-export const FeedPostMenuOther = ({ thread, reply }) => {
+export const FeedPostMenuOther = ({ post }) => {
+  // post is thread or reply
   const buttonRef = useRef(null);
+  const { handleFollowUser, isFollowing } = useFollowUser(post.createdBy);
+
   const handleClick = () => {
     buttonRef.current.click();
   };
@@ -112,10 +116,15 @@ export const FeedPostMenuOther = ({ thread, reply }) => {
           ></MenuButton>
           <MenuList minW="0" p={2} w={"fit-content"}>
             <MenuItem hidden aria-hidden></MenuItem>
-            <MenuItem>
-              <Text role="button">Unfollow</Text>
-            </MenuItem>
-            <MenuDivider />
+            {isFollowing && (
+              <>
+                <MenuItem onClick={handleFollowUser}>
+                  <Text role="button">Unfollow</Text>
+                </MenuItem>
+                <MenuDivider />
+              </>
+            )}
+
             <MenuItem>
               <Text role="button">Mute</Text>
             </MenuItem>

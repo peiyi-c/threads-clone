@@ -81,7 +81,7 @@ const FeedPost = ({ thread }) => {
                 <FeedPostMenuSelf thread={thread} />
               )}
               {user && user.uid !== thread.createdBy && (
-                <FeedPostMenuOther thread={thread} />
+                <FeedPostMenuOther post={thread} />
               )}
             </HStack>
           </HStack>

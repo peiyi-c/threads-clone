@@ -34,7 +34,7 @@ const useGetUserReplies = () => {
     };
 
     getReplies();
-  }, [userProfile, showToast]);
+  }, [userProfile.uid, showToast]);
 
   return { isLoading, replied };
 };
