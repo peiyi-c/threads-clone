@@ -52,6 +52,7 @@ const useFollowUser = (profileUserId) => {
             followings: user.followings.filter((uid) => uid !== profileUserId),
           })
         );
+        showToast("Success", "Unfollowed", "success");
       } else {
         // follow
         setUser({
@@ -72,6 +73,7 @@ const useFollowUser = (profileUserId) => {
           })
         );
         setIsFollowing(true);
+        showToast("Success", "Following!", "success");
       }
     } catch (error) {
       showToast("Error", error.message, "error");
