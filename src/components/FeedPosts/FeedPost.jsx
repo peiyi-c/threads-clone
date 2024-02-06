@@ -9,6 +9,9 @@ import {
   Button,
   Divider,
   useDisclosure,
+  Skeleton,
+  SkeletonCircle,
+  SkeletonText,
 } from "@chakra-ui/react";
 import { Reply, Repost, Share, UnLike, Like } from "../../assets/logos";
 import FeedPostSlider from "./FeedPostSlider";
@@ -198,3 +201,62 @@ const FeedPost = ({ thread }) => {
 };
 
 export default FeedPost;
+
+export const FeedPostSkeleton = () => {
+  return (
+    <>
+      <Grid
+        my={"12px"}
+        templateColumns={"48px minmax(0, 1fr)"}
+        templateRows={"21px 19px max-content max-content"}
+      >
+        {/* thread author avatar */}
+        <SkeletonCircle
+          size={"36px"}
+          startColor="#00000026"
+          endColor="#f3f5f733"
+        />
+
+        {/* thread author name */}
+        <HStack justifyContent={"space-between"}>
+          <Skeleton
+            fadeDuration={4}
+            startColor="#00000026"
+            endColor="#f3f5f733"
+          >
+            <Text as={"span"} ml={2}>
+              --------------
+            </Text>
+          </Skeleton>
+
+          <Skeleton startColor="#00000026" endColor="#f3f5f733">
+            {/* thread created at */}
+            <Text as={"span"}>-----</Text>
+          </Skeleton>
+        </HStack>
+
+        <Box
+          mt={-17}
+          gridColumnStart={2}
+          gridColumnEnd={3}
+          gridRowStart={3}
+          gridRowEnd={4}
+          mb={2}
+        >
+          {/* thread text */}
+          <SkeletonText
+            mt="4"
+            noOfLines={2}
+            spacing={1}
+            skeletonHeight={4}
+            startColor="#00000026"
+            endColor="#ffffff12"
+          />
+        </Box>
+      </Grid>
+
+      {/* thread button divider */}
+      <Divider orientation="horizontal" variant={"standard"} />
+    </>
+  );
+};
