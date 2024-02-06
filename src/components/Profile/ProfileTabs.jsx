@@ -1,12 +1,12 @@
-import { Tabs, Tab, TabList, TabPanels, TabPanel } from "@chakra-ui/react";
+import { Tabs, TabPanels, TabPanel, Tab, TabList } from "@chakra-ui/react";
 import UserThreads from "./UserThreads";
 import UserReplies from "./UserReplies";
 
 const ProfileTabs = () => {
   const TABS = ["Threads", "Replies", "Reposts"];
-
   return (
     <Tabs colorScheme="black" display={"block"}>
+      {/* tab list */}
       <TabList>
         {TABS.map((tab) => (
           <Tab key={tab} fontSize={"15px"}>
@@ -14,6 +14,7 @@ const ProfileTabs = () => {
           </Tab>
         ))}
       </TabList>
+
       <TabPanels>
         <TabPanel>
           {/* user threads */}
