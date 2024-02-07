@@ -10,12 +10,14 @@ const useShowToast = () => {
         title,
         description,
         status,
-        duration: 3000,
+        duration: 2500,
         isClosable: true,
+        variant: "subtle",
       });
     },
     [toast]
   );
+
   return showToast;
 };
 
