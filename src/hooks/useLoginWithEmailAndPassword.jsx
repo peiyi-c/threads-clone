@@ -23,7 +23,6 @@ const useLoginWithEmailAndPassword = () => {
         return;
       }
       if (userCred) {
-        showToast("Success", "Log in successfull!!", "success");
         navigate("/");
         const docRef = doc(firestore, "users", userCred.user.uid);
         const docSnap = await getDoc(docRef);
