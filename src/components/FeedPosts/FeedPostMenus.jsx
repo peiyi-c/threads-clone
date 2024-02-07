@@ -12,11 +12,12 @@ import {
   Button,
   useDisclosure,
 } from "@chakra-ui/react";
-import { More } from "../../assets/logos";
-import FeedPostMenuSelfAlert from "./FeedPostMenuAlert";
+import { More, Repost, Reposted } from "../../assets/logos";
+import FeedPostMoreSelfAlert from "./FeedPostMoreSelfAlert";
 import useFollowUser from "../../hooks/useFollowUser";
+import useRepostPost from "../../hooks/useRepostPost";
 
-export const FeedPostMenuSelf = ({ thread, reply }) => {
+export const FeedPostMoreSelf = ({ thread, reply }) => {
   const { onOpen, isOpen, onClose } = useDisclosure();
   const buttonRef = useRef(null);
   const handleClick = () => {
@@ -65,7 +66,7 @@ export const FeedPostMenuSelf = ({ thread, reply }) => {
         </GridItem>
       </Grid>
       {isOpen && (
-        <FeedPostMenuSelfAlert
+        <FeedPostMoreSelfAlert
           reply={reply}
           thread={thread}
           onCloseMenuAlert={onClose}
@@ -76,7 +77,7 @@ export const FeedPostMenuSelf = ({ thread, reply }) => {
   );
 };
 
-export const FeedPostMenuOther = ({ post }) => {
+export const FeedPostMoreOther = ({ post }) => {
   // post is thread or reply
   const buttonRef = useRef(null);
   const { handleFollowUser, isFollowing } = useFollowUser(post.createdBy);
@@ -131,6 +132,65 @@ export const FeedPostMenuOther = ({ post }) => {
             <MenuDivider />
             <MenuItem>
               <Text role="button">Hide</Text>
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      </GridItem>
+    </Grid>
+  );
+};
+
+export const FeedPostRepost = ({ post }) => {
+  const buttonRef = useRef(null);
+  const { handleRepostPost, isReposted } = useRepostPost(post);
+
+  const handleClick = () => {
+    buttonRef.current.click();
+  };
+  return (
+    <Grid
+      gridTemplateColumns={"1fr"}
+      gridTemplateRows={"1fr"}
+      alignItems={"center"}
+      justifyItems={"end"}
+    >
+      {/* More Menu Icon */}
+      <GridItem
+        colStart={1}
+        colEnd={2}
+        rowStart={1}
+        rowEnd={1}
+        zIndex={"dropdown"}
+      >
+        <Button variant={"ghost"} size={"sm"} onClick={handleClick}>
+          {isReposted ? <Reposted /> : <Repost />}
+        </Button>
+      </GridItem>
+
+      {/*  Menu List */}
+      <GridItem w={"36px"} colStart={1} colEnd={2} rowStart={1} rowEnd={1}>
+        <Menu closeOnSelect={true} size={"sm"}>
+          <MenuButton
+            as={Button}
+            ref={buttonRef}
+            opacity={0}
+            aria-hidden
+          ></MenuButton>
+          <MenuList minW="0" p={2} w={"fit-content"}>
+            <MenuItem hidden aria-hidden></MenuItem>
+
+            <MenuItem onClick={handleRepostPost}>
+              {isReposted ? (
+                <Text role="button" color={"#FF3040"}>
+                  Remove
+                </Text>
+              ) : (
+                <Text role="button">Repost</Text>
+              )}
+            </MenuItem>
+            <MenuDivider />
+            <MenuItem>
+              <Text role="button">Quote</Text>
             </MenuItem>
           </MenuList>
         </Menu>

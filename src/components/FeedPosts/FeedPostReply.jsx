@@ -18,7 +18,7 @@ import useGetProfileById from "../../hooks/useGetProfileById";
 import useLikeReply from "../../hooks/useLikeReply";
 import { timeAgo } from "../../utils/timeAgo";
 import { AvatarGroup1, AvatarGroup2, AvatarGroup3 } from "./AvatarGroup";
-import { FeedPostMenuOther, FeedPostMenuSelf } from "./FeedPostMenu";
+import { FeedPostMoreOther, FeedPostMoreSelf } from "./FeedPostMenus";
 import useAuthStore from "../../store/authStore";
 
 const FeedPostReply = ({ reply }) => {
@@ -66,10 +66,10 @@ const FeedPostReply = ({ reply }) => {
 
             {/* more button */}
             {user && user.uid === reply.createdBy && (
-              <FeedPostMenuSelf reply={reply} />
+              <FeedPostMoreSelf reply={reply} />
             )}
             {user && user.uid !== reply.createdBy && (
-              <FeedPostMenuOther post={reply} />
+              <FeedPostMoreOther post={reply} />
             )}
           </HStack>
         </HStack>

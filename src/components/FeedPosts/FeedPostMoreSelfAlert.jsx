@@ -15,7 +15,7 @@ import {
 import useDeleteThread from "../../hooks/useDeleteThread";
 import useDeleteReply from "../../hooks/useDeleteReply";
 
-const FeedPostMenuSelfAlert = ({
+const FeedPostMoreSelfAlert = ({
   thread,
   reply,
   onCloseMenuAlert,
@@ -68,4 +68,4 @@ const FeedPostMenuSelfAlert = ({
   );
 };
 
-export default FeedPostMenuSelfAlert;
+export default FeedPostMoreSelfAlert;
