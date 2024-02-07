@@ -9,6 +9,7 @@ import inputStyle from "./_input.jsx";
 import textareaStyle from "./_textarea.jsx";
 import tabsStyle from "./_tab.jsx";
 import switchStyle from "./_switch.jsx";
+import alertStyle from "./_alert.jsx";
 
 const styles = {
   global: (props) => ({
@@ -61,6 +62,7 @@ const components = {
   Textarea: { ...textareaStyle },
   Tabs: { ...tabsStyle },
   Switch: { ...switchStyle },
+  Alert: { ...alertStyle },
 };
 
 const theme = extendTheme({
