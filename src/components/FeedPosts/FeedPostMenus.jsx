@@ -140,7 +140,7 @@ export const FeedPostMoreOther = ({ post }) => {
   );
 };
 
-export const FeedPostRepost = ({ post, type }) => {
+export const FeedPostRepost = ({ post, type, userProfile, user }) => {
   const buttonRef = useRef(null);
   const { handleRepostPost, isReposted } = useRepostPost(post, type);
 
@@ -181,16 +181,28 @@ export const FeedPostRepost = ({ post, type }) => {
 
             <MenuItem onClick={handleRepostPost}>
               {isReposted ? (
-                <Text role="button" color={"#FF3040"}>
+                <Button h={"20px"} variant={"ghost"} color={"#FF3040"}>
                   Remove
-                </Text>
+                </Button>
               ) : (
-                <Text role="button">Repost</Text>
+                <Button
+                  h={"20px"}
+                  variant={"ghost"}
+                  isDisabled={user?.uid === userProfile?.uid}
+                >
+                  Repost
+                </Button>
               )}
             </MenuItem>
             <MenuDivider />
             <MenuItem>
-              <Text role="button">Quote</Text>
+              <Button
+                isDisabled={user?.uid === userProfile?.uid}
+                h={"20px"}
+                variant={"ghost"}
+              >
+                Quote
+              </Button>
             </MenuItem>
           </MenuList>
         </Menu>
