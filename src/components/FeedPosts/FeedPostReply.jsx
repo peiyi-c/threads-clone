@@ -109,7 +109,7 @@ const FeedPostReply = ({ reply }) => {
             {/* repost button */}
             <FeedPostRepost
               post={reply}
-              type={"reply"}
+              type={"replies"}
               user={user}
               userProfile={userProfile}
             />

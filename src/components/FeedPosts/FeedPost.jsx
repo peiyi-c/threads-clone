@@ -121,7 +121,7 @@ const FeedPost = ({ thread }) => {
               {/* repost button */}
               <FeedPostRepost
                 post={thread}
-                type={"thread"}
+                type={"threads"}
                 user={user}
                 userProfile={userProfile}
               />

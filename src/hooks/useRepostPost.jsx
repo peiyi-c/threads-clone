@@ -29,17 +29,11 @@ const useRepostPost = (post, type) => {
       });
 
       // update post (thread or reply)
-      if (type === "thread") {
-        const threadRef = doc(firestore, "threads", post.id);
-        await updateDoc(threadRef, {
-          repostedBy: isReposted ? arrayRemove(user.uid) : arrayUnion(user.uid),
-        });
-      } else if (type === "reply") {
-        const replyRef = doc(firestore, "replies", post.id);
-        await updateDoc(replyRef, {
-          repostedBy: isReposted ? arrayRemove(user.uid) : arrayUnion(user.uid),
-        });
-      }
+      const postRef = doc(firestore, type, post.id);
+      await updateDoc(postRef, {
+        repostedBy: isReposted ? arrayRemove(user.uid) : arrayUnion(user.uid),
+      });
+
       // update ui and store
       if (isReposted) {
         // unrepost
