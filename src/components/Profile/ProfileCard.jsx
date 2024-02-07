@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 
 const ProfileCard = ({ user, isLoading }) => {
   const subColor = useColorModeValue("#999999", "#777777");
-  const showDot = user.followers.length > 1 && user.bioLink;
+  const showDot = user?.followers.length > 1 && user?.bioLink;
 
   if (isLoading) return <ProfileCardSkeleton />;
 
