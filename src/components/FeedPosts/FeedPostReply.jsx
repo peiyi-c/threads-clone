@@ -12,13 +12,17 @@ import {
 } from "@chakra-ui/react";
 import FeedPostSlider from "./FeedPostSlider";
 import FeedPostComment from "./FeedPostComment";
-import { UnLike, Repost, Reply, Share, Like } from "../../assets/logos";
+import { UnLike, Reply, Share, Like } from "../../assets/logos";
 import useGetReplyReplies from "../../hooks/useGetReplyReplies";
 import useGetProfileById from "../../hooks/useGetProfileById";
 import useLikeReply from "../../hooks/useLikeReply";
 import { timeAgo } from "../../utils/timeAgo";
 import { AvatarGroup1, AvatarGroup2, AvatarGroup3 } from "./AvatarGroup";
-import { FeedPostMoreOther, FeedPostMoreSelf } from "./FeedPostMenus";
+import {
+  FeedPostMoreOther,
+  FeedPostMoreSelf,
+  FeedPostRepost,
+} from "./FeedPostMenus";
 import useAuthStore from "../../store/authStore";
 
 const FeedPostReply = ({ reply }) => {
@@ -92,17 +96,24 @@ const FeedPostReply = ({ reply }) => {
             </Box>
           )}
 
-          {/* reply like, reply, repost, share button */}
+          {/* buttons */}
           <HStack my={"12px"}>
+            {/*  (un)like button */}
             <Button onClick={handleLikeReply} variant={"ghost"} size={"sm"}>
               {isLiked ? <Like /> : <UnLike />}
             </Button>
+            {/*  reply button */}
             <Button onClick={onOpen} variant={"ghost"} size={"sm"}>
               <Reply />
             </Button>
-            <Button variant={"ghost"} size={"sm"}>
-              <Repost />
-            </Button>
+            {/* repost button */}
+            <FeedPostRepost
+              post={reply}
+              type={"reply"}
+              user={user}
+              userProfile={userProfile}
+            />
+            {/* share button */}
             <Button variant={"ghost"} size={"sm"}>
               <Share />
             </Button>
