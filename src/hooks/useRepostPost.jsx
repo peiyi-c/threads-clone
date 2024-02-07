@@ -1,21 +1,24 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useAuthStore from "../store/authStore";
 import useShowToast from "./useShowToast";
 import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { firestore } from "../firebase/firebase";
+import useUserProfileStore from "../store/userProfileStore";
 
-const useRepostPost = (post) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isReposted, setIsReposted] = useState(false);
+const useRepostPost = (post, type) => {
   const { user } = useAuthStore();
-  const showToast = useShowToast();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isReposted, setIsReposted] = useState(
+    post.repostedBy?.includes(user?.uid) || false
+  );
 
-  useEffect(() => {
-    if (user) setIsReposted(user.reposts?.includes(post.id));
-  }, [user.uid, post.id]);
+  const { userProfile, addRepost, removeRepost } = useUserProfileStore();
+  const showToast = useShowToast();
 
   const handleRepostPost = async () => {
     if (isLoading) return;
+    if (!user) return showToast("Error", "Please login to repost", "error");
+
     setIsLoading(true);
 
     try {
@@ -25,12 +28,34 @@ const useRepostPost = (post) => {
         reposts: isReposted ? arrayRemove(post.id) : arrayUnion(post.id),
       });
 
+      // update post (thread or reply)
+      if (type === "thread") {
+        const threadRef = doc(firestore, "threads", post.id);
+        await updateDoc(threadRef, {
+          repostedBy: isReposted ? arrayRemove(user.uid) : arrayUnion(user.uid),
+        });
+      } else if (type === "reply") {
+        const replyRef = doc(firestore, "replies", post.id);
+        await updateDoc(replyRef, {
+          repostedBy: isReposted ? arrayRemove(user.uid) : arrayUnion(user.uid),
+        });
+      }
+      // update ui and store
       if (isReposted) {
+        // unrepost
         setIsReposted(false);
         showToast("Success", "Removed!", "success");
+
+        if (user.uid === userProfile.uid) {
+          removeRepost(post);
+        }
       } else {
+        // repost
         setIsReposted(true);
         showToast("Success", "Reposted!", "success");
+        if (user.uid === userProfile.uid) {
+          addRepost(post);
+        }
       }
     } catch (error) {
       showToast("Error", error.message, "error");

@@ -2,7 +2,9 @@ import { create } from "zustand";
 // store which profile we're checking
 const useUserProfileStore = create((set) => ({
   userProfile: null,
+  // set the user of ProfilePage
   setUserProfile: (userProfile) => set({ userProfile }),
+  // for ui if user of ProfilePage equals to authUser
   addThread: (thread) =>
     set((state) => ({
       userProfile: {
@@ -31,6 +33,20 @@ const useUserProfileStore = create((set) => ({
         replies: state.userProfile.replies.filter(
           (reply) => reply.id !== replyId
         ),
+      },
+    })),
+  addRepost: (post) =>
+    set((state) => ({
+      userProfile: {
+        ...state.userProfile,
+        reposts: [post.id, ...state.userProfile.reposts],
+      },
+    })),
+  removeRepost: (id) =>
+    set((state) => ({
+      userProfile: {
+        ...state.userProfile,
+        reposts: state.userProfile.reposts.filter((repost) => repost.id !== id),
       },
     })),
 }));
