@@ -1,6 +1,7 @@
 import { Tabs, TabPanels, TabPanel, Tab, TabList } from "@chakra-ui/react";
 import UserThreads from "./UserThreads";
 import UserReplies from "./UserReplies";
+import UserReposts from "./UserReposts";
 
 const ProfileTabs = () => {
   const TABS = ["Threads", "Replies", "Reposts"];
@@ -25,7 +26,8 @@ const ProfileTabs = () => {
           <UserReplies />
         </TabPanel>
         <TabPanel>
-          <p>Reposts</p>
+          {/* user reposts */}
+          <UserReposts />
         </TabPanel>
       </TabPanels>
     </Tabs>

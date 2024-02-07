@@ -119,7 +119,7 @@ const FeedPost = ({ thread }) => {
                 <Reply />
               </Button>
               {/* repost button */}
-              <FeedPostRepost post={thread} />
+              <FeedPostRepost post={thread} type={"thread"} />
               {/* share button */}
               <Button variant={"ghost"} size={"sm"}>
                 <Share />

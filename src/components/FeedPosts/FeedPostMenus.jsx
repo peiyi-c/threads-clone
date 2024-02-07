@@ -140,9 +140,9 @@ export const FeedPostMoreOther = ({ post }) => {
   );
 };
 
-export const FeedPostRepost = ({ post }) => {
+export const FeedPostRepost = ({ post, type }) => {
   const buttonRef = useRef(null);
-  const { handleRepostPost, isReposted } = useRepostPost(post);
+  const { handleRepostPost, isReposted } = useRepostPost(post, type);
 
   const handleClick = () => {
     buttonRef.current.click();
