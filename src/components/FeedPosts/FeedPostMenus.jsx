@@ -181,13 +181,13 @@ export const FeedPostRepost = ({ post, type, userProfile, user }) => {
 
             <MenuItem onClick={handleRepostPost}>
               {isReposted ? (
-                <Button h={"20px"} variant={"ghost"} color={"#FF3040"}>
+                <Button h={"20px"} variant={"line"} color={"#FF3040"}>
                   Remove
                 </Button>
               ) : (
                 <Button
                   h={"20px"}
-                  variant={"ghost"}
+                  variant={"line"}
                   isDisabled={user?.uid === userProfile?.uid}
                 >
                   Repost
@@ -199,7 +199,7 @@ export const FeedPostRepost = ({ post, type, userProfile, user }) => {
               <Button
                 isDisabled={user?.uid === userProfile?.uid}
                 h={"20px"}
-                variant={"ghost"}
+                variant={"line"}
               >
                 Quote
               </Button>
