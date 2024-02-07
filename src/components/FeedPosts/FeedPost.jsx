@@ -13,7 +13,7 @@ import {
   SkeletonCircle,
   SkeletonText,
 } from "@chakra-ui/react";
-import { Reply, Repost, Share, UnLike, Like } from "../../assets/logos";
+import { Reply, Share, UnLike, Like } from "../../assets/logos";
 import FeedPostSlider from "./FeedPostSlider";
 import { timeAgo } from "../../utils/timeAgo";
 import useGetProfileById from "../../hooks/useGetProfileById";
@@ -23,7 +23,11 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ContentContext } from "../../contexts/contentContext";
 import { AvatarGroup1, AvatarGroup2, AvatarGroup3 } from "./AvatarGroup";
-import { FeedPostMenuSelf, FeedPostMenuOther } from "./FeedPostMenu";
+import {
+  FeedPostMoreSelf,
+  FeedPostMoreOther,
+  FeedPostRepost,
+} from "./FeedPostMenus";
 import useAuthStore from "../../store/authStore";
 
 const FeedPost = ({ thread }) => {
@@ -78,10 +82,10 @@ const FeedPost = ({ thread }) => {
 
               {/* more button */}
               {user && user.uid === thread.createdBy && (
-                <FeedPostMenuSelf thread={thread} />
+                <FeedPostMoreSelf thread={thread} />
               )}
               {user && user.uid !== thread.createdBy && (
-                <FeedPostMenuOther post={thread} />
+                <FeedPostMoreOther post={thread} />
               )}
             </HStack>
           </HStack>
@@ -104,17 +108,19 @@ const FeedPost = ({ thread }) => {
               </Box>
             )}
 
-            {/* thread like, reply, repost, share button */}
+            {/* buttons */}
             <HStack my={0.5}>
+              {/*  (un)like button */}
               <Button onClick={handleLikeThread} variant={"ghost"} size={"sm"}>
                 {isLiked ? <Like /> : <UnLike />}
               </Button>
+              {/*  reply button */}
               <Button onClick={onOpen} variant={"ghost"} size={"sm"}>
                 <Reply />
               </Button>
-              <Button variant={"ghost"} size={"sm"}>
-                <Repost />
-              </Button>
+              {/* repost button */}
+              <FeedPostRepost post={thread} />
+              {/* share button */}
               <Button variant={"ghost"} size={"sm"}>
                 <Share />
               </Button>
