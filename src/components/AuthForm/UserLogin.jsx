@@ -4,7 +4,7 @@ import { Input, Button, useColorModeValue } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import useLoginWithEmailAndPassword from "../../hooks/useLoginWithEmailAndPassword";
 
-const Login = () => {
+const UserLogin = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [inputs, setInputs] = useState({
     email: "",
@@ -78,4 +78,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default UserLogin;
