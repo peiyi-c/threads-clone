@@ -16,18 +16,20 @@ const useGetSuggestedUsers = () => {
 
       try {
         // find unfollowed users
-        const threadRef = collection(firestore, "users");
-        const q = query(
-          threadRef,
-          where("uid", "not-in", [user.uid, ...user.followings])
-        );
-        const querySnap = await getDocs(q);
-        const users = [];
-        querySnap.forEach((doc) => {
-          users.push({ ...doc.data(), id: doc.id });
-        });
-        users.sort((a, b) => b.createdAt - a.createdAt);
-        setSuggestedUsers(users);
+        if (user.followings) {
+          const threadRef = collection(firestore, "users");
+          const q = query(
+            threadRef,
+            where("uid", "not-in", [user.uid, ...user.followings])
+          );
+          const querySnap = await getDocs(q);
+          const users = [];
+          querySnap.forEach((doc) => {
+            users.push({ ...doc.data(), id: doc.id });
+          });
+          users.sort((a, b) => b.createdAt - a.createdAt);
+          setSuggestedUsers(users);
+        }
       } catch (error) {
         showToast("Error", error.message, "error");
       } finally {
