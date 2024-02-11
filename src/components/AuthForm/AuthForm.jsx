@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 import UserLogin from "./UserLogin";
-import Signup from "./Signup";
+import UserSignup from "./UserSignup";
 
 const AuthForm = () => {
   const { pathname } = useLocation();
@@ -22,7 +22,7 @@ const AuthForm = () => {
           {pathname === "/login" ? "Log In" : "Sign Up"}
         </Heading>
         {/* input fields */}
-        {pathname === "/login" ? <UserLogin /> : <Signup />}
+        {pathname === "/login" ? <UserLogin /> : <UserSignup />}
         {/* switch button */}
         <Flex
           justifyContent={"center"}

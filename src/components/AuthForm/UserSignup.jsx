@@ -2,7 +2,7 @@ import { Flex, Input, Button, useColorModeValue } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import useSignupWithEmailAndPassword from "../../hooks/useSignupWithEmailAndPassword";
 
-const Signup = () => {
+const UserSignup = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [inputs, setInputs] = useState({
     username: "",
@@ -101,4 +101,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default UserSignup;
