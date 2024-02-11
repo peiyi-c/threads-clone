@@ -9,8 +9,8 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
-import LogIn from "./Login.jsx";
-import SignUp from "./SignUp.jsx";
+import LogIn from "./Login";
+import SignUp from "./SignUp";
 
 const AuthForm = () => {
   const { pathname } = useLocation();
