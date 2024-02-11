@@ -153,6 +153,7 @@ export const FeedPostRepost = ({ post, type, userProfile, user }) => {
       gridTemplateRows={"1fr"}
       alignItems={"center"}
       justifyItems={"end"}
+      w={"2rem"}
     >
       {/* More Menu Icon */}
       <GridItem
@@ -168,14 +169,9 @@ export const FeedPostRepost = ({ post, type, userProfile, user }) => {
       </GridItem>
 
       {/*  Menu List */}
-      <GridItem w={"36px"} colStart={1} colEnd={2} rowStart={1} rowEnd={1}>
+      <GridItem colStart={1} colEnd={2} rowStart={1} rowEnd={1}>
         <Menu closeOnSelect={true} size={"sm"}>
-          <MenuButton
-            as={Button}
-            ref={buttonRef}
-            opacity={0}
-            aria-hidden
-          ></MenuButton>
+          <MenuButton ref={buttonRef} opacity={0} aria-hidden></MenuButton>
           <MenuList minW="0" p={2} w={"fit-content"}>
             <MenuItem hidden aria-hidden></MenuItem>
 
