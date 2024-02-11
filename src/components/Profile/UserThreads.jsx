@@ -5,7 +5,7 @@ import FeedPosts from "../FeedPosts/FeedPosts";
 
 const UserThreads = () => {
   const { isLoading, threads } = useGetUserThreads();
-  const displayThreads = !isLoading && threads;
+  const displayThreads = !isLoading && threads.length;
   const color = useColorModeValue("#000000", "#F3F5F7");
   if (isLoading)
     return (

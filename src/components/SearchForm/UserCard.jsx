@@ -42,11 +42,11 @@ const UserCard = ({ user }) => {
               {user.followers && (
                 <Text
                   mt={2}
-                  display={user.followers?.length === 0 ? "none" : "inline"}
+                  display={user?.followers?.length === 0 ? "none" : "inline"}
                 >
-                  {user.followers?.length > 1
-                    ? `${user.followers?.length} followers`
-                    : user.followers?.length === 1
+                  {user?.followers?.length > 1
+                    ? `${user?.followers?.length} followers`
+                    : user?.followers?.length === 1
                     ? `1 follower`
                     : ""}
                 </Text>

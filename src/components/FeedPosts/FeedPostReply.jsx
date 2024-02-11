@@ -32,7 +32,7 @@ const FeedPostReply = ({ reply }) => {
   const { replies } = useGetReplyReplies(reply.id);
   const { user } = useAuthStore();
   const threadLength =
-    reply.replies && reply.replies?.length > 0 ? reply.replies.length : "";
+    reply.replies && reply.replies?.length > 0 ? reply?.replies.length : "";
 
   return (
     <>
