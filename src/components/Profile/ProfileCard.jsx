@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 
 const ProfileCard = ({ user, isLoading }) => {
   const subColor = useColorModeValue("#999999", "#777777");
-  const showDot = user?.followers.length > 1 && user?.bioLink;
+  const showDot = user?.followers?.length > 1 && user?.bioLink;
 
   if (isLoading) return <ProfileCardSkeleton />;
 
@@ -43,8 +43,8 @@ const ProfileCard = ({ user, isLoading }) => {
         <HStack mt={"10px"} color={subColor}>
           <Avatar size={"xs"} />
           <Text as={"span"}>
-            {user.followers.length}{" "}
-            {user.followers.length > 1 ? "Followers" : "Follower"}
+            {user.followers?.length}{" "}
+            {user.followers?.length > 1 ? "Followers" : "Follower"}
             {showDot && <Text as={"span"}> · </Text>}
             <Link target="_blank" to={user.bioLink}>
               {user.bioLink
