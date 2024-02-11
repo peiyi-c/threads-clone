@@ -11,7 +11,7 @@ const useShowToast = () => {
         description,
         status,
         duration: 2500,
-        isClosable: true,
+        isClosable: false,
         variant: "subtle",
       });
     },
