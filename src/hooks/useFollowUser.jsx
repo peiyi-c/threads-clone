@@ -13,7 +13,7 @@ const useFollowUser = (profileUserId) => {
   const showToast = useShowToast();
 
   useEffect(() => {
-    if (user) setIsFollowing(user.followings?.includes(profileUserId));
+    if (user) setIsFollowing(user?.followings?.includes(profileUserId));
   }, [user, profileUserId]);
 
   const handleFollowUser = async () => {

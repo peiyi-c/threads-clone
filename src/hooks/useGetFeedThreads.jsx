@@ -17,7 +17,7 @@ const useGetFeedThreads = () => {
     const getFeedThreads = async () => {
       setIsLoading(true);
 
-      if (user.followings.length === 0) {
+      if (user?.followings.length === 0) {
         setIsLoading(false);
         setThreads([]);
         return;
