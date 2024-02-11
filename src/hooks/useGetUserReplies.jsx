@@ -16,16 +16,21 @@ const useGetUserReplies = () => {
       setIsLoading(true);
 
       try {
-        const threadRef = collection(firestore, "threads");
-        const q = query(threadRef, where("id", "in", [...userProfile.replies]));
-        const querySnapshot = await getDocs(q);
-        const threads = [];
-        querySnapshot.forEach((doc) => {
-          threads.push({ ...doc.data(), id: doc.id });
-        });
+        if (userProfile.replies.length) {
+          const threadRef = collection(firestore, "threads");
+          const q = query(
+            threadRef,
+            where("id", "in", [...userProfile.replies])
+          );
+          const querySnapshot = await getDocs(q);
+          const threads = [];
+          querySnapshot.forEach((doc) => {
+            threads.push({ ...doc.data(), id: doc.id });
+          });
 
-        threads.sort((a, b) => b.createdAt - a.createdAt);
-        setReplied(threads);
+          threads.sort((a, b) => b.createdAt - a.createdAt);
+          setReplied(threads);
+        }
       } catch (error) {
         showToast("Error", error.message, "error");
       } finally {

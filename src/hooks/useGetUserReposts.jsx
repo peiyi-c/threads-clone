@@ -15,36 +15,33 @@ const useGetUserReposts = () => {
       setIsLoading(true);
 
       try {
-        const reposts = [];
-        // if any repost of thread exist
-        const q = userProfile?.reposts.length
-          ? query(
-              collection(firestore, "threads"),
-              where("id", "in", [...userProfile.reposts])
-            )
-          : null;
-        if (q) {
-          const querySnapshot = await getDocs(q);
-          querySnapshot.forEach((doc) =>
-            reposts.push({ ...doc.data(), id: doc.id })
+        if (userProfile.reposts.length) {
+          const reposts = [];
+          // if any repost of thread exist
+          const q = query(
+            collection(firestore, "threads"),
+            where("id", "in", [...userProfile.reposts])
           );
-          setReposts(reposts);
-        }
 
-        // if any repost of reply exist
-        const qu = userProfile?.reposts.length
-          ? query(
-              collection(firestore, "replies"),
-              where("id", "in", [...userProfile.reposts])
-            )
-          : null;
-
-        if (qu) {
-          const querySnap = await getDocs(qu);
-          querySnap.forEach((doc) =>
-            reposts.push({ ...doc.data(), id: doc.id })
+          if (q) {
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) =>
+              reposts.push({ ...doc.data(), id: doc.id })
+            );
+            setReposts(reposts);
+          }
+          // if any repost of reply exist
+          const qu = query(
+            collection(firestore, "replies"),
+            where("id", "in", [...userProfile.reposts])
           );
-          setReposts(reposts);
+          if (qu) {
+            const querySnap = await getDocs(qu);
+            querySnap.forEach((doc) =>
+              reposts.push({ ...doc.data(), id: doc.id })
+            );
+            setReposts(reposts);
+          }
         }
       } catch (error) {
         showToast("Error", error.message, "error");

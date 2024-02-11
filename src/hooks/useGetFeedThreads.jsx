@@ -17,27 +17,23 @@ const useGetFeedThreads = () => {
     const getFeedThreads = async () => {
       setIsLoading(true);
 
-      if (user?.followings.length === 0) {
-        setIsLoading(false);
-        setThreads([]);
-        return;
-      }
-      const q = query(
-        collection(firestore, "threads"),
-        where("createdBy", "in", user.followings)
-      );
-
       try {
-        const querySnapshot = await getDocs(q);
-        const feedThreads = [];
-        querySnapshot.forEach((doc) =>
-          feedThreads.push({
-            id: doc.id,
-            ...doc.data(),
-          })
-        );
-        feedThreads.sort((a, b) => b.createdAt - a.createdAt);
-        setThreads(feedThreads);
+        if (user.followings.length) {
+          const q = query(
+            collection(firestore, "threads"),
+            where("createdBy", "in", [...user.followings])
+          );
+          const querySnapshot = await getDocs(q);
+          const feedThreads = [];
+          querySnapshot.forEach((doc) =>
+            feedThreads.push({
+              id: doc.id,
+              ...doc.data(),
+            })
+          );
+          feedThreads.sort((a, b) => b.createdAt - a.createdAt);
+          setThreads(feedThreads);
+        }
       } catch (error) {
         showToast("Error", error.message, "error");
       } finally {
