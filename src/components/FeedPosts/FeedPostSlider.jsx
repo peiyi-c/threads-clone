@@ -6,14 +6,14 @@ import {
   Image,
   HStack,
   useColorModeValue,
-  Flex,
   CloseButton,
+  Box,
 } from "@chakra-ui/react";
 import { Continue } from "../../assets/logos";
 import { useRef, useState } from "react";
 
 const FeedPostSlider = ({ images, setImages, isEdit }) => {
-  const INITIAL_SLIDE = 2;
+  const INITIAL_SLIDE = 1;
   const [currentSlide, setCurrentSlide] = useState(INITIAL_SLIDE);
   const imageBorderColor = useColorModeValue("#0000001a", "#ffffff0d");
   const swiperRef = useRef(null);
@@ -36,47 +36,52 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
   };
 
   return (
-    <HStack ml={"-10px"}>
+    <>
       {useSwiper ? (
         <>
-          {/* Button Left */}
-          <Button
-            onClick={handlePrevClick}
-            variant={"ghost"}
-            size={"md"}
-            ml={"-10px"}
-            isDisabled={currentSlide === 2}
-            _disabled={{
-              opacity: 0,
-              cursor: "default",
-            }}
-          >
-            <Continue />
-          </Button>
+          <HStack position={"relative"}>
+            {/* Button Left */}
+            <Button
+              position={"absolute"}
+              left={-50}
+              onClick={handlePrevClick}
+              variant={"ghost"}
+              size={"md"}
+              ml={"-10px"}
+              isDisabled={currentSlide === 2}
+              _disabled={{
+                opacity: 0,
+                cursor: "default",
+              }}
+            >
+              <Continue />
+            </Button>
 
-          {/* images from 3, Swipter */}
-          <Swiper
-            modules={[Navigation]}
-            onBeforeInit={(swiper) => {
-              swiperRef.current = swiper;
-            }}
-            spaceBetween={12}
-            slidesPerView={3}
-            navigation
-            scrollbar={{ draggable: true }}
-            //  onSwiper={(swiper) => console.log(swiper)}
-            //  onSlideChange={() => console.log("slide change")}
-          >
-            {images.map((image) => (
-              <SwiperSlide key={image.id}>
-                <Flex
+            {/* images from 3, Swipter */}
+            <Swiper
+              modules={[Navigation]}
+              onBeforeInit={(swiper) => {
+                swiperRef.current = swiper;
+              }}
+              spaceBetween={12}
+              slidesPerView={2}
+              navigation
+              scrollbar={{ draggable: true }}
+            >
+              {images.map((image) => (
+                <SwiperSlide
                   key={image.id}
-                  w={"full"}
                   position={"relative"}
+                  display={"flex"}
                   justifyContent={"center"}
+                  alignItems={"center"}
                 >
                   <Image
                     src={image.path}
+                    display={"block"}
+                    h={"16rem"}
+                    w={"full"}
+                    objectFit={"cover"}
                     borderRadius={"18px"}
                     border={`1.5px solid ${imageBorderColor}`}
                   />
@@ -92,42 +97,39 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
                       onClick={() => deleteImage(image.id)}
                     />
                   )}
-                </Flex>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                </SwiperSlide>
+              ))}
+            </Swiper>
 
-          {/* Button Right */}
-          <Button
-            onClick={handleNextClick}
-            variant={"ghost"}
-            size={"md"}
-            transform={"rotate(180deg)"}
-            isDisabled={currentSlide === images.length}
-            _disabled={{
-              opacity: 0,
-              cursor: "default",
-            }}
-          >
-            <Continue />
-          </Button>
+            {/* Button Right */}
+            <Button
+              // position={"absolute"}
+              // right={-20}
+              onClick={handleNextClick}
+              variant={"ghost"}
+              size={"md"}
+              transform={"rotate(180deg)"}
+              isDisabled={currentSlide === images.length}
+              _disabled={{
+                opacity: 0,
+                cursor: "default",
+              }}
+            >
+              <Continue />
+            </Button>
+          </HStack>
         </>
       ) : (
-        <>
+        <HStack>
           {images.map((image) => (
-            <Flex
-              key={image.id}
-              h={"16rem"}
-              position={"relative"}
-              justifyContent={"center"}
-            >
+            <Box key={image.id} position={"relative"}>
               <Image
                 src={image.path}
+                h={"16rem"}
                 objectFit={"cover"}
                 borderRadius={"18px"}
                 border={`1.5px solid ${imageBorderColor}`}
               />
-
               {isEdit && (
                 <CloseButton
                   size={"sm"}
@@ -140,11 +142,11 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
                   onClick={() => deleteImage(image.id)}
                 />
               )}
-            </Flex>
+            </Box>
           ))}
-        </>
+        </HStack>
       )}
-    </HStack>
+    </>
   );
 };
 
