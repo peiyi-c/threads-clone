@@ -76,7 +76,6 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
                   justifyContent={"center"}
                 >
                   <Image
-                    h={"full"}
                     src={image.path}
                     borderRadius={"18px"}
                     border={`1.5px solid ${imageBorderColor}`}
@@ -118,14 +117,13 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
           {images.map((image) => (
             <Flex
               key={image.id}
-              w={"full"}
+              h={"16rem"}
               position={"relative"}
               justifyContent={"center"}
             >
               <Image
                 src={image.path}
-                h={"full"}
-                w={"full"}
+                objectFit={"cover"}
                 borderRadius={"18px"}
                 border={`1.5px solid ${imageBorderColor}`}
               />
