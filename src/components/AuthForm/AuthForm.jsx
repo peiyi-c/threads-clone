@@ -1,16 +1,9 @@
 /* eslint-disable react/prop-types */
-import {
-  Button,
-  Container,
-  Heading,
-  useColorModeValue,
-  Text,
-  Flex,
-  Box,
-} from "@chakra-ui/react";
+import { Button, Container, Heading, Text, Flex, Box } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 import UserLogin from "./UserLogin";
 import UserSignup from "./UserSignup";
+import { whiteBlack, blackWhite } from "../../hooks/useColors";
 
 const AuthForm = () => {
   const { pathname } = useLocation();
@@ -61,8 +54,8 @@ const SwitchButton = ({ ButtonText }) => {
         fontSize={"15px"}
         colorScheme="blackAlpha.500"
         _hover={{
-          color: useColorModeValue("#FFFFFF", "#000000"),
-          bg: useColorModeValue("#000000", "#FFFFFF"),
+          color: whiteBlack,
+          bg: blackWhite,
         }}
       >
         {ButtonText}
