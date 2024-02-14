@@ -43,7 +43,7 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
             {/* Button Left */}
             <Button
               position={"absolute"}
-              left={-50}
+              left={-100}
               onClick={handlePrevClick}
               variant={"ghost"}
               size={"md"}
@@ -59,29 +59,27 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
 
             {/* images from 3, Swipter */}
             <Swiper
+              slidesPerView={"auto"}
               modules={[Navigation]}
               onBeforeInit={(swiper) => {
                 swiperRef.current = swiper;
               }}
-              spaceBetween={12}
-              slidesPerView={2}
-              navigation
+              spaceBetween={6}
+              navigation={true}
               scrollbar={{ draggable: true }}
             >
               {images.map((image) => (
                 <SwiperSlide
                   key={image.id}
                   position={"relative"}
-                  display={"flex"}
-                  justifyContent={"center"}
-                  alignItems={"center"}
+                  style={{
+                    width: "auto",
+                  }}
                 >
                   <Image
                     src={image.path}
                     display={"block"}
-                    h={"16rem"}
-                    w={"full"}
-                    objectFit={"cover"}
+                    maxH={"25rem"}
                     borderRadius={"18px"}
                     border={`1.5px solid ${imageBorderColor}`}
                   />
@@ -103,8 +101,8 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
 
             {/* Button Right */}
             <Button
-              // position={"absolute"}
-              // right={-20}
+              position={"absolute"}
+              right={-20}
               onClick={handleNextClick}
               variant={"ghost"}
               size={"md"}
@@ -125,8 +123,8 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
             <Box key={image.id} position={"relative"}>
               <Image
                 src={image.path}
-                h={"16rem"}
                 objectFit={"cover"}
+                maxH={"25rem"}
                 borderRadius={"18px"}
                 border={`1.5px solid ${imageBorderColor}`}
               />
