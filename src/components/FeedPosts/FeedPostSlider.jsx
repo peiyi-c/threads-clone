@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import {
@@ -11,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { Continue } from "../../assets/logos";
 import { useRef, useState } from "react";
+import PropTypes from "prop-types";
 
 const FeedPostSlider = ({ images, setImages, isEdit }) => {
   const INITIAL_SLIDE = 1;
@@ -148,6 +148,12 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
       )}
     </>
   );
+};
+
+FeedPostSlider.propTypes = {
+  images: PropTypes.array,
+  setImages: PropTypes.func,
+  isEdit: PropTypes.bool,
 };
 
 export default FeedPostSlider;

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
   Avatar,
   Button,
@@ -10,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import useFollowUser from "../../hooks/useFollowUser";
 import useColors from "../../hooks/useColors";
+import PropTypes from "prop-types";
 
 const UserCard = ({ user }) => {
   const { handleFollowUser, isFollowing } = useFollowUser(user.uid);
@@ -81,3 +81,7 @@ const UserCard = ({ user }) => {
 };
 
 export default UserCard;
+
+UserCard.propTypes = {
+  user: PropTypes.object.isRequired,
+};

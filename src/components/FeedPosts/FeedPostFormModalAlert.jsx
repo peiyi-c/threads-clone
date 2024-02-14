@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
   AlertDialog,
   AlertDialogOverlay,
@@ -12,6 +11,7 @@ import {
 import { useContext } from "react";
 import { ContentContext } from "../../contexts/contentContext";
 import { useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const FeedPostFormModalAlert = ({
   onClosePostAlert,
@@ -56,6 +56,12 @@ const FeedPostFormModalAlert = ({
       </AlertDialogContent>
     </AlertDialog>
   );
+};
+
+FeedPostFormModalAlert.propTypes = {
+  onClosePostAlert: PropTypes.func.isRequired,
+  isOpenPostAlert: PropTypes.func.isRequired,
+  onClosePost: PropTypes.func.isRequired,
 };
 
 export default FeedPostFormModalAlert;

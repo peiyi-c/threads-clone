@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
   Grid,
   Avatar,
@@ -24,6 +23,7 @@ import {
   FeedPostRepost,
 } from "./FeedPostMenus";
 import useAuthStore from "../../store/authStore";
+import PropTypes from "prop-types";
 
 const FeedPostReply = ({ reply }) => {
   const { isLoading, userProfile } = useGetProfileById(reply.createdBy);
@@ -203,6 +203,10 @@ const FeedPostReply = ({ reply }) => {
       )}
     </>
   );
+};
+
+FeedPostReply.propTypes = {
+  reply: PropTypes.object.isRequired,
 };
 
 export default FeedPostReply;

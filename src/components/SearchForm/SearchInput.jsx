@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
   InputGroup,
   InputLeftElement,
@@ -7,6 +6,7 @@ import {
 } from "@chakra-ui/react";
 import { SearchIcon, SmallCloseIcon } from "@chakra-ui/icons";
 import useColors from "../../hooks/useColors";
+import PropTypes from "prop-types";
 
 const SearchInput = ({ value, setValue, handleSubmit }) => {
   const { subText } = useColors();
@@ -48,3 +48,9 @@ const SearchInput = ({ value, setValue, handleSubmit }) => {
 };
 
 export default SearchInput;
+
+SearchInput.propTypes = {
+  value: PropTypes.string,
+  setValue: PropTypes.func,
+  handleSubmit: PropTypes.func,
+};

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
   AlertDialog,
   AlertDialogOverlay,
@@ -12,6 +11,7 @@ import {
 import { useContext } from "react";
 import { ContentContext } from "../../contexts/contentContext";
 import { useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const FeedPostCommentAlert = ({
   onCloseCommentAlert,
@@ -55,6 +55,12 @@ const FeedPostCommentAlert = ({
       </AlertDialogContent>
     </AlertDialog>
   );
+};
+
+FeedPostCommentAlert.propTypes = {
+  onCloseCommentAlert: PropTypes.func.isRequired,
+  isOpenCommentAlert: PropTypes.func.isRequired,
+  onCloseComment: PropTypes.func.isRequired,
 };
 
 export default FeedPostCommentAlert;

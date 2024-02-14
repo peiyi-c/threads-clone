@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
 import { createContext, useState } from "react";
-
+import PropTypes from "prop-types";
 export const ContentContext = createContext();
 
 export function ContentMessage({ children }) {
@@ -11,3 +10,6 @@ export function ContentMessage({ children }) {
     </ContentContext.Provider>
   );
 }
+ContentMessage.propTypes = {
+  children: PropTypes.node.isRequired,
+};

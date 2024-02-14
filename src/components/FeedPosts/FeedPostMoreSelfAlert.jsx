@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
   AlertDialog,
   AlertDialogOverlay,
@@ -14,6 +13,7 @@ import {
 import useDeleteThread from "../../hooks/useDeleteThread";
 import useDeleteReply from "../../hooks/useDeleteReply";
 import useColors from "../../hooks/useColors";
+import PropTypes from "prop-types";
 
 const FeedPostMoreSelfAlert = ({
   thread,
@@ -69,4 +69,10 @@ const FeedPostMoreSelfAlert = ({
   );
 };
 
+FeedPostMoreSelfAlert.propTypes = {
+  thread: PropTypes.object,
+  reply: PropTypes.object,
+  onCloseMenuAlert: PropTypes.func,
+  isOpenMenuAlert: PropTypes.func,
+};
 export default FeedPostMoreSelfAlert;

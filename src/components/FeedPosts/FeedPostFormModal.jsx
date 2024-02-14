@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
   Modal,
   ModalOverlay,
@@ -28,6 +27,7 @@ import usePreviewImg from "../../hooks/usePreviewImg";
 import FeedPostSlider from "./FeedPostSlider";
 import useCreateThread from "../../hooks/useCreateThread";
 import useColors from "../../hooks/useColors";
+import PropTypes from "prop-types";
 
 const FeedPostFormModal = ({ onClosePost, isOpenPost }) => {
   const [text, setText] = useState("");
@@ -245,6 +245,11 @@ const FeedPostFormModal = ({ onClosePost, isOpenPost }) => {
   );
 };
 
+FeedPostFormModal.propTypes = {
+  onClosePost: PropTypes.func.isRequired,
+  isOpenPost: PropTypes.func.isRequired,
+};
+
 export default FeedPostFormModal;
 
 const ModalBodySub = ({ user, edit }) => {
@@ -268,6 +273,11 @@ const ModalBodySub = ({ user, edit }) => {
       />
     </>
   );
+};
+
+ModalBodySub.propTypes = {
+  user: PropTypes.object,
+  edit: PropTypes.bool,
 };
 
 // const FeedPostComment = ({ user, MIN_TEXTAREA_HEIGHT }) => {

@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import FeedPost from "./FeedPost";
+import PropTypes from "prop-types";
 
 const FeedPosts = ({ threads }) => {
   return (
@@ -9,6 +9,9 @@ const FeedPosts = ({ threads }) => {
       ))}
     </>
   );
+};
+FeedPosts.propTypes = {
+  threads: PropTypes.array,
 };
 
 export default FeedPosts;

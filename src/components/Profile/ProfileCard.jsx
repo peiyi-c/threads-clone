@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
   VStack,
   Flex,
@@ -12,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import useColors from "../../hooks/useColors";
+import PropTypes from "prop-types";
 
 const ProfileCard = ({ user, isLoading }) => {
   const { subText } = useColors();
@@ -60,6 +60,11 @@ const ProfileCard = ({ user, isLoading }) => {
 };
 
 export default ProfileCard;
+
+ProfileCard.propTypes = {
+  user: PropTypes.object,
+  isLoading: PropTypes.bool,
+};
 
 // Profile Card Skeleton
 const ProfileCardSkeleton = () => {

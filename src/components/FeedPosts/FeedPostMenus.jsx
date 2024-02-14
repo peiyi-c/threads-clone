@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useRef } from "react";
 import {
   GridItem,
@@ -16,6 +15,7 @@ import { More, Repost, Reposted } from "../../assets/logos";
 import FeedPostMoreSelfAlert from "./FeedPostMoreSelfAlert";
 import useFollowUser from "../../hooks/useFollowUser";
 import useRepostPost from "../../hooks/useRepostPost";
+import PropTypes from "prop-types";
 
 export const FeedPostMoreSelf = ({ thread, reply }) => {
   const { onOpen, isOpen, onClose } = useDisclosure();
@@ -75,6 +75,10 @@ export const FeedPostMoreSelf = ({ thread, reply }) => {
       )}
     </>
   );
+};
+FeedPostMoreSelf.propTypes = {
+  thread: PropTypes.object,
+  reply: PropTypes.object,
 };
 
 export const FeedPostMoreOther = ({ post }) => {
@@ -138,6 +142,9 @@ export const FeedPostMoreOther = ({ post }) => {
       </GridItem>
     </Grid>
   );
+};
+FeedPostMoreOther.propTypes = {
+  post: PropTypes.object,
 };
 
 export const FeedPostRepost = ({ post, type, userProfile, user }) => {
@@ -205,4 +212,10 @@ export const FeedPostRepost = ({ post, type, userProfile, user }) => {
       </GridItem>
     </Grid>
   );
+};
+FeedPostRepost.propTypes = {
+  post: PropTypes.object,
+  type: PropTypes.string,
+  userProfile: PropTypes.object,
+  user: PropTypes.object,
 };

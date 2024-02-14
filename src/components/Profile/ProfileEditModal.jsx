@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import {
   Modal,
   ModalOverlay,
@@ -21,6 +20,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import usePreviewImg from "../../hooks/usePreviewImg";
 import useEditProfile from "../../hooks/useEditProfile";
+import PropTypes from "prop-types";
 
 const ProfileEditModal = ({ onCloseEdit, isOpenEdit, user }) => {
   const borderColor = useColorModeValue("#DADDE1", "#F3F5F726");
@@ -181,6 +181,12 @@ const ProfileEditModal = ({ onCloseEdit, isOpenEdit, user }) => {
   );
 };
 
+ProfileEditModal.propTypes = {
+  onCloseEdit: PropTypes.func,
+  isOpenEdit: PropTypes.func,
+  user: PropTypes.object.isRequired,
+};
+
 export default ProfileEditModal;
 
 // modal for each field
@@ -265,4 +271,13 @@ const ProfileEditFieldModal = ({
       </form>
     </Modal>
   );
+};
+
+ProfileEditFieldModal.propTypes = {
+  onCloseField: PropTypes.func,
+  isOpenField: PropTypes.func,
+  user: PropTypes.object.isRequired,
+  inputs: PropTypes.object,
+  setInputs: PropTypes.func,
+  field: PropTypes.string.isRequired,
 };

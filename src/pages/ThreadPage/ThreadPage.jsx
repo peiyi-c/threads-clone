@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import FeedPost from "../../components/FeedPosts/FeedPost";
 import useGetThreadReplies from "../../hooks/useGetThreadReplies";
 import { useLocation } from "react-router-dom";

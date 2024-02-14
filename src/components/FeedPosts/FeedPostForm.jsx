@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
   Avatar,
   Button,
@@ -16,6 +15,7 @@ import FeedPostFormModal from "./FeedPostFormModal";
 import FollowingPosts from "./FollowingPosts";
 import SuggestedPosts from "./SuggestedPosts";
 import useColors from "../../hooks/useColors";
+import PropTypes from "prop-types";
 
 const FeedPostForm = ({ user, setTab }) => {
   const { subText } = useColors();
@@ -72,6 +72,11 @@ const FeedPostForm = ({ user, setTab }) => {
       </Tabs>
     </>
   );
+};
+
+FeedPostForm.propTypes = {
+  user: PropTypes.object,
+  setTab: PropTypes.func,
 };
 
 export default FeedPostForm;
