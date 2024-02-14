@@ -75,14 +75,13 @@ export const Back = () => {
   );
 };
 export const Home = () => {
-  const color = useColorModeValue("#B8B8B8", "#4D4D4D");
-  const { logo } = useColors();
+  const { logo, logoSub } = useColors();
   const { pathname } = useLocation();
 
   return (
     <Box
       style={{
-        color: pathname !== "/" ? color : logo,
+        color: pathname !== "/" ? logoSub : logo,
       }}
     >
       <svg
@@ -108,14 +107,13 @@ export const Home = () => {
   );
 };
 export const Search = () => {
-  const color = useColorModeValue("#B8B8B8", "#4D4D4D");
-  const { logo } = useColors();
+  const { logo, logoSub } = useColors();
   const { pathname } = useLocation();
 
   return (
     <Box
       style={{
-        color: pathname !== "/search" ? color : logo,
+        color: pathname !== "/search" ? logoSub : logo,
       }}
     >
       <svg
@@ -140,14 +138,13 @@ export const Search = () => {
   );
 };
 export const Create = () => {
-  const color = useColorModeValue("#B8B8B8", "#4D4D4D");
-  const { logo } = useColors();
+  const { logo, logoSub } = useColors();
   const { content } = useContext(ContentContext);
 
   return (
     <Box
       style={{
-        color: content !== "create" ? color : logo,
+        color: content !== "create" ? logoSub : logo,
       }}
     >
       <svg
@@ -178,14 +175,13 @@ export const Create = () => {
   );
 };
 export const Activity = () => {
-  const color = useColorModeValue("#B8B8B8", "#4D4D4D");
-  const { logo } = useColors();
+  const { logo, logoSub } = useColors();
   const { pathname } = useLocation();
 
   return (
     <Box
       style={{
-        color: `${color}`,
+        color: `${logoSub}`,
       }}
     >
       <svg
@@ -209,14 +205,13 @@ export const Activity = () => {
   );
 };
 export const Profile = () => {
-  const color = useColorModeValue("#B8B8B8", "#4D4D4D");
-  const { logo } = useColors();
+  const { logo, logoSub } = useColors();
   const { ausername } = useParams();
 
   return (
     <Box
       style={{
-        color: `${color}`,
+        color: `${logoSub}`,
       }}
     >
       <svg
@@ -247,8 +242,7 @@ export const Profile = () => {
   );
 };
 export const Menu = ({ handleClick }) => {
-  const color = useColorModeValue("#B8B8B8", "#4D4D4D");
-  const { logo } = useColors();
+  const { logo, logoSub } = useColors();
 
   return (
     <Box
@@ -260,7 +254,7 @@ export const Menu = ({ handleClick }) => {
         transition: "transform 0.11s ease-in-out",
       }}
       style={{
-        color: `${color}`,
+        color: `${logoSub}`,
       }}
       onClick={handleClick}
     >
