@@ -1,7 +1,7 @@
-/* eslint-disable react/prop-types */
 import { Avatar, useColorModeValue } from "@chakra-ui/react";
 import useGetProfileById from "../../hooks/useGetProfileById";
 import useColors from "../../hooks/useColors";
+import PropTypes from "prop-types";
 // Avatar groups used in thread and reply
 
 export const AvatarGroup1 = ({ repliedBy }) => {
@@ -72,4 +72,14 @@ export const AvatarGroup3 = ({ repliedBy }) => {
       />
     </>
   );
+};
+
+AvatarGroup1.propTypes = {
+  repliedBy: PropTypes.array.isRequired,
+};
+AvatarGroup2.propTypes = {
+  repliedBy: PropTypes.array.isRequired,
+};
+AvatarGroup3.propTypes = {
+  repliedBy: PropTypes.array.isRequired,
 };

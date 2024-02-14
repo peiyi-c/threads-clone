@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Input, Button } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import useLoginWithEmailAndPassword from "../../hooks/useLoginWithEmailAndPassword";

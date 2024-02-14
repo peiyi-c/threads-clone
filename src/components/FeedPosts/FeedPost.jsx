@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
   Grid,
   Avatar,
@@ -29,6 +28,7 @@ import {
   FeedPostRepost,
 } from "./FeedPostMenus";
 import useAuthStore from "../../store/authStore";
+import PropTypes from "prop-types";
 
 const FeedPost = ({ thread }) => {
   const { isLoading, userProfile } = useGetProfileById(thread?.createdBy);
@@ -209,6 +209,10 @@ const FeedPost = ({ thread }) => {
         )}
       </>
     );
+};
+
+FeedPost.propTypes = {
+  thread: PropTypes.object.isRequired,
 };
 
 export default FeedPost;

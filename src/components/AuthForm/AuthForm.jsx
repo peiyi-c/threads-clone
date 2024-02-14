@@ -1,9 +1,9 @@
-/* eslint-disable react/prop-types */
 import { Button, Container, Heading, Text, Flex, Box } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 import UserLogin from "./UserLogin";
 import UserSignup from "./UserSignup";
 import useColors from "../../hooks/useColors";
+import PropTypes from "prop-types";
 
 const AuthForm = () => {
   const { pathname } = useLocation();
@@ -64,4 +64,8 @@ const SwitchButton = ({ ButtonText }) => {
       </Button>
     </Link>
   );
+};
+
+SwitchButton.propTypes = {
+  ButtonText: PropTypes.string.isRequired,
 };

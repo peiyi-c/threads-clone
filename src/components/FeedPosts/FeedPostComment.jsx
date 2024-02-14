@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
   Button,
   Grid,
@@ -29,6 +28,7 @@ import FeedPostCommentAlert from "./FeedPostCommentAlert";
 import useReplyThread from "../../hooks/useReplyThread";
 import useReplyReply from "../../hooks/useReplyReply";
 import useColors from "../../hooks/useColors";
+import PropTypes from "prop-types";
 
 const FeedPostComment = ({
   onCloseComment,
@@ -335,3 +335,11 @@ const FeedPostComment = ({
 };
 
 export default FeedPostComment;
+
+FeedPostComment.propTypes = {
+  onCloseComment: PropTypes.func.isRequired,
+  isOpenComment: PropTypes.func.isRequired,
+  thread: PropTypes.object,
+  reply: PropTypes.object,
+  userProfile: PropTypes.object,
+};
