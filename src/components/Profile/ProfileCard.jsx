@@ -11,12 +11,15 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import useColors from "../../hooks/useColors";
+import useGetProfileById from "../../hooks/useGetProfileById";
 import PropTypes from "prop-types";
 
 const ProfileCard = ({ user, isLoading }) => {
   const { subText } = useColors();
   const showDot = user?.followers?.length > 1 && user?.bioLink;
-
+  const { userProfile } = useGetProfileById(
+    user.followers[user.followers.length - 1]
+  );
   if (isLoading) return <ProfileCardSkeleton />;
 
   return (
@@ -30,18 +33,21 @@ const ProfileCard = ({ user, isLoading }) => {
           gap={0}
         >
           <Box>
-            <Heading fontSize={"21px"} lineHeight={"30px"}>
+            <Heading fontSize={"21px"} lineHeight={9}>
               {user.displayName}
             </Heading>
-            <Text lineHeight={"21px"}>{user.username}</Text>
+            <Text lineHeight={5}>{user.username}</Text>
           </Box>
           <Box ml={"auto"}>
             <Avatar size={"lg"} src={user.profilePicURL} />
           </Box>
         </Flex>
-        <Text lineHeight={"21px"}>{user.bioDescription}</Text>
-        <HStack mt={"10px"} color={subText}>
-          <Avatar size={"xs"} />
+        <Text lineHeight={5}>{user.bioDescription}</Text>
+        <HStack mt={3} color={subText}>
+          <Avatar
+            size={"xs"}
+            src={userProfile ? userProfile?.profilePicURL : ""}
+          />
           <Text as={"span"}>
             {user?.followers?.length}{" "}
             {user?.followers?.length > 1 ? "Followers" : "Follower"}
