@@ -20,7 +20,7 @@ const useGetSuggestedUsers = () => {
           const threadRef = collection(firestore, "users");
           const q = query(
             threadRef,
-            where("uid", "not-in", [user.uid, ...user.followings])
+            where("uid", "not-in", [user.uid, ...user.followings.slice(-9)])
           );
           const querySnap = await getDocs(q);
           const users = [];

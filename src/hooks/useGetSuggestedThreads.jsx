@@ -19,7 +19,7 @@ const useGetSuggestedThreads = () => {
         const threadRef = collection(firestore, "threads");
         const q = query(
           threadRef,
-          where("createdBy", "not-in", [user.uid, ...user.followings])
+          where("createdBy", "not-in", [user.uid, ...user.followings.slice(-9)])
         );
         const querySnap = await getDocs(q);
         const threads = [];
