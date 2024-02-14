@@ -42,6 +42,7 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
           <HStack position={"relative"}>
             {/* Button Left */}
             <Button
+              display={{ base: "none", md: "flex" }}
               position={"absolute"}
               left={-100}
               onClick={handlePrevClick}
@@ -101,6 +102,7 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
 
             {/* Button Right */}
             <Button
+              display={{ base: "none", md: "flex" }}
               position={"absolute"}
               right={-20}
               onClick={handleNextClick}
@@ -118,7 +120,7 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
           </HStack>
         </>
       ) : (
-        <HStack>
+        <HStack justifyContent={"center"}>
           {images.map((image) => (
             <Box key={image.id} position={"relative"}>
               <Image
