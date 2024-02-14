@@ -17,7 +17,6 @@ import {
   FormLabel,
   Input,
   ModalFooter,
-  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import FeedPostSlider from "./FeedPostSlider";
@@ -47,7 +46,7 @@ const FeedPostComment = ({
   const { handleImgChange, selectedFile, setSelectedFile } = usePreviewImg();
   const { isUpdating, handleFeedPostReply } = useReplyThread();
   const { isCommenting, handleReplyReply } = useReplyReply();
-  const { blackWhite, whiteBlack } = useColors();
+  const { blackWhite, whiteBlack, subText } = useColors();
 
   const MIN_TEXTAREA_HEIGHT = 12;
 
@@ -294,7 +293,7 @@ const FeedPostComment = ({
             </ModalBody>
 
             <ModalFooter display={"flex"} justifyContent={"space-between"}>
-              <Text as={"span"} color={useColorModeValue("#999999", "#777777")}>
+              <Text as={"span"} color={subText}>
                 Your followers can reply
               </Text>
               <Button

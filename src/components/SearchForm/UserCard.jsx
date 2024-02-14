@@ -9,13 +9,12 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import useFollowUser from "../../hooks/useFollowUser";
+import useColors from "../../hooks/useColors";
 
 const UserCard = ({ user }) => {
   const { handleFollowUser, isFollowing } = useFollowUser(user.uid);
-
+  const { whiteBlack, subText } = useColors();
   const borderColor = useColorModeValue("#f5f5f5", "#101010");
-  const buttonColor = useColorModeValue("#999999", "#777777");
-  const buttonBg = useColorModeValue("#ffffff", "#000000");
 
   return (
     <>
@@ -60,12 +59,12 @@ const UserCard = ({ user }) => {
                 minW={"6.5rem"}
                 isDisabled={isFollowing}
                 _disabled={{
-                  color: buttonColor,
-                  bg: buttonBg,
+                  color: subText,
+                  bg: whiteBlack,
                 }}
                 _hover={{
-                  color: buttonColor,
-                  bg: buttonBg,
+                  color: subText,
+                  bg: whiteBlack,
                 }}
               >
                 <Text p={"0 4px"} as={"span"} fontSize={"15px"}>

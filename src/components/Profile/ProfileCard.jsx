@@ -7,14 +7,14 @@ import {
   Avatar,
   HStack,
   Heading,
-  useColorModeValue,
   Skeleton,
   SkeletonCircle,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import useColors from "../../hooks/useColors";
 
 const ProfileCard = ({ user, isLoading }) => {
-  const subColor = useColorModeValue("#999999", "#777777");
+  const { subText } = useColors();
   const showDot = user?.followers?.length > 1 && user?.bioLink;
 
   if (isLoading) return <ProfileCardSkeleton />;
@@ -40,7 +40,7 @@ const ProfileCard = ({ user, isLoading }) => {
           </Box>
         </Flex>
         <Text lineHeight={"21px"}>{user.bioDescription}</Text>
-        <HStack mt={"10px"} color={subColor}>
+        <HStack mt={"10px"} color={subText}>
           <Avatar size={"xs"} />
           <Text as={"span"}>
             {user?.followers?.length}{" "}

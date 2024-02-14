@@ -5,7 +5,6 @@ import {
   Flex,
   Text,
   Divider,
-  useColorModeValue,
   useDisclosure,
   Tabs,
   TabList,
@@ -16,9 +15,10 @@ import {
 import FeedPostFormModal from "./FeedPostFormModal";
 import FollowingPosts from "./FollowingPosts";
 import SuggestedPosts from "./SuggestedPosts";
+import useColors from "../../hooks/useColors";
 
 const FeedPostForm = ({ user, setTab }) => {
-  const color = useColorModeValue("#999999", "#777777");
+  const { subText } = useColors();
   const { onOpen, isOpen, onClose } = useDisclosure();
 
   return (
@@ -32,7 +32,7 @@ const FeedPostForm = ({ user, setTab }) => {
         alignItems={"center"}
       >
         <Avatar mr={"8px"} size="md" name="" src={user && user.profilePicURL} />
-        <Text onClick={onOpen} mr={"auto"} fontSize={"15px"} color={color}>
+        <Text onClick={onOpen} mr={"auto"} fontSize={"15px"} color={subText}>
           Start a thread...
         </Text>
         <Button size={"sm"} variant={"solid"} disabled>

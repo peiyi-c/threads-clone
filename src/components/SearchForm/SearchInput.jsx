@@ -3,14 +3,13 @@ import {
   InputGroup,
   InputLeftElement,
   Input,
-  useColorModeValue,
   InputRightElement,
 } from "@chakra-ui/react";
 import { SearchIcon, SmallCloseIcon } from "@chakra-ui/icons";
+import useColors from "../../hooks/useColors";
 
 const SearchInput = ({ value, setValue, handleSubmit }) => {
-  const IconColor = useColorModeValue("#999999", "#777777");
-
+  const { subText } = useColors();
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup mt={"6px"}>
@@ -20,7 +19,7 @@ const SearchInput = ({ value, setValue, handleSubmit }) => {
           w={"48px"}
           left={"12px"}
         >
-          <SearchIcon color={IconColor} />
+          <SearchIcon color={subText} />
         </InputLeftElement>
 
         <Input
@@ -40,7 +39,7 @@ const SearchInput = ({ value, setValue, handleSubmit }) => {
             right={"12px"}
             cursor={"pointer"}
           >
-            <SmallCloseIcon color={IconColor} onClick={() => setValue("")} />
+            <SmallCloseIcon color={subText} onClick={() => setValue("")} />
           </InputRightElement>
         )}
       </InputGroup>

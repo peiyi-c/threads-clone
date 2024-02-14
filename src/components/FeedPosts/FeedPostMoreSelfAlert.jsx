@@ -10,10 +10,10 @@ import {
   Divider,
   AlertDialogBody,
   Text,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import useDeleteThread from "../../hooks/useDeleteThread";
 import useDeleteReply from "../../hooks/useDeleteReply";
+import useColors from "../../hooks/useColors";
 
 const FeedPostMoreSelfAlert = ({
   thread,
@@ -23,6 +23,7 @@ const FeedPostMoreSelfAlert = ({
 }) => {
   const { handleDeleteThread } = useDeleteThread();
   const { handleDeleteReply } = useDeleteReply();
+  const { subText } = useColors();
   const handleDelete = async () => {
     if (thread) {
       await handleDeleteThread(thread);
@@ -46,7 +47,7 @@ const FeedPostMoreSelfAlert = ({
         <AlertDialogHeader textAlign={"center"}>Delete post?</AlertDialogHeader>
         <AlertDialogCloseButton />
         <AlertDialogBody textAlign={"center"}>
-          <Text color={useColorModeValue("#999999", "#777777")}>
+          <Text color={subText}>
             If you delete this post, you won&apos;t be able to restore it.
           </Text>
         </AlertDialogBody>

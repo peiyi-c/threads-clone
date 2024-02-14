@@ -13,7 +13,6 @@ import {
   Button,
   Text,
   Avatar,
-  useColorModeValue,
   Flex,
   useDisclosure,
   Input,
@@ -39,7 +38,7 @@ const FeedPostFormModal = ({ onClosePost, isOpenPost }) => {
   const { user } = useAuthStore();
   const { handleImgChange, selectedFile, setSelectedFile } = usePreviewImg();
   const { handleCreatePost, isLoading } = useCreateThread();
-  const { blackWhite, whiteBlack } = useColors();
+  const { blackWhite, whiteBlack, subText } = useColors();
 
   const MIN_TEXTAREA_HEIGHT = 16;
 
@@ -205,7 +204,7 @@ const FeedPostFormModal = ({ onClosePost, isOpenPost }) => {
             </ModalBody>
 
             <ModalFooter display={"flex"} justifyContent={"space-between"}>
-              <Text as={"span"} color={useColorModeValue("#999999", "#777777")}>
+              <Text as={"span"} color={subText}>
                 Your followers can reply
               </Text>
               <Button

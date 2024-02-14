@@ -331,10 +331,9 @@ export const VerticalLine = ({ h }) => {
   );
 };
 export const AttachMedia = () => {
-  const color = useColorModeValue("#999999", "#777777");
-
+  const { subText } = useColors();
   return (
-    <Box color={color}>
+    <Box color={subText}>
       <svg
         aria-label="Attach media"
         role="img"
@@ -393,9 +392,9 @@ export const AttachMedia = () => {
   );
 };
 export const Tag = () => {
-  const color = useColorModeValue("#999999", "#777777");
+  const { subText } = useColors();
   return (
-    <Box color={color}>
+    <Box color={subText}>
       <svg
         aria-label="Add a tag"
         role="img"
@@ -424,9 +423,9 @@ export const Tag = () => {
   );
 };
 export const Poll = () => {
-  const color = useColorModeValue("#999999", "#777777");
+  const { subText } = useColors();
   return (
-    <Box color={color}>
+    <Box color={subText}>
       <svg
         aria-label="Add a poll"
         role="img"
@@ -645,14 +644,14 @@ export const More = () => {
 
 // Carousel
 export const Continue = () => {
-  const color = useColorModeValue("#999999", "#777777");
+  const { subText } = useColors();
   return (
     <svg
       aria-label="Continue"
       role="img"
       viewBox="0 0 24 24"
       style={{
-        fill: `${color}`,
+        fill: `${subText}`,
         height: 16,
         width: 16,
       }}
@@ -660,8 +659,8 @@ export const Continue = () => {
       <title>{"Continue"}</title>
       <line
         style={{
-          fill: `${color}`,
-          stroke: `${color}`,
+          fill: `${subText}`,
+          stroke: `${subText}`,
         }}
         x1={2.909}
         x2={22.001}
@@ -671,7 +670,7 @@ export const Continue = () => {
       <polyline
         style={{
           fill: "transparent",
-          stroke: `${color}`,
+          stroke: `${subText}`,
         }}
         points="9.276 4.726 2.001 12.004 9.276 19.274"
       />
@@ -681,7 +680,7 @@ export const Continue = () => {
 
 // Switch
 const Switch = () => {
-  const color = useColorModeValue("#999999", "#777777");
+  const { subText } = useColors();
   return (
     <svg
       aria-hidden="true"
@@ -689,7 +688,7 @@ const Switch = () => {
       viewBox="0 0 12 16"
       xmlns="http://www.w3.org/2000/svg"
       style={{
-        color: `${color}`,
+        color: `${subText}`,
         height: 16,
         width: 12,
       }}
