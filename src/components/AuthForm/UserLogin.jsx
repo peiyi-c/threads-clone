@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { Input, Button } from "@chakra-ui/react";
-import { whiteBlack, blackWhite } from "../../hooks/useColors";
 import { useEffect, useState } from "react";
 import useLoginWithEmailAndPassword from "../../hooks/useLoginWithEmailAndPassword";
+import useColors from "../../hooks/useColors";
 
 const UserLogin = () => {
   const [isDisabled, setIsDisabled] = useState(true);
@@ -11,6 +11,7 @@ const UserLogin = () => {
     password: "",
   });
   const { loading, signin } = useLoginWithEmailAndPassword();
+  const { whiteBlack, blackWhite } = useColors();
 
   useEffect(() => {
     if (inputs.email.trim(" ") && inputs.password.trim(" ")) {

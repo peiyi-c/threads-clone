@@ -3,10 +3,11 @@ import { Button, Container, Heading, Text, Flex, Box } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 import UserLogin from "./UserLogin";
 import UserSignup from "./UserSignup";
-import { whiteBlack, blackWhite } from "../../hooks/useColors";
+import useColors from "../../hooks/useColors";
 
 const AuthForm = () => {
   const { pathname } = useLocation();
+
   return (
     <Container maxW={"md"}>
       <form>
@@ -42,6 +43,7 @@ export default AuthForm;
 
 const SwitchButton = ({ ButtonText }) => {
   const { pathname } = useLocation();
+  const { whiteBlack, blackWhite } = useColors();
   return (
     <Link to={pathname === "/login" ? "/signup" : "/login"}>
       <Button

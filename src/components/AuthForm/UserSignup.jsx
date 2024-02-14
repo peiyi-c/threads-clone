@@ -1,7 +1,7 @@
 import { Flex, Input, Button } from "@chakra-ui/react";
-import { whiteBlack, blackWhite } from "../../hooks/useColors";
 import { useState, useEffect } from "react";
 import useSignupWithEmailAndPassword from "../../hooks/useSignupWithEmailAndPassword";
+import useColors from "../../hooks/useColors";
 
 const UserSignup = () => {
   const [isDisabled, setIsDisabled] = useState(true);
@@ -12,6 +12,7 @@ const UserSignup = () => {
     password: "",
   });
   const { loading, signup } = useSignupWithEmailAndPassword();
+  const { whiteBlack, blackWhite } = useColors();
 
   useEffect(() => {
     if (
