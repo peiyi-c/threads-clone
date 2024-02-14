@@ -18,7 +18,7 @@ const AuthForm = () => {
     <Container maxW={"md"}>
       <form>
         {/* headline */}
-        <Heading fontSize={"18px"} textAlign={"center"} mb={"16px"}>
+        <Heading fontSize={"18px"} textAlign={"center"} mb={4}>
           {pathname === "/login" ? "Log In" : "Sign Up"}
         </Heading>
         {/* input fields */}
@@ -32,7 +32,7 @@ const AuthForm = () => {
           gap={1}
         >
           <Box flex={2} h={"1px"} bg={"gray.100"} />
-          <Text mx={"4px"} my={"12px"} color={"blackAlpha.600"}>
+          <Text mx={1} my={3} color={"blackAlpha.600"}>
             OR
           </Text>
           <Box flex={2} h={"1px"} bg={"gray.100"} />
@@ -54,7 +54,7 @@ const SwitchButton = ({ ButtonText }) => {
       <Button
         h={"full"}
         w={"full"}
-        p={"15px"}
+        p={3.5}
         size={"lg"}
         variant={"outline"}
         borderRadius={"10px"}

@@ -36,7 +36,7 @@ const UserLogin = () => {
     <>
       <Input
         onChange={handleChange}
-        my={"6px"}
+        my={2}
         name="email"
         type="email"
         variant={"auth"}
@@ -44,7 +44,7 @@ const UserLogin = () => {
       />
       <Input
         onChange={handleChange}
-        my={"6px"}
+        my={2}
         name="password"
         type="password"
         variant={"auth"}
@@ -53,7 +53,7 @@ const UserLogin = () => {
       <Button
         onClick={handleClick}
         isLoading={loading}
-        mt={"6px"}
+        mt={2}
         h={"full"}
         w={"full"}
         size={"lg"}

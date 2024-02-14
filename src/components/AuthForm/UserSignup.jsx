@@ -40,7 +40,7 @@ const UserSignup = () => {
       <Flex w={"full"} flexDir={{ base: "column", md: "row" }}>
         <Input
           onChange={handleChange}
-          my={"6px"}
+          my={1}
           name="username"
           type="text"
           variant={"auth"}
@@ -48,7 +48,7 @@ const UserSignup = () => {
         />
         <Input
           onChange={handleChange}
-          my={"6px"}
+          my={1}
           name="displayName"
           type="text"
           variant={"auth"}
@@ -59,7 +59,7 @@ const UserSignup = () => {
 
       <Input
         onChange={handleChange}
-        my={"6px"}
+        my={1}
         name="email"
         type="email"
         variant={"auth"}
@@ -67,7 +67,7 @@ const UserSignup = () => {
       />
       <Input
         onChange={handleChange}
-        my={"6px"}
+        my={1}
         name="password"
         type="password"
         variant={"auth"}
@@ -77,7 +77,7 @@ const UserSignup = () => {
         onClick={handleClick}
         isDisabled={isDisabled}
         isLoading={loading}
-        mt={"6px"}
+        mt={2}
         h={"full"}
         w={"full"}
         size={"lg"}
