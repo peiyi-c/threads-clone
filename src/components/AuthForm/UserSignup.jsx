@@ -1,4 +1,5 @@
-import { Flex, Input, Button, useColorModeValue } from "@chakra-ui/react";
+import { Flex, Input, Button } from "@chakra-ui/react";
+import { whiteBlack, blackWhite } from "../../hooks/useColors";
 import { useState, useEffect } from "react";
 import useSignupWithEmailAndPassword from "../../hooks/useSignupWithEmailAndPassword";
 
@@ -84,12 +85,12 @@ const UserSignup = () => {
         variant={"auth"}
         fontSize={"15px"}
         _disabled={{
-          bg: useColorModeValue("#000000", "#FFFFFF"),
-          color: useColorModeValue("#FFFFFF", "#000000"),
+          bg: blackWhite,
+          color: whiteBlack,
           opacity: 0.8,
           _hover: {
-            bg: useColorModeValue("#000000", "#FFFFFF"),
-            color: useColorModeValue("#FFFFFF", "#000000"),
+            bg: blackWhite,
+            color: whiteBlack,
             opacity: 0.8,
             cursor: "not-allowed",
           },

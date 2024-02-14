@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import { Input, Button, useColorModeValue } from "@chakra-ui/react";
-
+import { Input, Button } from "@chakra-ui/react";
+import { whiteBlack, blackWhite } from "../../hooks/useColors";
 import { useEffect, useState } from "react";
 import useLoginWithEmailAndPassword from "../../hooks/useLoginWithEmailAndPassword";
 
@@ -61,12 +61,12 @@ const UserLogin = () => {
         fontSize={"15px"}
         isDisabled={isDisabled}
         _disabled={{
-          bg: useColorModeValue("#000000", "#FFFFFF"),
-          color: useColorModeValue("#FFFFFF", "#000000"),
+          bg: blackWhite,
+          color: whiteBlack,
           opacity: 0.8,
           _hover: {
-            bg: useColorModeValue("#000000", "#FFFFFF"),
-            color: useColorModeValue("#FFFFFF", "#000000"),
+            bg: blackWhite,
+            color: whiteBlack,
             opacity: 0.8,
             cursor: "not-allowed",
           },
