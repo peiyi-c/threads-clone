@@ -29,6 +29,7 @@ import usePreviewImg from "../../hooks/usePreviewImg";
 import FeedPostCommentAlert from "./FeedPostCommentAlert";
 import useReplyThread from "../../hooks/useReplyThread";
 import useReplyReply from "../../hooks/useReplyReply";
+import useColors from "../../hooks/useColors";
 
 const FeedPostComment = ({
   onCloseComment,
@@ -46,6 +47,7 @@ const FeedPostComment = ({
   const { handleImgChange, selectedFile, setSelectedFile } = usePreviewImg();
   const { isUpdating, handleFeedPostReply } = useReplyThread();
   const { isCommenting, handleReplyReply } = useReplyReply();
+  const { blackWhite, whiteBlack } = useColors();
 
   const MIN_TEXTAREA_HEIGHT = 12;
 
@@ -303,12 +305,12 @@ const FeedPostComment = ({
                 ml={"auto"}
                 isDisabled={!text || !images}
                 _disabled={{
-                  bg: useColorModeValue("#000000", "#FFFFFF"),
-                  color: useColorModeValue("#FFFFFF", "#000000"),
+                  bg: blackWhite,
+                  color: whiteBlack,
                   opacity: 0.25,
                   _hover: {
-                    bg: useColorModeValue("#000000", "#FFFFFF"),
-                    color: useColorModeValue("#FFFFFF", "#000000"),
+                    bg: blackWhite,
+                    color: whiteBlack,
                     opacity: 0.25,
                     cursor: "not-allowed",
                   },

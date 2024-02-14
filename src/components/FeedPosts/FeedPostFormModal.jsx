@@ -28,6 +28,7 @@ import useAuthStore from "../../store/authStore";
 import usePreviewImg from "../../hooks/usePreviewImg";
 import FeedPostSlider from "./FeedPostSlider";
 import useCreateThread from "../../hooks/useCreateThread";
+import useColors from "../../hooks/useColors";
 
 const FeedPostFormModal = ({ onClosePost, isOpenPost }) => {
   const [text, setText] = useState("");
@@ -38,6 +39,7 @@ const FeedPostFormModal = ({ onClosePost, isOpenPost }) => {
   const { user } = useAuthStore();
   const { handleImgChange, selectedFile, setSelectedFile } = usePreviewImg();
   const { handleCreatePost, isLoading } = useCreateThread();
+  const { blackWhite, whiteBlack } = useColors();
 
   const MIN_TEXTAREA_HEIGHT = 16;
 
@@ -214,12 +216,12 @@ const FeedPostFormModal = ({ onClosePost, isOpenPost }) => {
                 ml={"auto"}
                 isDisabled={!text || !images}
                 _disabled={{
-                  bg: useColorModeValue("#000000", "#FFFFFF"),
-                  color: useColorModeValue("#FFFFFF", "#000000"),
+                  bg: blackWhite,
+                  color: whiteBlack,
                   opacity: 0.25,
                   _hover: {
-                    bg: useColorModeValue("#000000", "#FFFFFF"),
-                    color: useColorModeValue("#FFFFFF", "#000000"),
+                    bg: blackWhite,
+                    color: whiteBlack,
                     opacity: 0.25,
                     cursor: "not-allowed",
                   },
