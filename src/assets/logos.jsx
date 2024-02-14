@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import { useContext } from "react";
 import { ContentContext } from "../contexts/contentContext";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
@@ -31,8 +31,8 @@ export const Threads = ({ h = 32, w = 32 }) => {
 };
 
 Threads.propTypes = {
-  h: PropTypes.bool,
-  w: PropTypes.bool,
+  h: PropTypes.string,
+  w: PropTypes.string,
 };
 
 // Navigation
@@ -262,7 +262,7 @@ export const Menu = ({ handleClick }) => {
       onClick={handleClick}
     >
       <svg
-        aria-label="More"
+        aria-label="Menu"
         role="img"
         viewBox="0 0 24 24"
         style={{
@@ -271,7 +271,7 @@ export const Menu = ({ handleClick }) => {
           width: 24,
         }}
       >
-        <title>{"More"}</title>
+        <title>{"Menu"}</title>
         <rect
           width="100%"
           height={1}
@@ -622,25 +622,31 @@ export const Follow = () => {
     </svg>
   );
 };
-export const More = () => {
+export const More = ({ handleClick }) => {
   const { logo } = useColors();
   return (
-    <svg
-      aria-label="More"
-      role="img"
-      viewBox="0 0 24 24"
-      style={{
-        fill: `${logo}`,
-        height: 20,
-        width: 20,
-      }}
-    >
-      <title>{"More"}</title>
-      <circle cx={12} cy={12} r={1.5} />
-      <circle cx={6} cy={12} r={1.5} />
-      <circle cx={18} cy={12} r={1.5} />
-    </svg>
+    <Button variant={"ghost"} size={"sm"} onClick={handleClick}>
+      <svg
+        aria-label="More"
+        role="img"
+        viewBox="0 0 24 24"
+        style={{
+          fill: `${logo}`,
+          height: 20,
+          width: 20,
+        }}
+      >
+        <title>{"More"}</title>
+        <circle cx={12} cy={12} r={1.5} />
+        <circle cx={6} cy={12} r={1.5} />
+        <circle cx={18} cy={12} r={1.5} />
+      </svg>
+    </Button>
   );
+};
+
+More.propTypes = {
+  handleClick: PropTypes.func.isRequired,
 };
 
 // Carousel

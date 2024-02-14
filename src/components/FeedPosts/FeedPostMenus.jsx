@@ -40,20 +40,13 @@ export const FeedPostMoreSelf = ({ thread, reply }) => {
           rowEnd={1}
           zIndex={"dropdown"}
         >
-          <Button variant={"ghost"} size={"sm"} onClick={handleClick}>
-            <More />
-          </Button>
+          <More handleClick={handleClick} />
         </GridItem>
 
         {/*  Menu List */}
         <GridItem colStart={1} colEnd={2} rowStart={1} rowEnd={1}>
           <Menu closeOnSelect={true} size={"sm"}>
-            <MenuButton
-              as={Button}
-              ref={buttonRef}
-              opacity={0}
-              aria-hidden
-            ></MenuButton>
+            <MenuButton ref={buttonRef} opacity={0} aria-hidden></MenuButton>
             <MenuList minW="0" p={2} w={"fit-content"}>
               <MenuItem hidden aria-hidden></MenuItem>
               <MenuItem>
@@ -105,20 +98,13 @@ export const FeedPostMoreOther = ({ post }) => {
         rowEnd={1}
         zIndex={"dropdown"}
       >
-        <Button variant={"ghost"} size={"sm"} onClick={handleClick}>
-          <More />
-        </Button>
+        <More handleClick={handleClick} />
       </GridItem>
 
       {/*  Menu List */}
       <GridItem colStart={1} colEnd={2} rowStart={1} rowEnd={1}>
         <Menu closeOnSelect={true} size={"sm"}>
-          <MenuButton
-            as={Button}
-            ref={buttonRef}
-            opacity={0}
-            aria-hidden
-          ></MenuButton>
+          <MenuButton ref={buttonRef} opacity={0} aria-hidden></MenuButton>
           <MenuList minW="0" p={2} w={"fit-content"}>
             <MenuItem hidden aria-hidden></MenuItem>
             {isFollowing && (
