@@ -18,7 +18,7 @@ const ProfileCard = ({ user, isLoading }) => {
   const { subText } = useColors();
   const showDot = user?.followers?.length > 1 && user?.bioLink;
   const { userProfile } = useGetProfileById(
-    user.followers[user.followers.length - 1]
+    user?.followers[user?.followers.length - 1] || "no-follower"
   );
   if (isLoading) return <ProfileCardSkeleton />;
 
@@ -44,10 +44,10 @@ const ProfileCard = ({ user, isLoading }) => {
         </Flex>
         <Text lineHeight={5}>{user.bioDescription}</Text>
         <HStack mt={3} color={subText}>
-          <Avatar
-            size={"xs"}
-            src={userProfile ? userProfile?.profilePicURL : ""}
-          />
+          {userProfile && (
+            <Avatar size={"xs"} src={userProfile?.profilePicURL} />
+          )}
+
           <Text as={"span"}>
             {user?.followers?.length}{" "}
             {user?.followers?.length > 1 ? "Followers" : "Follower"}
