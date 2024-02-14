@@ -10,14 +10,16 @@ import {
 import useFollowUser from "../../hooks/useFollowUser";
 import useColors from "../../hooks/useColors";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const UserCard = ({ user }) => {
   const { handleFollowUser, isFollowing } = useFollowUser(user.uid);
   const { whiteBlack, subText } = useColors();
   const borderColor = useColorModeValue("#f5f5f5", "#101010");
+  const followeLength = user?.followers?.length;
 
   return (
-    <>
+    <Link to={`/@${user?.username}`}>
       <HStack my={5} alignItems={"flex-start"}>
         {/* user image */}
         <Avatar
@@ -39,13 +41,10 @@ const UserCard = ({ user }) => {
               </Text>
               {/* user follower count */}
               {user.followers && (
-                <Text
-                  mt={2}
-                  display={user?.followers?.length === 0 ? "none" : "inline"}
-                >
-                  {user?.followers?.length > 1
-                    ? `${user?.followers?.length} followers`
-                    : user?.followers?.length === 1
+                <Text mt={2} display={followeLength === 0 ? "none" : "inline"}>
+                  {followeLength > 1
+                    ? `${followeLength} followers`
+                    : followeLength === 1
                     ? `1 follower`
                     : ""}
                 </Text>
@@ -76,7 +75,7 @@ const UserCard = ({ user }) => {
           <Divider orientation="horizontal" />
         </VStack>
       </HStack>
-    </>
+    </Link>
   );
 };
 
