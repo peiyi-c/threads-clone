@@ -8,7 +8,6 @@ import {
   MenuItem,
   Text,
   MenuDivider,
-  Button,
   useDisclosure,
 } from "@chakra-ui/react";
 import { More, Repost, Reposted } from "../../assets/logos";
@@ -109,19 +108,17 @@ export const FeedPostMoreOther = ({ post }) => {
             <MenuItem hidden aria-hidden></MenuItem>
             {isFollowing && (
               <>
-                <MenuItem onClick={handleFollowUser}>
-                  <Text role="button">Unfollow</Text>
-                </MenuItem>
+                <MenuItem onClick={handleFollowUser}>Unfollow</MenuItem>
                 <MenuDivider />
               </>
             )}
 
             <MenuItem>
-              <Text role="button">Mute</Text>
+              <Text>Mute</Text>
             </MenuItem>
             <MenuDivider />
             <MenuItem>
-              <Text role="button">Hide</Text>
+              <Text>Hide</Text>
             </MenuItem>
           </MenuList>
         </Menu>
@@ -156,9 +153,11 @@ export const FeedPostRepost = ({ post, type, userProfile, user }) => {
         rowEnd={1}
         zIndex={"dropdown"}
       >
-        <Button variant={"ghost"} size={"sm"} onClick={handleClick}>
-          {isReposted ? <Reposted /> : <Repost />}
-        </Button>
+        {isReposted ? (
+          <Reposted handleClick={handleClick} />
+        ) : (
+          <Repost handleClick={handleClick} />
+        )}
       </GridItem>
 
       {/*  Menu List */}
@@ -167,31 +166,21 @@ export const FeedPostRepost = ({ post, type, userProfile, user }) => {
           <MenuButton ref={buttonRef} opacity={0} aria-hidden></MenuButton>
           <MenuList minW="0" p={2} w={"fit-content"}>
             <MenuItem hidden aria-hidden></MenuItem>
-
-            <MenuItem onClick={handleRepostPost}>
-              {isReposted ? (
-                <Button h={"20px"} variant={"line"} color={"#FF3040"}>
-                  Remove
-                </Button>
-              ) : (
-                <Button
-                  h={"20px"}
-                  variant={"line"}
-                  isDisabled={user?.uid === userProfile?.uid}
-                >
-                  Repost
-                </Button>
-              )}
-            </MenuItem>
-            <MenuDivider />
-            <MenuItem>
-              <Button
+            {isReposted ? (
+              <MenuItem onClick={handleRepostPost}>
+                <Text>Remove</Text>
+              </MenuItem>
+            ) : (
+              <MenuItem
+                onClick={handleRepostPost}
                 isDisabled={user?.uid === userProfile?.uid}
-                h={"20px"}
-                variant={"line"}
               >
-                Quote
-              </Button>
+                <Text>Repost</Text>
+              </MenuItem>
+            )}
+            <MenuDivider />
+            <MenuItem isDisabled={user?.uid === userProfile?.uid}>
+              <Text>Quote</Text>
             </MenuItem>
           </MenuList>
         </Menu>
