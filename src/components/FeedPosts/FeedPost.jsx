@@ -39,7 +39,7 @@ const FeedPost = ({ thread }) => {
   const { user } = useAuthStore();
 
   const threadLength =
-    thread.replies && thread.replies.length > 0 ? thread.replies.length : "";
+    thread?.replies && thread?.replies.length > 0 ? thread.replies.length : "";
   const showDot = threadLength && likes > 0;
   const openThreadPage = () => {
     setContent("thread");
@@ -133,7 +133,7 @@ const FeedPost = ({ thread }) => {
           </Box>
 
           {/* thread line */}
-          {thread?.replies && thread?.replies.length > 0 && (
+          {threadLength && (
             <Flex
               mt={"18px"}
               mb={"6px"}
