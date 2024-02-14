@@ -1,11 +1,9 @@
-/* eslint-disable react/prop-types */
-import { useColorModeValue } from "@chakra-ui/react";
 import { Box } from "@chakra-ui/react";
 import { useContext } from "react";
 import { ContentContext } from "../contexts/contentContext";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import useColors from "../hooks/useColors";
-
+import PropTypes from "prop-types";
 // Header
 export const Threads = ({ h = 32, w = 32 }) => {
   const { logo } = useColors();
@@ -30,6 +28,11 @@ export const Threads = ({ h = 32, w = 32 }) => {
       </svg>
     </Box>
   );
+};
+
+Threads.propTypes = {
+  h: PropTypes.bool,
+  w: PropTypes.bool,
 };
 
 // Navigation
@@ -298,32 +301,36 @@ export const Menu = ({ handleClick }) => {
   );
 };
 
-// Comment
-export const VerticalLine = ({ h }) => {
-  const color = useColorModeValue("#e5e5e5", "#333638");
-
-  return (
-    <Box color={color} m={"12px 0 0 6px"}>
-      <svg
-        className="xv787a8"
-        aria-hidden="true"
-        fill="none"
-        height={h}
-        viewBox={`0 0 21 ${h}`}
-        width={21}
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d={`M18 1L18 ${h}`}
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-        />
-      </svg>
-    </Box>
-  );
+Menu.propTypes = {
+  handleClick: PropTypes.func.isRequired,
 };
+
+// Comment
+// export const VerticalLine = ({ h }) => {
+//   const color = useColorModeValue("#e5e5e5", "#333638");
+
+//   return (
+//     <Box color={color} m={"12px 0 0 6px"}>
+//       <svg
+//         className="xv787a8"
+//         aria-hidden="true"
+//         fill="none"
+//         height={h}
+//         viewBox={`0 0 21 ${h}`}
+//         width={21}
+//         xmlns="http://www.w3.org/2000/svg"
+//       >
+//         <path
+//           d={`M18 1L18 ${h}`}
+//           stroke="currentColor"
+//           strokeLinecap="round"
+//           strokeLinejoin="round"
+//           strokeWidth={2}
+//         />
+//       </svg>
+//     </Box>
+//   );
+// };
 export const AttachMedia = () => {
   const { subText } = useColors();
   return (
