@@ -18,7 +18,7 @@ import { timeAgo } from "../../utils/timeAgo";
 import useGetProfileById from "../../hooks/useGetProfileById";
 import useLikeThread from "../../hooks/useLikeThread";
 import FeedPostComment from "./FeedPostComment";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ContentContext } from "../../contexts/contentContext";
 import { AvatarGroup1, AvatarGroup2, AvatarGroup3 } from "./AvatarGroup";
@@ -56,15 +56,17 @@ const FeedPost = ({ thread }) => {
         >
           {/* thread author avatar */}
           {!isLoading && (
-            <Avatar
-              gridColumnStart={1}
-              gridColumnEnd={2}
-              gridRowStart={1}
-              gridRowEnd={3}
-              size="md"
-              name={userProfile?.username}
-              src={userProfile?.profilePicURL}
-            />
+            <Link to={`/@${userProfile.username}`}>
+              <Avatar
+                gridColumnStart={1}
+                gridColumnEnd={2}
+                gridRowStart={1}
+                gridRowEnd={3}
+                size="md"
+                name={userProfile?.username}
+                src={userProfile?.profilePicURL}
+              />
+            </Link>
           )}
           {/* thread author name */}
           <HStack justifyContent={"space-between"}>
