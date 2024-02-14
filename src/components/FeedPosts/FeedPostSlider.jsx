@@ -17,7 +17,7 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
   const [currentSlide, setCurrentSlide] = useState(INITIAL_SLIDE);
   const imageBorderColor = useColorModeValue("#0000001a", "#ffffff0d");
   const swiperRef = useRef(null);
-  const useSwiper = images?.length >= 3;
+  const useSwiper = images?.length >= 2;
 
   const handlePrevClick = () => {
     if (currentSlide === INITIAL_SLIDE) return;
@@ -57,7 +57,7 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
               <Continue />
             </Button>
 
-            {/* images from 3, Swipter */}
+            {/* images from 2, Swipter */}
             <Swiper
               slidesPerView={"auto"}
               modules={[Navigation]}
