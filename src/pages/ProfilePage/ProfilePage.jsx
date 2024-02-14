@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Text,
-  useColorModeValue,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import ProfileCard from "../../components/Profile/ProfileCard";
 import ProfileTabs from "../../components/Profile/ProfileTabs";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
@@ -14,6 +7,7 @@ import { useParams } from "react-router-dom";
 import useGetProfileByUsername from "../../hooks/useGetProfileByUsername";
 import ProfileEditModal from "../../components/Profile/ProfileEditModal";
 import useFollowUser from "../../hooks/useFollowUser";
+import useColors from "../../hooks/useColors";
 
 const ProfilePage = () => {
   const { user } = useAuthStore();
@@ -40,7 +34,7 @@ const ProfilePage = () => {
 
   const userNotFound = !isLoading && !userProfile;
 
-  const color = useColorModeValue("#000000", "#F3F5F7");
+  const { logo } = useColors();
   if (userNotFound && !viewOwnProfileAndAuth) return <NotFoundPage />;
 
   return (
@@ -100,7 +94,7 @@ const ProfilePage = () => {
       {/* Tabs */}
       {!isLoading && displayProfileTab && <ProfileTabs />}
       {!isLoading && displayProfilePrivate && (
-        <Text textAlign={"center"} mt={5} color={color}>
+        <Text textAlign={"center"} mt={5} color={logo}>
           This Profile is private.
         </Text>
       )}

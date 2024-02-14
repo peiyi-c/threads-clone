@@ -1,12 +1,14 @@
-import { Text, useColorModeValue } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import useGetUserReplies from "../../hooks/useGetUserReplies";
 import { FeedPostSkeleton } from "../FeedPosts/FeedPost";
 import FeedPosts from "../FeedPosts/FeedPosts";
+import useColors from "../../hooks/useColors";
 
 const UserReplies = () => {
   const { isLoading, replied } = useGetUserReplies();
   const displayReplied = !isLoading && replied;
-  const color = useColorModeValue("#000000", "#F3F5F7");
+  const { logo } = useColors();
+
   if (isLoading)
     return (
       <>
@@ -22,7 +24,7 @@ const UserReplies = () => {
       {displayReplied ? (
         <FeedPosts threads={replied} />
       ) : (
-        <Text textAlign={"center"} mt={5} color={color}>
+        <Text textAlign={"center"} mt={5} color={logo}>
           No replies yet.
         </Text>
       )}

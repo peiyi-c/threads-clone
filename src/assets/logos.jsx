@@ -4,10 +4,11 @@ import { Box } from "@chakra-ui/react";
 import { useContext } from "react";
 import { ContentContext } from "../contexts/contentContext";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
+import useColors from "../hooks/useColors";
 
 // Header
 export const Threads = ({ h = 32, w = 32 }) => {
-  const color = useColorModeValue("#000000", "#F3F5F7");
+  const { logo } = useColors();
   return (
     <Box
       cursor={"pointer"}
@@ -18,7 +19,7 @@ export const Threads = ({ h = 32, w = 32 }) => {
     >
       <svg
         aria-label="Threads"
-        fill={color}
+        fill={logo}
         height={h}
         role="img"
         viewBox="0 0 192 192"
@@ -33,16 +34,15 @@ export const Threads = ({ h = 32, w = 32 }) => {
 
 // Navigation
 export const Back = () => {
-  const color = useColorModeValue("#000000", "#F3F5F7");
+  const { logo } = useColors();
   const navigate = useNavigate();
-
   return (
     <svg
       aria-label="Back"
       role="img"
       viewBox="0 0 24 24"
       style={{
-        fill: `${color}`,
+        fill: `${logo}`,
         height: 26,
         width: 26,
         marginLeft: "6px",
@@ -53,7 +53,7 @@ export const Back = () => {
       <line
         style={{
           fill: "transparent",
-          stroke: `${color}`,
+          stroke: `${logo}`,
           strokeWidth: 1.7,
           strokeLinecap: "round",
         }}
@@ -65,7 +65,7 @@ export const Back = () => {
       <polyline
         style={{
           fill: "transparent",
-          stroke: `${color}`,
+          stroke: `${logo}`,
           strokeWidth: 1.7,
           strokeLinecap: "round",
         }}
@@ -76,13 +76,13 @@ export const Back = () => {
 };
 export const Home = () => {
   const color = useColorModeValue("#B8B8B8", "#4D4D4D");
-  const colorFill = useColorModeValue("#000000", "#F3F5F7");
+  const { logo } = useColors();
   const { pathname } = useLocation();
 
   return (
     <Box
       style={{
-        color: pathname !== "/" ? color : colorFill,
+        color: pathname !== "/" ? color : logo,
       }}
     >
       <svg
@@ -109,13 +109,13 @@ export const Home = () => {
 };
 export const Search = () => {
   const color = useColorModeValue("#B8B8B8", "#4D4D4D");
-  const colorFill = useColorModeValue("#000000", "#F3F5F7");
+  const { logo } = useColors();
   const { pathname } = useLocation();
 
   return (
     <Box
       style={{
-        color: pathname !== "/search" ? color : colorFill,
+        color: pathname !== "/search" ? color : logo,
       }}
     >
       <svg
@@ -141,13 +141,13 @@ export const Search = () => {
 };
 export const Create = () => {
   const color = useColorModeValue("#B8B8B8", "#4D4D4D");
-  const colorFill = useColorModeValue("#000000", "#F3F5F7");
+  const { logo } = useColors();
   const { content } = useContext(ContentContext);
 
   return (
     <Box
       style={{
-        color: content !== "create" ? color : colorFill,
+        color: content !== "create" ? color : logo,
       }}
     >
       <svg
@@ -179,7 +179,7 @@ export const Create = () => {
 };
 export const Activity = () => {
   const color = useColorModeValue("#B8B8B8", "#4D4D4D");
-  const colorFill = useColorModeValue("#000000", "#F3F5F7");
+  const { logo } = useColors();
   const { pathname } = useLocation();
 
   return (
@@ -196,12 +196,12 @@ export const Activity = () => {
           height: 26,
           width: 26,
         }}
-        fill={pathname !== "/activity" ? "transparent" : `${colorFill}`}
+        fill={pathname !== "/activity" ? "transparent" : `${logo}`}
       >
         <title>activity</title>
         <path
           d="M2.5 9.85683C2.5 14.224 6.22178 18.5299 12.0332 22.2032C12.3554 22.397 12.7401 22.5909 13 22.5909C13.2703 22.5909 13.655 22.397 13.9668 22.2032C19.7782 18.5299 23.5 14.224 23.5 9.85683C23.5 6.11212 20.8698 3.5 17.4599 3.5C15.4847 3.5 13.9356 4.39792 13 5.74479C12.0851 4.40812 10.5257 3.5 8.5401 3.5C5.14059 3.5 2.5 6.11212 2.5 9.85683Z"
-          stroke={pathname !== "/activity" ? "currentColor" : `${colorFill}`}
+          stroke={pathname !== "/activity" ? "currentColor" : `${logo}`}
           strokeWidth={2.5}
         />
       </svg>
@@ -210,7 +210,7 @@ export const Activity = () => {
 };
 export const Profile = () => {
   const color = useColorModeValue("#B8B8B8", "#4D4D4D");
-  const colorFill = useColorModeValue("#000000", "#F3F5F7");
+  const { logo } = useColors();
   const { ausername } = useParams();
 
   return (
@@ -227,19 +227,19 @@ export const Profile = () => {
           height: 26,
           width: 26,
         }}
-        fill={ausername ? `${colorFill}` : "transparent"}
+        fill={ausername ? `${logo}` : "transparent"}
       >
         <title>profile</title>
         <circle
           cx={13}
           cy={7.25}
           r={4}
-          stroke={ausername ? `${colorFill}` : "currentColor"}
+          stroke={ausername ? `${logo}` : "currentColor"}
           strokeWidth={2.5}
         />
         <path
           d="M6.26678 23.75H19.744C21.603 23.75 22.5 23.2186 22.5 22.0673C22.5 19.3712 18.8038 15.75 13 15.75C7.19625 15.75 3.5 19.3712 3.5 22.0673C3.5 23.2186 4.39704 23.75 6.26678 23.75Z"
-          stroke={ausername ? `${colorFill}` : "currentColor"}
+          stroke={ausername ? `${logo}` : "currentColor"}
           strokeWidth={2.5}
         />
       </svg>
@@ -248,12 +248,12 @@ export const Profile = () => {
 };
 export const Menu = ({ handleClick }) => {
   const color = useColorModeValue("#B8B8B8", "#4D4D4D");
-  const hoverColor = useColorModeValue("#000000", "#F3F5F7");
+  const { logo } = useColors();
 
   return (
     <Box
       _hover={{
-        svg: { color: `${hoverColor}` },
+        svg: { color: `${logo}` },
       }}
       _active={{
         transform: "scale(0.9)",
@@ -269,7 +269,7 @@ export const Menu = ({ handleClick }) => {
         role="img"
         viewBox="0 0 24 24"
         style={{
-          fill: `${hoverColor}`,
+          fill: `${logo}`,
           height: 24,
           width: 24,
         }}
@@ -467,7 +467,7 @@ export const Poll = () => {
   );
 };
 export const UnLike = () => {
-  const color = useColorModeValue("#000000", "#F3F5F7");
+  const { logo } = useColors();
   return (
     <svg
       aria-label="Unlike"
@@ -481,7 +481,7 @@ export const UnLike = () => {
     >
       <title>{"Unlike"}</title>
       <path
-        stroke={color}
+        stroke={logo}
         strokeWidth={1.7}
         d="M1.2 7.328c0 3.66 3.118 7.269 7.99 10.347.27.163.592.325.81.325.226 0 .548-.162.81-.325 4.87-3.078 7.99-6.687 7.99-10.347C18.8 4.189 16.595 2 13.737 2c-1.655 0-2.953.753-3.738 1.881C9.233 2.761 7.926 2 6.262 2c-2.85 0-5.063 2.19-5.063 5.328Z"
       />
@@ -510,7 +510,7 @@ export const Like = () => {
   );
 };
 export const Reply = () => {
-  const color = useColorModeValue("#000000", "#F3F5F7");
+  const { logo } = useColors();
   return (
     <svg
       aria-label="Reply"
@@ -524,7 +524,7 @@ export const Reply = () => {
     >
       <title>{"Reply"}</title>
       <path
-        stroke={color}
+        stroke={logo}
         strokeWidth={1.7}
         d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z"
       />
@@ -532,14 +532,14 @@ export const Reply = () => {
   );
 };
 export const Repost = () => {
-  const color = useColorModeValue("#000000", "#F3F5F7");
+  const { logo } = useColors();
   return (
     <svg
       aria-label="Repost"
       role="img"
       viewBox="0 0 24 24"
       style={{
-        fill: `${color}`,
+        fill: `${logo}`,
         height: 20,
         width: 20,
       }}
@@ -550,7 +550,7 @@ export const Repost = () => {
   );
 };
 export const Reposted = () => {
-  const color = useColorModeValue("#000000", "#F3F5F7");
+  const { logo } = useColors();
   return (
     <svg
       aria-label="Reposten"
@@ -558,7 +558,7 @@ export const Reposted = () => {
       viewBox="0 0 24 24"
       className="x1lliihq xffa9am x1jwls1v x1n2onr6 x17fnjtu x1yxark7"
       style={{
-        fill: `${color}`,
+        fill: `${logo}`,
         height: 20,
         width: 20,
       }}
@@ -569,7 +569,7 @@ export const Reposted = () => {
   );
 };
 export const Share = () => {
-  const color = useColorModeValue("#000000", "#F3F5F7");
+  const { logo } = useColors();
   return (
     <svg
       aria-label="Share"
@@ -585,7 +585,7 @@ export const Share = () => {
       <line
         style={{
           fill: "transparent",
-          stroke: `${color}`,
+          stroke: `${logo}`,
           strokeWidth: 1.7,
         }}
         x1={22}
@@ -596,7 +596,7 @@ export const Share = () => {
       <polygon
         style={{
           fill: "transparent",
-          stroke: `${color}`,
+          stroke: `${logo}`,
           strokeWidth: 1.7,
         }}
         points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334"
@@ -605,14 +605,14 @@ export const Share = () => {
   );
 };
 export const Follow = () => {
-  const color = useColorModeValue("#000000", "#F3F5F7");
+  const { logo } = useColors();
   return (
     <svg
       aria-label="Follow"
       role="img"
       viewBox="0 0 10 9"
       style={{
-        fill: `${color}`,
+        fill: `${logo}`,
         height: 10,
         width: 10,
       }}
@@ -623,14 +623,14 @@ export const Follow = () => {
   );
 };
 export const More = () => {
-  const color = useColorModeValue("#000000", "#F3F5F7");
+  const { logo } = useColors();
   return (
     <svg
       aria-label="More"
       role="img"
       viewBox="0 0 24 24"
       style={{
-        fill: `${color}`,
+        fill: `${logo}`,
         height: 20,
         width: 20,
       }}

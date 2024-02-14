@@ -1,12 +1,13 @@
-import { Text, useColorModeValue } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import useGetUserThreads from "../../hooks/useGetUserThreads";
 import { FeedPostSkeleton } from "../FeedPosts/FeedPost";
 import FeedPosts from "../FeedPosts/FeedPosts";
+import useColors from "../../hooks/useColors";
 
 const UserThreads = () => {
   const { isLoading, threads } = useGetUserThreads();
   const displayThreads = !isLoading && threads.length;
-  const color = useColorModeValue("#000000", "#F3F5F7");
+  const { logo } = useColors();
   if (isLoading)
     return (
       <>
@@ -22,7 +23,7 @@ const UserThreads = () => {
       {displayThreads ? (
         <FeedPosts threads={threads} />
       ) : (
-        <Text textAlign={"center"} mt={5} color={color}>
+        <Text textAlign={"center"} mt={5} color={logo}>
           No threads yet.
         </Text>
       )}
