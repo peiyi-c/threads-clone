@@ -60,7 +60,7 @@ const FeedPostFormModalAlert = ({
 
 FeedPostFormModalAlert.propTypes = {
   onClosePostAlert: PropTypes.func.isRequired,
-  isOpenPostAlert: PropTypes.func.isRequired,
+  isOpenPostAlert: PropTypes.bool.isRequired,
   onClosePost: PropTypes.func.isRequired,
 };
 

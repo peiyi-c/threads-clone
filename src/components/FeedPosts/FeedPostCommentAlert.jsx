@@ -59,7 +59,7 @@ const FeedPostCommentAlert = ({
 
 FeedPostCommentAlert.propTypes = {
   onCloseCommentAlert: PropTypes.func.isRequired,
-  isOpenCommentAlert: PropTypes.func.isRequired,
+  isOpenCommentAlert: PropTypes.bool.isRequired,
   onCloseComment: PropTypes.func.isRequired,
 };
 
