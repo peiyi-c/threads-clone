@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Avatar, useColorModeValue } from "@chakra-ui/react";
 import useGetProfileById from "../../hooks/useGetProfileById";
+import useColors from "../../hooks/useColors";
 // Avatar groups used in thread and reply
 
 export const AvatarGroup1 = ({ repliedBy }) => {
@@ -13,8 +14,7 @@ export const AvatarGroup1 = ({ repliedBy }) => {
 };
 
 export const AvatarGroup2 = ({ repliedBy }) => {
-  const borderOne = useColorModeValue("#00000026", "#f3f5f726");
-  const borderTwo = useColorModeValue("transparent", "#101010");
+  const { avatarBorder1, avatarBorder2 } = useColors();
   return (
     <>
       <Avatar
@@ -22,16 +22,16 @@ export const AvatarGroup2 = ({ repliedBy }) => {
         src={useGetProfileById(repliedBy[0]).userProfile?.profilePicURL}
         position={"relative"}
         left={"3px"}
-        border={`1.5px solid ${borderOne}`}
-        outline={`0.5px solid ${borderTwo}`}
+        border={`1.5px solid ${avatarBorder1}`}
+        outline={`0.5px solid ${avatarBorder2}`}
       />
       <Avatar
         size="xs"
         src={useGetProfileById(repliedBy[1]).userProfile?.profilePicURL}
         position={"relative"}
         right={"3px"}
-        border={`1.5px solid ${borderOne}`}
-        outline={`0.5px solid ${borderTwo}`}
+        border={`1.5px solid ${avatarBorder1}`}
+        outline={`0.5px solid ${avatarBorder2}`}
       />
     </>
   );
