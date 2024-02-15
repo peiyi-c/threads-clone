@@ -40,7 +40,7 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
   };
 
   const handleImageOpen = (e) => {
-    setClickedImage(e.target.dataset.image);
+    setClickedImage(Number(e.target.dataset.image));
     onOpen();
   };
 
