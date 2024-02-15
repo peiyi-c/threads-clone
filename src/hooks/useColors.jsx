@@ -8,7 +8,7 @@ const useColors = () => {
   const subText = useColorModeValue("#999999", "#777777");
   const avatarBorder1 = useColorModeValue("#00000026", "#f3f5f726");
   const avatarBorder2 = useColorModeValue("transparent", "#101010");
-
+  const imageBorder = useColorModeValue("#0000001a", "#ffffff0d");
   return {
     whiteBlack,
     blackWhite,
@@ -17,6 +17,7 @@ const useColors = () => {
     subText,
     avatarBorder1,
     avatarBorder2,
+    imageBorder,
   };
 };
 
