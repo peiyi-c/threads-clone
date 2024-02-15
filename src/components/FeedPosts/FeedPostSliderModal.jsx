@@ -22,19 +22,17 @@ const FeedPostSliderModal = ({
   initialSlide,
 }) => {
   const swiperRef = useRef(null);
-  const INITIAL_SLIDE = initialSlide;
-  const [currentSlide, setCurrentSlide] = useState(INITIAL_SLIDE);
+  const [currentSlide, setCurrentSlide] = useState(initialSlide);
 
   const handlePrevClick = () => {
+    if (currentSlide === initialSlide) return;
     swiperRef.current?.slidePrev();
-    setCurrentSlide((prev) => prev - 1);
   };
 
   const handleNextClick = () => {
+    if (currentSlide === Object.keys(images).length - 1) return;
     swiperRef.current?.slideNext();
-    setCurrentSlide((prev) => prev + 1);
   };
-
   return (
     <Modal
       isCentered
@@ -46,7 +44,12 @@ const FeedPostSliderModal = ({
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalCloseButton />
+        <ModalCloseButton
+          _active={{
+            transform: "scale(1.1)",
+            transition: "transform 0.2s ease-in-out, background 0.1s ease-out",
+          }}
+        />
         <ModalBody
           display={"flex"}
           justifyContent={"center"}
@@ -76,7 +79,8 @@ const FeedPostSliderModal = ({
                   {/* images from 2, Swiper */}
                   <Swiper
                     slidesPerView={"auto"}
-                    initialSlide={INITIAL_SLIDE}
+                    onRealIndexChange={(el) => setCurrentSlide(el.activeIndex)}
+                    initialSlide={initialSlide}
                     modules={[Navigation]}
                     onBeforeInit={(swiper) => {
                       swiperRef.current = swiper;
@@ -114,7 +118,7 @@ const FeedPostSliderModal = ({
                     variant={"image"}
                     size={"lg"}
                     transform={"rotate(180deg)"}
-                    isDisabled={currentSlide === images.length}
+                    isDisabled={currentSlide === Object.keys(images).length - 1}
                   >
                     <Continue />
                   </Button>
@@ -145,7 +149,7 @@ FeedPostSliderModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   useSwiper: PropTypes.bool.isRequired,
   images: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
-  initialSlide: PropTypes.string,
+  initialSlide: PropTypes.number,
 };
 
 export default FeedPostSliderModal;
