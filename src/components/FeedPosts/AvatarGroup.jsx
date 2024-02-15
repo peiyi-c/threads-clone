@@ -1,7 +1,8 @@
-import { Avatar, useColorModeValue } from "@chakra-ui/react";
+import { Avatar } from "@chakra-ui/react";
 import useGetProfileById from "../../hooks/useGetProfileById";
 import useColors from "../../hooks/useColors";
 import PropTypes from "prop-types";
+
 // Avatar groups used in thread and reply
 
 export const AvatarGroup1 = ({ repliedBy }) => {
@@ -38,8 +39,7 @@ export const AvatarGroup2 = ({ repliedBy }) => {
 };
 
 export const AvatarGroup3 = ({ repliedBy }) => {
-  const borderOne = useColorModeValue("#00000026", "#f3f5f726");
-  const borderTwo = useColorModeValue("transparent", "#101010");
+  const { avatarBorder1, avatarBorder2 } = useColors();
   return (
     <>
       <Avatar
@@ -48,8 +48,8 @@ export const AvatarGroup3 = ({ repliedBy }) => {
         position={"relative"}
         left={"9px"}
         bottom={"3px"}
-        border={`1.5px solid ${borderOne}`}
-        outline={`0.5px solid ${borderTwo}`}
+        border={`1.5px solid ${avatarBorder1}`}
+        outline={`0.5px solid ${avatarBorder2}`}
       />
       <Avatar
         w={3}
@@ -58,8 +58,8 @@ export const AvatarGroup3 = ({ repliedBy }) => {
         position={"relative"}
         top={"14px"}
         left={"5px"}
-        border={`1.5px solid ${borderOne}`}
-        outline={`0.5px solid ${borderTwo}`}
+        border={`1.5px solid ${avatarBorder1}`}
+        outline={`0.5px solid ${avatarBorder2}`}
       />
       <Avatar
         size="xs"
@@ -67,8 +67,8 @@ export const AvatarGroup3 = ({ repliedBy }) => {
         bottom={"13px"}
         right={0}
         position={"relative"}
-        border={`1.5px solid ${borderOne}`}
-        outline={`0.5px solid ${borderTwo}`}
+        border={`1.5px solid ${avatarBorder1}`}
+        outline={`0.5px solid ${avatarBorder2}`}
       />
     </>
   );
