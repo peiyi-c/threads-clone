@@ -48,7 +48,6 @@ export const Back = () => {
         fill: `${logo}`,
         height: 26,
         width: 26,
-        marginLeft: "6px",
       }}
       onClick={() => navigate(-1)}
     >

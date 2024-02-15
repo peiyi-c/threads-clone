@@ -52,12 +52,14 @@ const Header = () => {
             {content !== null && (
               <Button
                 onClick={goBack}
-                display={{ base: "none", md: "block" }}
+                display={{ base: "none", md: "flex" }}
                 variant={"ghost"}
-                size={"md"}
+                size={"lg"}
                 position={"absolute"}
-                left={"20%"}
-                top={4}
+                left={"18%"}
+                top={3.5}
+                justifyContent={"center"}
+                alignItems={"center"}
               >
                 <Back />
               </Button>
