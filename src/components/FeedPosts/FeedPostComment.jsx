@@ -337,7 +337,7 @@ export default FeedPostComment;
 
 FeedPostComment.propTypes = {
   onCloseComment: PropTypes.func.isRequired,
-  isOpenComment: PropTypes.func.isRequired,
+  isOpenComment: PropTypes.bool.isRequired,
   thread: PropTypes.object,
   reply: PropTypes.object,
   userProfile: PropTypes.object,
