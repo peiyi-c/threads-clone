@@ -1,4 +1,5 @@
 import { mode } from "@chakra-ui/theme-tools";
+
 const modalStyle = {
   baseStyle: (props) => ({
     header: {
@@ -51,6 +52,37 @@ const modalStyle = {
         borderRadius: { md: "0 0 18px 18px" },
       },
     }),
+    image: {
+      header: {
+        bg: "#000000",
+        borderRadius: 0,
+      },
+      dialogContainer: {},
+      dialog: {
+        h: "100vh",
+        w: "100vw",
+        backgroundColor: "transparent",
+        "--modal-shadow": "none",
+      },
+      closeButton: {
+        position: "absolute",
+        left: "0.75rem",
+        m: "2rem",
+        width: "44px",
+        height: "44px",
+        color: "#ffffff",
+        bg: "#070707",
+        borderRadius: "50%",
+      },
+      body: {
+        bg: "#000000",
+        borderRadius: 0,
+      },
+      footer: {
+        bg: "#000000",
+        borderRadius: 0,
+      },
+    },
   },
 };
 

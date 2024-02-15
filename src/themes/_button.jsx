@@ -14,6 +14,7 @@ const buttonStyle = {
     ghost: (props) => ({
       bg: "transparent",
       color: "inherit",
+      transition: "background 0.3s ease-out",
       _hover: {
         bg: props.colorMode === "light" ? "#0000000d" : "#ffffff1a",
       },
@@ -75,6 +76,7 @@ const buttonStyle = {
       borderColor: props.colorMode === "light" ? "#0000000a" : "#ffffff0a",
       borderRadius: "100px",
       transform: "scale(0.95)",
+      transition: "transform 0.3s ease-in",
       _hover: {
         bg: props.colorMode === "light" ? "#FFFFFF" : "#000000",
         color: props.colorMode === "light" ? "#000000" : "#FFFFFF",
@@ -82,6 +84,25 @@ const buttonStyle = {
       },
       boxShadow: "0 8px 24px 0 #00000014",
     }),
+    image: {
+      bg: "#070707",
+      padding: 0,
+      color: "inherit",
+
+      cursor: "pointer",
+      border: "unset",
+      borderRadius: "50%",
+      transform: "scale(0.95)",
+
+      transition: "transform 0.5s ease-in",
+      _hover: {
+        transform: "scale(1)",
+      },
+      _disabled: {
+        opacity: 0,
+        cursor: "not-allowed",
+      },
+    },
   },
 };
 

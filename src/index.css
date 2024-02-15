@@ -11,3 +11,7 @@
 .swiper-button-next::after {
   opacity: 0;
 }
+
+.swiper-wrapper {
+  align-items: center;
+}

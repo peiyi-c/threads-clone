@@ -4,20 +4,24 @@ import {
   Button,
   Image,
   HStack,
-  useColorModeValue,
   CloseButton,
   Box,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { Continue } from "../../assets/logos";
 import { useRef, useState } from "react";
 import PropTypes from "prop-types";
+import useColors from "../../hooks/useColors";
+import FeedPostSliderModal from "./FeedPostSliderModal";
 
 const FeedPostSlider = ({ images, setImages, isEdit }) => {
   const INITIAL_SLIDE = 1;
   const [currentSlide, setCurrentSlide] = useState(INITIAL_SLIDE);
-  const imageBorderColor = useColorModeValue("#0000001a", "#ffffff0d");
+  const [clickedImage, setClickedImage] = useState();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const swiperRef = useRef(null);
   const useSwiper = images?.length >= 2;
+  const { imageBorder } = useColors();
 
   const handlePrevClick = () => {
     if (currentSlide === INITIAL_SLIDE) return;
@@ -35,6 +39,11 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
     setImages(images.filter((image) => image.id !== imageId));
   };
 
+  const handleImageOpen = (e) => {
+    setClickedImage(e.target.dataset.image);
+    onOpen();
+  };
+
   return (
     <>
       {useSwiper ? (
@@ -49,16 +58,15 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
               variant={"ghost"}
               size={"md"}
               ml={"-10px"}
-              isDisabled={currentSlide === 2}
+              isDisabled={currentSlide === 1}
               _disabled={{
                 opacity: 0,
-                cursor: "default",
               }}
             >
               <Continue />
             </Button>
 
-            {/* images from 2, Swipter */}
+            {/* images from 2, Swiper */}
             <Swiper
               slidesPerView={"auto"}
               modules={[Navigation]}
@@ -69,7 +77,7 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
               navigation={true}
               scrollbar={{ draggable: true }}
             >
-              {images.map((image) => (
+              {images.map((image, idx) => (
                 <SwiperSlide
                   key={image.id}
                   position={"relative"}
@@ -78,11 +86,13 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
                   }}
                 >
                   <Image
+                    data-image={idx}
+                    onClick={handleImageOpen}
                     src={image.path}
                     display={"block"}
                     maxH={"25rem"}
                     borderRadius={"18px"}
-                    border={`1.5px solid ${imageBorderColor}`}
+                    border={`1.5px solid ${imageBorder}`}
                   />
                   {isEdit && (
                     <CloseButton
@@ -92,7 +102,7 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
                       right={2}
                       color="whiteAlpha.900"
                       bg={"#00000066"}
-                      borderRadius={"100%"}
+                      borderRadius={"50%"}
                       onClick={() => deleteImage(image.id)}
                     />
                   )}
@@ -112,7 +122,6 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
               isDisabled={currentSlide === images.length}
               _disabled={{
                 opacity: 0,
-                cursor: "default",
               }}
             >
               <Continue />
@@ -124,11 +133,12 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
           {images.map((image) => (
             <Box key={image.id} position={"relative"}>
               <Image
+                onClick={onOpen}
                 src={image.path}
                 objectFit={"cover"}
                 maxH={"25rem"}
                 borderRadius={"18px"}
-                border={`1.5px solid ${imageBorderColor}`}
+                border={`1.5px solid ${imageBorder}`}
               />
               {isEdit && (
                 <CloseButton
@@ -145,6 +155,15 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
             </Box>
           ))}
         </HStack>
+      )}
+      {isOpen && (
+        <FeedPostSliderModal
+          isOpen={isOpen}
+          onClose={onClose}
+          useSwiper={useSwiper}
+          images={images}
+          initialSlide={clickedImage}
+        />
       )}
     </>
   );
