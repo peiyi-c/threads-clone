@@ -88,7 +88,6 @@ const ProfileEditModal = ({ onCloseEdit, isOpenEdit, user }) => {
                 <Avatar
                   src={selectedFile || inputs.profilePicURL}
                   alt={inputs.displayName}
-                  name={inputs.displayName}
                   size={"md"}
                   alignSelf={"flex-start"}
                   onClick={() => fileRef.current.click()}

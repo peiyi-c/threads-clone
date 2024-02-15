@@ -138,7 +138,6 @@ const FeedPostComment = ({
                   gridRowStart={1}
                   gridRowEnd={3}
                   size="md"
-                  name={userProfile?.username}
                   src={userProfile?.profilePicURL}
                 />
 

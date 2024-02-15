@@ -127,7 +127,6 @@ const FeedPostFormModal = ({ onClosePost, isOpenPost }) => {
                   gridRowStart={1}
                   gridRowEnd={3}
                   size="md"
-                  name={user.username}
                   src={user.profilePicURL}
                 />
                 <Text as={"span"} fontSize={"15px"} fontWeight={"bold"}>
@@ -247,7 +246,7 @@ const FeedPostFormModal = ({ onClosePost, isOpenPost }) => {
 
 FeedPostFormModal.propTypes = {
   onClosePost: PropTypes.func.isRequired,
-  isOpenPost: PropTypes.func.isRequired,
+  isOpenPost: PropTypes.bool.isRequired,
 };
 
 export default FeedPostFormModal;
@@ -258,7 +257,6 @@ const ModalBodySub = ({ user, edit }) => {
       <Avatar
         m={"6px 0 0 12px"}
         size="xs"
-        name={user.username}
         src={user.profilePicURL}
         opacity={edit ? "1" : "0.5"}
       />

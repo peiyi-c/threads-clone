@@ -63,7 +63,6 @@ const FeedPost = ({ thread }) => {
                 gridRowStart={1}
                 gridRowEnd={3}
                 size="md"
-                name={userProfile?.username}
                 src={userProfile?.profilePicURL}
               />
             </Link>
