@@ -60,6 +60,10 @@ const Header = () => {
                 top={3.5}
                 justifyContent={"center"}
                 alignItems={"center"}
+                _active={{
+                  transform: "scale(0.9)",
+                  transition: "transform 0.11s ease-in-out",
+                }}
               >
                 <Back />
               </Button>
