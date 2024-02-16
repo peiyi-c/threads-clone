@@ -9,12 +9,20 @@ import {
   Text,
   MenuDivider,
   useDisclosure,
+  Button,
+  VStack,
+  Flex,
+  Box,
+  Avatar,
+  HStack,
 } from "@chakra-ui/react";
 import { More, Repost, Reposted } from "../../assets/logos";
 import FeedPostMoreSelfAlert from "./FeedPostMoreSelfAlert";
 import useFollowUser from "../../hooks/useFollowUser";
 import useRepostPost from "../../hooks/useRepostPost";
 import PropTypes from "prop-types";
+import useColors from "../../hooks/useColors";
+import useGetProfileById from "../../hooks/useGetProfileById";
 
 export const FeedPostMoreSelf = ({ thread, reply }) => {
   const { onOpen, isOpen, onClose } = useDisclosure();
@@ -144,6 +152,7 @@ export const FeedPostRepost = ({ post, type, userProfile, user }) => {
       alignItems={"center"}
       justifyItems={"end"}
       w={"2rem"}
+      zIndex={0}
     >
       {/* More Menu Icon */}
       <GridItem
@@ -193,4 +202,113 @@ FeedPostRepost.propTypes = {
   type: PropTypes.string,
   userProfile: PropTypes.object,
   user: PropTypes.object,
+};
+
+export const FeedPostProfileName = ({ userProfile, isLoading }) => {
+  const buttonRef = useRef(null);
+  const { onOpen, isOpen, onClose } = useDisclosure();
+  const { userProfile: user } = useGetProfileById(
+    userProfile?.followers[userProfile?.followers.length - 1] || "no-follower"
+  );
+  const { handleFollowUser, isFollowing } = useFollowUser(userProfile?.uid);
+  const followersCount = user?.followers?.length || 0;
+
+  const { subText } = useColors();
+  if (!isLoading)
+    return (
+      <>
+        <Text
+          as={"span"}
+          fontSize={"15px"}
+          fontWeight={"bold"}
+          ml={2}
+          cursor={"pointer"}
+          _hover={{
+            textDecoration: "underline",
+          }}
+          onMouseEnter={onOpen}
+          onMouseLeave={onClose}
+        >
+          {userProfile?.displayName}
+        </Text>
+
+        {/* Profile Information */}
+        <Menu
+          closeOnBlur={true}
+          closeOnSelect={true}
+          size={"sm"}
+          isOpen={isOpen}
+        >
+          {isOpen && (
+            <>
+              <MenuButton
+                ref={buttonRef}
+                as={Button}
+                opacity={0}
+                aria-hidden
+                position={"absolute"}
+              ></MenuButton>
+              <MenuList
+                py={2}
+                w={"fit-content"}
+                mt={"-1rem"}
+                boxShadow={"8px 8px 24px 4px #00000014"}
+                onMouseEnter={onOpen}
+                onMouseLeave={onClose}
+              >
+                <MenuItem w={"20rem"} onMouseEnter={onOpen}>
+                  <VStack
+                    p={"16px 12px"}
+                    alignItems={"flex-start"}
+                    w={"full"}
+                    gap={0}
+                  >
+                    <Flex
+                      w={"full"}
+                      flexDir={"row"}
+                      justifyContent={"space-around"}
+                      gap={0}
+                    >
+                      <Box w={"full"}>
+                        <Text fontSize={"16px"}>{userProfile.displayName}</Text>
+                        <Text fontWeight={"normal"}>
+                          {userProfile.username}
+                        </Text>
+                      </Box>
+                      <Box ml={"auto"}>
+                        <Avatar size={"lg"} src={userProfile.profilePicURL} />
+                      </Box>
+                    </Flex>
+                    <Box fontWeight={"normal"} mt={1}>
+                      {userProfile.bioDescription}
+                    </Box>
+                    <HStack mt={2} color={subText}>
+                      {user && <Avatar size={"xs"} src={user?.profilePicURL} />}
+                      <Text as={"span"} fontWeight={"normal"}>
+                        {followersCount}{" "}
+                        {followersCount > 1 ? "followers" : "follower"}
+                      </Text>
+                    </HStack>
+                    {/* Follow Button */}
+                    <Button
+                      onClick={handleFollowUser}
+                      w={"full"}
+                      variant={isFollowing ? "squareOutline" : "square"}
+                      fontSize={"15px"}
+                      mt={5}
+                    >
+                      {isFollowing ? "Unfollow" : "Follow"}
+                    </Button>
+                  </VStack>
+                </MenuItem>
+              </MenuList>
+            </>
+          )}
+        </Menu>
+      </>
+    );
+};
+FeedPostProfileName.propTypes = {
+  userProfile: PropTypes.object,
+  isLoading: PropTypes.bool,
 };

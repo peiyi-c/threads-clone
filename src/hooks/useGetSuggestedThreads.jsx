@@ -35,7 +35,7 @@ const useGetSuggestedThreads = () => {
       }
     };
     if (user) getSuggestedThreads();
-  }, [user, showToast]);
+  }, [user.uid, showToast]);
   return { isLoading, suggestedThreads };
 };
 

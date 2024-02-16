@@ -26,6 +26,7 @@ import {
   FeedPostMoreSelf,
   FeedPostMoreOther,
   FeedPostRepost,
+  FeedPostProfileName,
 } from "./FeedPostMenus";
 import useAuthStore from "../../store/authStore";
 import PropTypes from "prop-types";
@@ -41,6 +42,7 @@ const FeedPost = ({ thread }) => {
   const threadLength =
     thread?.replies && thread?.replies.length > 0 ? thread.replies.length : "";
   const showDot = threadLength && likes > 0;
+
   const openThreadPage = () => {
     setContent("thread");
     navigate(`/@${userProfile.username}/post/${thread.id}`);
@@ -69,11 +71,7 @@ const FeedPost = ({ thread }) => {
           )}
           {/* thread author name */}
           <HStack justifyContent={"space-between"}>
-            {!isLoading && (
-              <Text as={"span"} fontSize={"15px"} fontWeight={"bold"} ml={2}>
-                {userProfile?.displayName}
-              </Text>
-            )}
+            {!isLoading && <FeedPostProfileName userProfile={userProfile} />}
 
             <HStack>
               {/* thread created at */}
@@ -104,7 +102,12 @@ const FeedPost = ({ thread }) => {
 
             {/* thread images */}
             {thread.mediaURLs && (
-              <Box my={"12px"} cursor={"pointer"}>
+              <Box
+                my={"12px"}
+                cursor={"pointer"}
+                position={"relative"}
+                zIndex={0}
+              >
                 <FeedPostSlider images={thread.mediaURLs} isEdit={false} />
               </Box>
             )}

@@ -91,7 +91,14 @@ const FeedPostReply = ({ reply }) => {
 
           {/* reply images */}
           {reply.mediaURLs && (
-            <Box my={2} gridColumnStart={2} gridColumnEnd={3} gridRowStart={2}>
+            <Box
+              my={2}
+              gridColumnStart={2}
+              gridColumnEnd={3}
+              gridRowStart={2}
+              position={"relative"}
+              zIndex={0}
+            >
               <FeedPostSlider images={reply.mediaURLs} isEdit={false} />
             </Box>
           )}

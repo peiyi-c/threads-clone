@@ -42,7 +42,7 @@ const useGetFeedThreads = () => {
     };
 
     if (user) getFeedThreads();
-  }, [user, showToast, setThreads, setUserProfile]);
+  }, [user.uid, showToast, setThreads, setUserProfile]);
 
   return { isLoading, threads };
 };
