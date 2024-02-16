@@ -22,7 +22,7 @@ import useGetProfileById from "../../hooks/useGetProfileById";
 import useFollowUser from "../../hooks/useFollowUser";
 import useColors from "../../hooks/useColors";
 import useAuthStore from "../../store/authStore";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ProfileFollowerModal = ({ userProfile }) => {
   const { onOpen, isOpen, onClose } = useDisclosure();
@@ -143,22 +143,32 @@ const FollowCard = ({ userId }) => {
   const { user } = useAuthStore();
   const { handleFollowUser, isFollowing } = useFollowUser(userId);
   const { borderColor, subText, whiteBlack } = useColors();
+  const navigate = useNavigate();
+
+  const handleForward = () => {
+    navigate(`/@${userProfile?.username}`);
+  };
 
   if (!isLoading)
     return (
       <HStack my={5} alignItems={"flex-start"}>
         {/* user image */}
-        <Link to={`/@${userProfile?.username}`}>
-          <Avatar
-            w={"36px"}
-            h={"36px"}
-            src={userProfile.profilePicURL}
-            outline={`0.25px solid ${borderColor}`}
-          />
-        </Link>
+        <Avatar
+          onClick={handleForward}
+          w={"36px"}
+          h={"36px"}
+          src={userProfile.profilePicURL}
+          outline={`0.25px solid ${borderColor}`}
+        />
+
         <VStack ml={2} flex={1}>
           <HStack w={"full"} mb={1}>
-            <VStack flex={1} alignItems={"flex-start"} gap={0}>
+            <VStack
+              flex={1}
+              alignItems={"flex-start"}
+              gap={0}
+              onClick={handleForward}
+            >
               {/* user display name */}
               <Text as={"span"} fontSize={"15px"} fontWeight={"bold"}>
                 {userProfile.displayName}
@@ -168,6 +178,7 @@ const FollowCard = ({ userId }) => {
                 {userProfile.username}
               </Text>
             </VStack>
+
             {/* follow button */}
             {user.uid !== userId && (
               <Button
