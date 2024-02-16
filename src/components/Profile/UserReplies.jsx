@@ -7,7 +7,7 @@ import useColors from "../../hooks/useColors";
 const UserReplies = () => {
   const { isLoading, replied } = useGetUserReplies();
   const displayReplied = !isLoading && replied;
-  const { logo } = useColors();
+  const { subText } = useColors();
 
   if (isLoading)
     return (
@@ -24,7 +24,7 @@ const UserReplies = () => {
       {displayReplied ? (
         <FeedPosts threads={replied} />
       ) : (
-        <Text textAlign={"center"} mt={5} color={logo}>
+        <Text textAlign={"center"} mt={5} color={subText}>
           No replies yet.
         </Text>
       )}

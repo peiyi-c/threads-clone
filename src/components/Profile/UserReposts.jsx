@@ -7,7 +7,7 @@ import useColors from "../../hooks/useColors";
 const UserReposts = () => {
   const { isLoading, reposts } = useGetUserReposts();
   const displayReposts = !isLoading && reposts;
-  const { logo } = useColors();
+  const { subText } = useColors();
   if (isLoading)
     return (
       <>
@@ -23,7 +23,7 @@ const UserReposts = () => {
       {displayReposts ? (
         <FeedPosts threads={reposts} />
       ) : (
-        <Text textAlign={"center"} mt={5} color={logo}>
+        <Text textAlign={"center"} mt={5} color={subText}>
           No reposts yet.
         </Text>
       )}

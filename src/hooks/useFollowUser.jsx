@@ -17,6 +17,7 @@ const useFollowUser = (profileUserId) => {
   }, [user, profileUserId]);
 
   const handleFollowUser = async () => {
+    if (profileUserId === user.uid) return;
     setIsUpdating(true);
     try {
       // update data
@@ -39,7 +40,7 @@ const useFollowUser = (profileUserId) => {
           ...user,
           followings: user.followings.filter((uid) => uid !== profileUserId),
         });
-        if (userProfile) {
+        if (userProfile && userProfile.uid === profileUserId) {
           setUserProfile({
             ...userProfile,
             followers: userProfile.followers.filter((uid) => uid !== user.uid),
@@ -59,7 +60,7 @@ const useFollowUser = (profileUserId) => {
           ...user,
           followings: [...user.followings, profileUserId],
         });
-        if (userProfile) {
+        if (userProfile && userProfile.uid === profileUserId) {
           setUserProfile({
             ...userProfile,
             followers: [...userProfile.followers, user.uid],

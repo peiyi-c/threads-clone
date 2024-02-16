@@ -7,7 +7,7 @@ import useColors from "../../hooks/useColors";
 const UserThreads = () => {
   const { isLoading, threads } = useGetUserThreads();
   const displayThreads = !isLoading && threads.length;
-  const { logo } = useColors();
+  const { subText } = useColors();
   if (isLoading)
     return (
       <>
@@ -23,7 +23,7 @@ const UserThreads = () => {
       {displayThreads ? (
         <FeedPosts threads={threads} />
       ) : (
-        <Text textAlign={"center"} mt={5} color={logo}>
+        <Text textAlign={"center"} mt={5} color={subText}>
           No threads yet.
         </Text>
       )}

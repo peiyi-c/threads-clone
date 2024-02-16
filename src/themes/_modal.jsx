@@ -83,6 +83,31 @@ const modalStyle = {
         borderRadius: 0,
       },
     },
+    followers: (props) => ({
+      header: {
+        px: 0,
+        backgroundColor: mode("#ffffff", "#181818")(props),
+        borderRadius: { base: "0", sm: "18px 18px 0 0" },
+        color: mode("#000000", "#ffffff")(props),
+        fontSize: "16px",
+      },
+      dialogContainer: {},
+      dialog: {
+        h: { base: "100vh", sm: "auto" },
+        w: { base: "100vw" },
+        maxW: { md: "35rem" },
+        backgroundColor: "transparent",
+        "--modal-shadow": "none",
+      },
+      body: {
+        p: 0,
+        borderRadius: { base: "0", sm: "0 0 18px 18px" },
+      },
+      footer: {
+        p: 0,
+        borderRadius: { base: "0", sm: "0 0 18px 18px" },
+      },
+    }),
   },
 };
 

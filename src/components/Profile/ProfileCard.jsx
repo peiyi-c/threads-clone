@@ -13,18 +13,17 @@ import { Link } from "react-router-dom";
 import useColors from "../../hooks/useColors";
 import useGetProfileById from "../../hooks/useGetProfileById";
 import PropTypes from "prop-types";
+import ProfileFollowerModal from "./ProfileFollowerModal";
 
-const ProfileCard = ({ user, isLoading }) => {
+const ProfileCard = ({ userProfile, isLoading }) => {
   const { subText } = useColors();
-  const showDot = user?.followers?.length > 1 && user?.bioLink;
-  const { userProfile } = useGetProfileById(
-    user?.followers[user?.followers.length - 1] || "no-follower"
+  const { userProfile: user } = useGetProfileById(
+    userProfile?.followers[userProfile?.followers.length - 1] || "no-follower"
   );
   if (isLoading) return <ProfileCardSkeleton />;
-
   return (
     !isLoading &&
-    user && (
+    userProfile && (
       <VStack p={"16px 12px"} alignItems={"flex-start"}>
         <Flex
           w={"full"}
@@ -34,31 +33,24 @@ const ProfileCard = ({ user, isLoading }) => {
         >
           <Box>
             <Heading fontSize={"21px"} lineHeight={9}>
-              {user.displayName}
+              {userProfile.displayName}
             </Heading>
-            <Text lineHeight={5}>{user.username}</Text>
+            <Text lineHeight={5}>{userProfile.username}</Text>
           </Box>
           <Box ml={"auto"}>
-            <Avatar size={"lg"} src={user.profilePicURL} />
+            <Avatar size={"lg"} src={userProfile.profilePicURL} />
           </Box>
         </Flex>
-        <Text lineHeight={5}>{user.bioDescription}</Text>
+        <Text lineHeight={5}>{userProfile.bioDescription}</Text>
         <HStack mt={3} color={subText}>
-          {userProfile && (
-            <Avatar size={"xs"} src={userProfile?.profilePicURL} />
-          )}
-
-          <Text as={"span"}>
-            {user?.followers?.length}{" "}
-            {user?.followers?.length > 1 ? "Followers" : "Follower"}
-            {showDot && <Text as={"span"}> · </Text>}
-            <Link target="_blank" to={user.bioLink}>
-              {user.bioLink
-                .replace("https://www.", "")
-                .replace("http://www.", "")
-                .replace("www.", "")}
-            </Link>
-          </Text>
+          {user && <Avatar size={"xs"} src={user?.profilePicURL} />}
+          <ProfileFollowerModal userProfile={userProfile} />
+          <Link target="_blank" to={userProfile.bioLink}>
+            {userProfile.bioLink
+              .replace("https://www.", "")
+              .replace("http://www.", "")
+              .replace("www.", "")}
+          </Link>
         </HStack>
       </VStack>
     )
@@ -68,7 +60,7 @@ const ProfileCard = ({ user, isLoading }) => {
 export default ProfileCard;
 
 ProfileCard.propTypes = {
-  user: PropTypes.object,
+  userProfile: PropTypes.object,
   isLoading: PropTypes.bool,
 };
 

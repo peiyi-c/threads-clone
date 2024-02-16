@@ -1,6 +1,5 @@
 const tabsStyle = {
   baseStyle: (props) => ({
-    root: {},
     tab: {
       w: "100%",
     },
@@ -9,7 +8,6 @@ const tabsStyle = {
       borderColorBottom:
         props.colorMode === "light" ? "#00000026" : "#f3f5f726",
     },
-
     tabpanels: {},
     tabpanel: {},
   }),

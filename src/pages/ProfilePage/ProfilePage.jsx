@@ -40,7 +40,7 @@ const ProfilePage = () => {
   return (
     <>
       {/* Profile Card */}
-      {<ProfileCard user={userProfile} isLoading={isLoading} />}
+      {<ProfileCard userProfile={userProfile} isLoading={isLoading} />}
 
       {/* Button */}
       {!viewProfileAndUnauth && (
