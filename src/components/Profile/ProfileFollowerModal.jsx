@@ -38,8 +38,15 @@ const ProfileFollowerModal = ({ userProfile }) => {
 
   return (
     <>
-      <Text as={"span"} onClick={onOpen} cursor={"pointer"}>
-        {followersCount} {followersCount > 1 ? "Followers" : "Follower"}
+      <Text
+        as={"span"}
+        onClick={onOpen}
+        cursor={"pointer"}
+        _hover={{
+          textDecoration: "underline",
+        }}
+      >
+        {followersCount} {followersCount > 1 ? "followers" : "follower"}
         {showDot && <Text as={"span"}> · </Text>}{" "}
       </Text>
 
