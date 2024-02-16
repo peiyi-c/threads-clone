@@ -15,7 +15,7 @@ const FollowingPosts = () => {
           ))}
       </>
     );
-  if (!isLoading) return <FeedPosts threads={threads} />;
+  if (!isLoading && threads) return <FeedPosts threads={threads} />;
 };
 
 export default FollowingPosts;

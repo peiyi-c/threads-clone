@@ -48,7 +48,7 @@ const FeedPost = ({ thread }) => {
     navigate(`/@${userProfile.username}/post/${thread.id}`);
   };
 
-  if (thread)
+  if (thread && !isLoading)
     return (
       <>
         <Grid
@@ -57,21 +57,21 @@ const FeedPost = ({ thread }) => {
           templateRows={"21px 19px max-content max-content"}
         >
           {/* thread author avatar */}
-          {!isLoading && (
-            <Link to={`/@${userProfile.username}`}>
-              <Avatar
-                gridColumnStart={1}
-                gridColumnEnd={2}
-                gridRowStart={1}
-                gridRowEnd={3}
-                size="md"
-                src={userProfile?.profilePicURL}
-              />
-            </Link>
-          )}
+
+          <Link to={`/@${userProfile.username}`}>
+            <Avatar
+              gridColumnStart={1}
+              gridColumnEnd={2}
+              gridRowStart={1}
+              gridRowEnd={3}
+              size="md"
+              src={userProfile?.profilePicURL}
+            />
+          </Link>
+
           {/* thread author name */}
           <HStack justifyContent={"space-between"}>
-            {!isLoading && <FeedPostProfileName userProfile={userProfile} />}
+            <FeedPostProfileName userProfile={userProfile} />
 
             <HStack>
               {/* thread created at */}

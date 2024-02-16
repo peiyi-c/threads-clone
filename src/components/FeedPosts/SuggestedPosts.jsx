@@ -14,7 +14,7 @@ const SuggestedPosts = () => {
           ))}
       </>
     );
-  if (!isLoading && suggestedThreads)
+  if (!isLoading)
     return (
       <>
         {suggestedThreads.map((thread) => (
