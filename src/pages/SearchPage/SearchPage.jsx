@@ -30,11 +30,13 @@ const SearchPage = () => {
       />
       {/* suggested users */}
       {displaySuggestedUsers &&
-        suggestedUsers.map((user) => <UserCard key={user.uid} user={user} />)}
+        suggestedUsers.map((user) => (
+          <UserCard key={user.uid} profile={user} />
+        ))}
 
       {/* found user result */}
       {displayFoundUsers &&
-        users.map((user) => <UserCard key={user.uid} user={user} />)}
+        users.map((user) => <UserCard key={user.uid} profile={user} />)}
     </>
   );
 };
