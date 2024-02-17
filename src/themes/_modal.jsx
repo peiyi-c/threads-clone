@@ -38,8 +38,8 @@ const modalStyle = {
       },
       dialogContainer: {},
       dialog: {
-        h: { base: "100vh", md: "auto" },
-        w: { base: "100vw" },
+        h: { base: "100svh", md: "auto" },
+        w: { base: "100svw" },
         maxW: { md: "38.75rem" },
         backgroundColor: "transparent",
         "--modal-shadow": "none",
@@ -59,8 +59,8 @@ const modalStyle = {
       },
       dialogContainer: {},
       dialog: {
-        h: "100vh",
-        w: "100vw",
+        h: "100svh",
+        w: "100svw",
         backgroundColor: "transparent",
         "--modal-shadow": "none",
       },
@@ -93,8 +93,8 @@ const modalStyle = {
       },
       dialogContainer: {},
       dialog: {
-        h: { base: "100vh", sm: "auto" },
-        w: { base: "100vw" },
+        h: { base: "100svh", sm: "auto" },
+        w: { base: "100svw" },
         maxW: { md: "35rem" },
         backgroundColor: "transparent",
         "--modal-shadow": "none",
