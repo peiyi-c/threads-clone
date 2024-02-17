@@ -67,7 +67,7 @@ const modalStyle = {
       closeButton: {
         position: "absolute",
         left: "0.75rem",
-        m: "2rem",
+        m: "2rem 0.5rem",
         width: "44px",
         height: "44px",
         color: "#ffffff",

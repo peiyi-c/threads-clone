@@ -90,7 +90,7 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
                     onClick={handleImageOpen}
                     src={image.path}
                     display={"block"}
-                    maxH={"25rem"}
+                    maxH={{ base: "15rem", md: "20rem", lg: "25rem" }}
                     borderRadius={"18px"}
                     border={`1.5px solid ${imageBorder}`}
                   />
@@ -135,8 +135,8 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
               <Image
                 onClick={onOpen}
                 src={image.path}
-                objectFit={"cover"}
-                maxH={"25rem"}
+                objectFit={"contain"}
+                maxH={{ base: "15rem", md: "20rem", lg: "25rem" }}
                 borderRadius={"18px"}
                 border={`1.5px solid ${imageBorder}`}
               />

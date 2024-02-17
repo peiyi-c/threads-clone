@@ -99,10 +99,11 @@ const FeedPostSliderModal = ({
                       >
                         <Image
                           src={image.path}
-                          height={"80%"}
+                          height={"80svh"}
                           maxH={"50rem"}
                           maxW={"80vw"}
                           display={"block"}
+                          objectFit={"contain"}
                         />
                       </SwiperSlide>
                     ))}
@@ -134,6 +135,7 @@ const FeedPostSliderModal = ({
                   height={"80svh"}
                   maxH={"50rem"}
                   maxW={"80vw"}
+                  objectFit={"contain"}
                 />
               ))}
             </>
