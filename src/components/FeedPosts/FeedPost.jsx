@@ -12,7 +12,7 @@ import {
   SkeletonCircle,
   SkeletonText,
 } from "@chakra-ui/react";
-import { Reply, Share, UnLike, Like } from "../../assets/logos";
+import { Reply, UnLike, Like } from "../../assets/logos";
 import FeedPostSlider from "./FeedPostSlider";
 import { timeAgo } from "../../utils/timeAgo";
 import useGetProfileById from "../../hooks/useGetProfileById";
@@ -27,6 +27,7 @@ import {
   FeedPostMoreOther,
   FeedPostRepost,
   FeedPostProfileName,
+  FeedPostShare,
 } from "./FeedPostMenus";
 import useAuthStore from "../../store/authStore";
 import PropTypes from "prop-types";
@@ -130,9 +131,7 @@ const FeedPost = ({ thread }) => {
                 userProfile={userProfile}
               />
               {/* share button */}
-              <Button variant={"ghost"} size={"sm"}>
-                <Share />
-              </Button>
+              <FeedPostShare post={thread} type={"post"} />
             </HStack>
           </Box>
 

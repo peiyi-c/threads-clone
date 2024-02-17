@@ -578,42 +578,50 @@ Reposted.propTypes = {
   handleClick: PropTypes.func.isRequired,
 };
 
-export const Share = () => {
+export const Share = ({ handleClick }) => {
   const { logo } = useColors();
   return (
-    <svg
-      aria-label="Share"
-      role="img"
-      viewBox="0 0 24 24"
-      style={{
-        fill: "currentColor",
-        height: 20,
-        width: 20,
-      }}
-    >
-      <title>{"Share"}</title>
-      <line
+    <Button variant={"ghost"} size={"sm"} onClick={handleClick}>
+      <svg
+        aria-label="Share"
+        role="img"
+        viewBox="0 0 24 24"
         style={{
-          fill: "transparent",
-          stroke: `${logo}`,
-          strokeWidth: 1.7,
+          fill: "currentColor",
+          height: 20,
+          width: 20,
+          marginTop: "4px",
         }}
-        x1={22}
-        x2={9.218}
-        y1={3}
-        y2={10.083}
-      />
-      <polygon
-        style={{
-          fill: "transparent",
-          stroke: `${logo}`,
-          strokeWidth: 1.7,
-        }}
-        points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334"
-      />
-    </svg>
+      >
+        <title>{"Share"}</title>
+        <line
+          style={{
+            fill: "transparent",
+            stroke: `${logo}`,
+            strokeWidth: 1.7,
+          }}
+          x1={22}
+          x2={9.218}
+          y1={3}
+          y2={10.083}
+        />
+        <polygon
+          style={{
+            fill: "transparent",
+            stroke: `${logo}`,
+            strokeWidth: 1.7,
+          }}
+          points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334"
+        />
+      </svg>
+    </Button>
   );
 };
+
+Share.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+};
+
 export const Follow = () => {
   const { logo } = useColors();
   return (

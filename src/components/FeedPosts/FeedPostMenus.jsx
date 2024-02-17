@@ -16,13 +16,14 @@ import {
   Avatar,
   HStack,
 } from "@chakra-ui/react";
-import { More, Repost, Reposted } from "../../assets/logos";
+import { More, Repost, Reposted, Share } from "../../assets/logos";
 import FeedPostMoreSelfAlert from "./FeedPostMoreSelfAlert";
 import useFollowUser from "../../hooks/useFollowUser";
 import useRepostPost from "../../hooks/useRepostPost";
 import PropTypes from "prop-types";
 import useColors from "../../hooks/useColors";
 import useGetProfileById from "../../hooks/useGetProfileById";
+import useShowToast from "../../hooks/useShowToast";
 
 export const FeedPostMoreSelf = ({ thread, reply }) => {
   const { onOpen, isOpen, onClose } = useDisclosure();
@@ -311,4 +312,58 @@ export const FeedPostProfileName = ({ userProfile, isLoading }) => {
 FeedPostProfileName.propTypes = {
   userProfile: PropTypes.object,
   isLoading: PropTypes.bool,
+};
+
+export const FeedPostShare = ({ post, type }) => {
+  const buttonRef = useRef(null);
+  const { userProfile } = useGetProfileById(post.createdBy);
+  const textToCopy = `https://threads-clone-silk-five.vercel.app/@${userProfile?.username}/${type}/${post.id}`;
+  const showToast = useShowToast();
+  const handleClick = () => {
+    buttonRef.current.click();
+  };
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(textToCopy);
+    showToast("Success", "copied!", "success");
+  };
+
+  return (
+    <Grid
+      gridTemplateColumns={"1fr"}
+      gridTemplateRows={"1fr"}
+      alignItems={"center"}
+      justifyItems={"end"}
+      w={"2rem"}
+      zIndex={0}
+    >
+      {/* Share Menu Icon */}
+      <GridItem
+        colStart={1}
+        colEnd={2}
+        rowStart={1}
+        rowEnd={1}
+        zIndex={"dropdown"}
+      >
+        <Share handleClick={handleClick} />
+      </GridItem>
+
+      {/* Copy List */}
+      <GridItem colStart={1} colEnd={2} rowStart={1} rowEnd={1}>
+        <Menu closeOnSelect={true} size={"sm"}>
+          <MenuButton ref={buttonRef} opacity={0} aria-hidden></MenuButton>
+          <MenuList minW="0" p={2} w={"fit-content"}>
+            <MenuItem hidden aria-hidden></MenuItem>
+            <MenuItem onClick={handleCopyLink}>
+              <Text>Copy link</Text>
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      </GridItem>
+    </Grid>
+  );
+};
+
+FeedPostShare.propTypes = {
+  post: PropTypes.object,
+  type: PropTypes.string,
 };
