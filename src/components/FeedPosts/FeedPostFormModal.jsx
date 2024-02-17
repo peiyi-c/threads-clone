@@ -275,7 +275,7 @@ const ModalBodySub = ({ user, edit }) => {
 
 ModalBodySub.propTypes = {
   user: PropTypes.object,
-  edit: PropTypes.bool,
+  edit: PropTypes.number,
 };
 
 // const FeedPostComment = ({ user, MIN_TEXTAREA_HEIGHT }) => {
