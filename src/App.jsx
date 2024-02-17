@@ -10,9 +10,10 @@ import SearchPage from "./pages/SearchPage/SearchPage";
 import ActivityPage from "./pages/ActivityPage/ActivityPage";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
-import ThreadPage from "./pages/ThreadPage/ThreadPage";
+import ThreadPage from "./pages/PostPage/ThreadPage";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
+import ReplyPage from "./pages/PostPage/ReplyPage";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             {/* for authUser and !authUser */}
             <Route path="/:ausername" element={<ProfilePage />} />
             <Route path="/:ausername/post/:postId" element={<ThreadPage />} />
+            <Route path="/:ausername/reply/:replyId" element={<ReplyPage />} />
           </Route>
           {/* only for !authUser */}
           <Route element={<PublicRoute />}>
