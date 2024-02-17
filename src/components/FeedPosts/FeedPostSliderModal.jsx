@@ -131,7 +131,7 @@ const FeedPostSliderModal = ({
                 <Image
                   src={image.path}
                   key={image.id}
-                  height={"80vh"}
+                  height={"80svh"}
                   maxH={"50rem"}
                   maxW={"80vw"}
                 />
