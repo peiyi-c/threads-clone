@@ -26,7 +26,7 @@ const Header = () => {
     >
       <Box h={{ base: "60px", md: "74px" }}>
         <Grid
-          templateColumns={"1fr  50vw 1fr"}
+          templateColumns={{ base: "repeat(3, 1fr)", md: "1fr 50% 1fr" }}
           h={"full"}
           w={"full"}
           alignContent={"stretch"}
