@@ -21,6 +21,9 @@ const useDeleteReply = () => {
     try {
       setIsDeleting(true);
 
+      //  user
+      const userRef = doc(firestore, "users", user.uid);
+
       // delete selected reply
       await deleteDoc(doc(firestore, "replies", reply.id));
       // * when deleting reply under thread
@@ -40,6 +43,10 @@ const useDeleteReply = () => {
         await updateDoc(threadRef, {
           replies: arrayRemove(reply.id),
           repliedBy: arrayRemove(reply.createdBy),
+        });
+        // update user
+        await updateDoc(userRef, {
+          replies: arrayRemove(reply.threadId),
         });
       }
 
@@ -61,13 +68,11 @@ const useDeleteReply = () => {
           replies: arrayRemove(reply.id),
           repliedBy: arrayRemove(reply.createdBy),
         });
+        // update user
+        await updateDoc(userRef, {
+          replies: arrayRemove(reply.replyId),
+        });
       }
-
-      // update user
-      const userRef = doc(firestore, "users", user.uid);
-      await updateDoc(userRef, {
-        replies: arrayRemove(reply.id),
-      });
 
       // update store
       if (reply?.threadId) {
