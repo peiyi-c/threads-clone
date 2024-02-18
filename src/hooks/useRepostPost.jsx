@@ -53,7 +53,6 @@ const useRepostPost = (post, type) => {
       }
     } catch (error) {
       showToast("Error", error.message, "error");
-      console.log(error.message);
     } finally {
       setIsLoading(false);
     }

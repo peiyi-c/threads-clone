@@ -47,7 +47,6 @@ const useGetUserReposts = () => {
         }
       } catch (error) {
         showToast("Error", error.message, "error");
-        console.log(error.message);
       } finally {
         setIsLoading(false);
       }
