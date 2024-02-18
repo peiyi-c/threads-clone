@@ -290,18 +290,19 @@ export const FeedPostProfileName = ({ userProfile, isLoading }) => {
                         {followersCount > 1 ? "followers" : "follower"}
                       </Text>
                     </HStack>
-                    {/* Follow Button */}
-                    <Button
-                      onClick={handleFollowUser}
-                      w={"full"}
-                      variant={isFollowing ? "squareOutline" : "square"}
-                      fontSize={"15px"}
-                      mt={5}
-                    >
-                      {isFollowing ? "Unfollow" : "Follow"}
-                    </Button>
                   </VStack>
                 </MenuItem>
+                {/* Follow Button */}
+                <VStack>
+                  <Button
+                    onClick={handleFollowUser}
+                    variant={isFollowing ? "squareOutline" : "square"}
+                    w={"90%"}
+                    fontSize={"15px"}
+                  >
+                    {isFollowing ? "Unfollow" : "Follow"}
+                  </Button>
+                </VStack>
               </MenuList>
             </>
           )}
@@ -353,9 +354,7 @@ export const FeedPostShare = ({ post, type }) => {
           <MenuButton ref={buttonRef} opacity={0} aria-hidden></MenuButton>
           <MenuList minW="0" p={2} w={"fit-content"}>
             <MenuItem hidden aria-hidden></MenuItem>
-            <MenuItem onClick={handleCopyLink}>
-              <Text>Copy link</Text>
-            </MenuItem>
+            <MenuItem onClick={handleCopyLink}>Copy link</MenuItem>
           </MenuList>
         </Menu>
       </GridItem>
