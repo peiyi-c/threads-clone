@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import useGetReplyById from "../../hooks/useGetReplyById";
 import FeedPostReply from "../../components/FeedPosts/FeedPostReply";
-import useGetReplyReplies from "../../hooks/useGetReplyReplies";
+//import useGetReplyReplies from "../../hooks/useGetReplyReplies";
 
 const ReplyPage = () => {
   const { pathname } = useLocation();
@@ -9,8 +9,8 @@ const ReplyPage = () => {
     pathname.indexOf("/reply/") + "/reply/".length
   );
   const { isLoading, reply } = useGetReplyById(replyId);
-  const { replies } = useGetReplyReplies(replyId);
-  console.log(replies);
+  //const { replies } = useGetReplyReplies(replyId);
+
   return (
     <>
       {/* Reply Post & Reply Replies */}
