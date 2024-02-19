@@ -35,8 +35,6 @@ const useSignupWithEmailAndPassword = () => {
     if (!qSnapshot.empty) {
       showToast("Error", "Username already exists", "error");
       return;
-    } else {
-      showToast("Loading", "Username validated!", "loading");
     }
     // check display name field
     const qDisplay = query(usersRef, where("displayName", "==", displayName));
@@ -44,8 +42,6 @@ const useSignupWithEmailAndPassword = () => {
     if (!qDisplaySnapshot.empty) {
       showToast("Error", "Display name already exists", "error");
       return;
-    } else {
-      showToast("Loading", "Display name validated!", "loading");
     }
     try {
       // create new user
@@ -79,7 +75,7 @@ const useSignupWithEmailAndPassword = () => {
           hides: [],
           notifications: [],
         };
-        showToast("Loading", "Setting up your data...", "loading");
+
         await setDoc(doc(firestore, "users", newUser.user.uid), userDoc);
         navigate("/");
         loginUser(userDoc);
