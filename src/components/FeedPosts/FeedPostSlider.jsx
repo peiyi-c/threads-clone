@@ -43,7 +43,6 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
     setClickedImage(Number(e.target.dataset.image));
     onOpen();
   };
-
   return (
     <>
       {useSwiper ? (
@@ -77,7 +76,7 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
               navigation={true}
               scrollbar={{ draggable: true }}
             >
-              {images.map((image, idx) => (
+              {images.map((image) => (
                 <SwiperSlide
                   key={image.id}
                   position={"relative"}
@@ -85,15 +84,34 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
                     width: "auto",
                   }}
                 >
-                  <Image
-                    data-image={idx}
-                    onClick={handleImageOpen}
-                    src={image.path}
-                    display={"block"}
-                    maxH={{ base: "15rem", md: "20rem", lg: "25rem" }}
-                    borderRadius={"18px"}
-                    border={`1.5px solid ${imageBorder}`}
-                  />
+                  {image.type?.includes("image") ? (
+                    <Image
+                      data-image={image.id}
+                      onClick={handleImageOpen}
+                      src={image.path}
+                      display={"block"}
+                      maxH={{ base: "15rem", md: "20rem", lg: "25rem" }}
+                      borderRadius={"18px"}
+                      border={`1.5px solid ${imageBorder}`}
+                    />
+                  ) : image.type?.includes("video") ? (
+                    <video
+                      style={{
+                        height: "auto",
+                        maxHeight: "20rem",
+                        objectFit: "cover",
+                        borderRadius: "18px",
+                        border: `1.5px solid ${imageBorder}`,
+                      }}
+                      muted
+                      controls
+                      type={image.type}
+                    >
+                      <source src={image.path} />
+                    </video>
+                  ) : (
+                    ""
+                  )}
                   {isEdit && (
                     <CloseButton
                       size={"sm"}
@@ -132,14 +150,34 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
         <HStack justifyContent={"center"}>
           {images.map((image) => (
             <Box key={image.id} position={"relative"}>
-              <Image
-                onClick={onOpen}
-                src={image.path}
-                objectFit={"contain"}
-                maxH={{ base: "15rem", md: "20rem", lg: "25rem" }}
-                borderRadius={"18px"}
-                border={`1.5px solid ${imageBorder}`}
-              />
+              {image.type?.includes("image") ? (
+                <Image
+                  onClick={onOpen}
+                  src={image.path}
+                  objectFit={"contain"}
+                  maxH={{ base: "15rem", md: "20rem", lg: "25rem" }}
+                  borderRadius={"18px"}
+                  border={`1.5px solid ${imageBorder}`}
+                />
+              ) : image.type?.includes("video") ? (
+                <video
+                  style={{
+                    height: "auto",
+                    maxHeight: "20rem",
+                    objectFit: "cover",
+                    borderRadius: "18px",
+                    border: `1.5px solid ${imageBorder}`,
+                  }}
+                  muted
+                  controls
+                  type={image.type}
+                >
+                  <source src={image.path} />
+                </video>
+              ) : (
+                ""
+              )}
+
               {isEdit && (
                 <CloseButton
                   size={"sm"}

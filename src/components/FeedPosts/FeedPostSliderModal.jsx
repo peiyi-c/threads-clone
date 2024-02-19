@@ -97,14 +97,32 @@ const FeedPostSliderModal = ({
                           justifyContent: "center",
                         }}
                       >
-                        <Image
-                          src={image.path}
-                          height={"80svh"}
-                          maxH={"50rem"}
-                          maxW={"80vw"}
-                          display={"block"}
-                          objectFit={"contain"}
-                        />
+                        {image.type?.includes("image") ? (
+                          <Image
+                            src={image.path}
+                            height={"80svh"}
+                            maxH={"50rem"}
+                            maxW={"80vw"}
+                            display={"block"}
+                            objectFit={"contain"}
+                          />
+                        ) : image.type?.includes("video") ? (
+                          <video
+                            style={{
+                              height: "auto",
+                              maxHeight: "20rem",
+                              objectFit: "cover",
+                              borderRadius: "18px",
+                            }}
+                            muted
+                            controls
+                            type={image.type}
+                          >
+                            <source src={image.path} />
+                          </video>
+                        ) : (
+                          ""
+                        )}
                       </SwiperSlide>
                     ))}
                   </Swiper>
@@ -128,16 +146,32 @@ const FeedPostSliderModal = ({
             </>
           ) : (
             <>
-              {images.map((image) => (
+              {images[0].image.type?.includes("image") ? (
                 <Image
-                  src={image.path}
-                  key={image.id}
+                  src={images[0].image.path}
+                  key={images[0].image.id}
                   height={"80svh"}
                   maxH={"50rem"}
                   maxW={"80vw"}
                   objectFit={"contain"}
                 />
-              ))}
+              ) : images[0].image.type?.includes("video") ? (
+                <video
+                  style={{
+                    height: "auto",
+                    maxHeight: "20rem",
+                    objectFit: "cover",
+                    borderRadius: "18px",
+                  }}
+                  muted
+                  controls
+                  type={images[0].image.type}
+                >
+                  <source src={images[0].image.path} />
+                </video>
+              ) : (
+                ""
+              )}
             </>
           )}
         </ModalBody>

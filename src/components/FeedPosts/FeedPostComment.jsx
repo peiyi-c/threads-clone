@@ -43,7 +43,8 @@ const FeedPostComment = ({
 
   const { onOpen, isOpen, onClose } = useDisclosure();
   const { user } = useAuthStore();
-  const { handleImgChange, selectedFile, setSelectedFile } = usePreviewImg();
+  const { handleImgChange, selectedFile, setSelectedFile, type } =
+    usePreviewImg();
   const { isUpdating, handleFeedPostReply } = useReplyThread();
   const { isCommenting, handleReplyReply } = useReplyReply();
   const { blackWhite, whiteBlack, subText } = useColors();
@@ -61,11 +62,14 @@ const FeedPostComment = ({
   }, [text]);
 
   useEffect(() => {
-    if (selectedFile) {
-      setImages([...images, { id: crypto.randomUUID(), path: selectedFile }]);
+    if (selectedFile && type) {
+      setImages([
+        ...images,
+        { id: crypto.randomUUID(), path: selectedFile, type },
+      ]);
       setSelectedFile(null);
     }
-  }, [setSelectedFile, selectedFile, images]);
+  }, [setSelectedFile, selectedFile, images, type]);
 
   const handleInputChange = (e) => {
     setText(e.target.value);
