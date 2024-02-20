@@ -101,8 +101,8 @@ const FeedPostSliderModal = ({
                           <Image
                             src={image.path}
                             height={"80svh"}
-                            maxH={"50rem"}
-                            maxW={"80vw"}
+                            maxH={{ base: "auto", sm: "50rem" }}
+                            maxW={{ base: "100svw", sm: "80svw" }}
                             display={"block"}
                             objectFit={"contain"}
                           />
@@ -146,16 +146,16 @@ const FeedPostSliderModal = ({
             </>
           ) : (
             <>
-              {images[0].image.type?.includes("image") ? (
+              {images[0].type.includes("image") ? (
                 <Image
-                  src={images[0].image.path}
-                  key={images[0].image.id}
+                  src={images[0].path}
+                  key={images[0].id}
                   height={"80svh"}
-                  maxH={"50rem"}
-                  maxW={"80vw"}
+                  maxH={{ base: "auto", sm: "50rem" }}
+                  maxW={{ base: "100svw", sm: "80svw" }}
                   objectFit={"contain"}
                 />
-              ) : images[0].image.type?.includes("video") ? (
+              ) : images[0].type.includes("video") ? (
                 <video
                   style={{
                     height: "auto",
@@ -165,9 +165,9 @@ const FeedPostSliderModal = ({
                   }}
                   muted
                   controls
-                  type={images[0].image.type}
+                  type={images[0].type}
                 >
-                  <source src={images[0].image.path} />
+                  <source src={images[0].path} />
                 </video>
               ) : (
                 ""
