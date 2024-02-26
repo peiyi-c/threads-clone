@@ -20,7 +20,7 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
   const [clickedImage, setClickedImage] = useState();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const swiperRef = useRef(null);
-  const useSwiper = images?.length >= 2;
+  const useSwiper = images?.length > 2;
   const { imageBorder } = useColors();
 
   const handlePrevClick = () => {
@@ -65,7 +65,7 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
               <Continue />
             </Button>
 
-            {/* images from 2, Swiper */}
+            {/* images from 3, Swiper */}
             <Swiper
               slidesPerView={"auto"}
               modules={[Navigation]}
@@ -83,6 +83,7 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
                   style={{
                     width: "auto",
                   }}
+                  justifyContent={"flex-start"}
                 >
                   {image.type?.includes("image") ? (
                     <Image
@@ -147,7 +148,7 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
           </HStack>
         </>
       ) : (
-        <HStack justifyContent={"center"}>
+        <HStack justifyContent={"flex-start"}>
           {images.map((image) => (
             <Box key={image.id} position={"relative"}>
               {image.type?.includes("image") ? (
