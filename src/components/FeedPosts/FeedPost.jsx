@@ -31,6 +31,8 @@ import {
 } from "./FeedPostMenus";
 import useAuthStore from "../../store/authStore";
 import PropTypes from "prop-types";
+import FeedQuote from "./FeedQuote";
+import useColors from "../../hooks/useColors";
 
 const FeedPost = ({ thread }) => {
   const { isLoading, userProfile } = useGetProfileById(thread?.createdBy);
@@ -40,22 +42,23 @@ const FeedPost = ({ thread }) => {
   const { onOpen, isOpen, onClose } = useDisclosure();
   const { user } = useAuthStore();
 
-  const threadLength =
+  const repliedByLength = thread?.repliedBy?.length;
+  const replyLength =
     thread?.replies && thread?.replies.length > 0 ? thread.replies.length : "";
-  const showDot = threadLength && likes > 0;
+  const showDot = replyLength && likes > 0;
+  const { imageBorder } = useColors();
 
   const openThreadPage = () => {
     setContent("thread");
     navigate(`/@${userProfile.username}/post/${thread.id}`);
   };
-
   if (thread && !isLoading)
     return (
       <>
         <Grid
           my={"12px"}
           templateColumns={"48px minmax(0, 1fr)"}
-          templateRows={"21px 19px max-content max-content"}
+          templateRows={"21px 19px repeat(3, max-content)"}
         >
           {/* thread author avatar */}
 
@@ -112,9 +115,25 @@ const FeedPost = ({ thread }) => {
                 <FeedPostSlider images={thread.mediaURLs} isEdit={false} />
               </Box>
             )}
+            {/* quote */}
+            {thread?.quoting && (
+              <Box
+                my={2}
+                p={"0.5rem 1.15rem"}
+                border={`${imageBorder} solid 1px`}
+                borderRadius={"18px"}
+                gridColumnStart={2}
+                gridRowStart={3}
+              >
+                <FeedQuote
+                  postId={thread.quoting.postId}
+                  createdBy={thread.quoting.createdBy}
+                />
+              </Box>
+            )}
 
             {/* buttons */}
-            <HStack my={0.5}>
+            <HStack my={0.5} gridRowStart={thread?.quoting ? 3 : 4}>
               {/*  (un)like button */}
               <Button onClick={handleLikeThread} variant={"ghost"} size={"sm"}>
                 {isLiked ? <Like /> : <UnLike />}
@@ -136,7 +155,7 @@ const FeedPost = ({ thread }) => {
           </Box>
 
           {/* thread line */}
-          {threadLength && (
+          {replyLength && (
             <Flex
               mt={"18px"}
               mb={"6px"}
@@ -159,15 +178,15 @@ const FeedPost = ({ thread }) => {
             gridRowEnd={5}
           >
             {/* 1 reply */}
-            {thread.repliedBy && thread.repliedBy.length === 1 && (
+            {repliedByLength === 1 && (
               <AvatarGroup1 repliedBy={thread.repliedBy} />
             )}
             {/* 2 replies */}
-            {thread.repliedBy && thread.repliedBy.length === 2 && (
+            {repliedByLength === 2 && (
               <AvatarGroup2 repliedBy={thread.repliedBy} />
             )}
             {/* 3-10 replies */}
-            {thread.repliedBy && thread.repliedBy.length >= 3 && (
+            {repliedByLength >= 3 && (
               <AvatarGroup3 repliedBy={thread.repliedBy} />
             )}
           </Flex>
@@ -178,22 +197,17 @@ const FeedPost = ({ thread }) => {
             gridColumnStart={2}
             gridColumnEnd={3}
             gridRowStart={4}
-            gridRowEnd={5}
             alignSelf={"center"}
             opacity={0.5}
           >
             <Text as={"span"} cursor={"pointer"} onClick={openThreadPage}>
-              {threadLength}{" "}
-              {thread.replies && thread.replies?.length > 1
-                ? "replies"
-                : thread.replies?.length > 0
-                ? "reply"
-                : ""}
+              {replyLength}{" "}
+              {replyLength > 1 ? "replies" : replyLength > 0 ? "reply" : ""}
             </Text>
             {showDot && " · "}
             <Text as={"span"} cursor={"pointer"}>
-              {likes && likes > 0 ? likes : ""}{" "}
-              {likes > 1 ? "likes" : likes > 0 ? "like" : ""}
+              {likes || ""} {likes > 1 && "likes"}
+              {likes === 1 && "like"}
             </Text>
           </Text>
         </Grid>

@@ -24,6 +24,7 @@ import PropTypes from "prop-types";
 import useColors from "../../hooks/useColors";
 import useGetProfileById from "../../hooks/useGetProfileById";
 import useShowToast from "../../hooks/useShowToast";
+import FeedPostFormModal from "./FeedPostFormModal";
 
 export const FeedPostMoreSelf = ({ thread, reply }) => {
   const { onOpen, isOpen, onClose } = useDisclosure();
@@ -142,60 +143,73 @@ FeedPostMoreOther.propTypes = {
 export const FeedPostRepost = ({ post, type, userProfile, user }) => {
   const buttonRef = useRef(null);
   const { handleRepostPost, isReposted } = useRepostPost(post, type);
-
+  const { onOpen, isOpen, onClose } = useDisclosure();
   const handleClick = () => {
     buttonRef.current.click();
   };
-  return (
-    <Grid
-      gridTemplateColumns={"1fr"}
-      gridTemplateRows={"1fr"}
-      alignItems={"center"}
-      justifyItems={"end"}
-      w={"2rem"}
-      zIndex={0}
-    >
-      {/* More Menu Icon */}
-      <GridItem
-        colStart={1}
-        colEnd={2}
-        rowStart={1}
-        rowEnd={1}
-        zIndex={"dropdown"}
-      >
-        {isReposted ? (
-          <Reposted handleClick={handleClick} />
-        ) : (
-          <Repost handleClick={handleClick} />
-        )}
-      </GridItem>
 
-      {/*  Menu List */}
-      <GridItem colStart={1} colEnd={2} rowStart={1} rowEnd={1}>
-        <Menu closeOnSelect={true} size={"sm"}>
-          <MenuButton ref={buttonRef} opacity={0} aria-hidden></MenuButton>
-          <MenuList minW="0" p={2} w={"fit-content"}>
-            <MenuItem hidden aria-hidden></MenuItem>
-            {isReposted ? (
-              <MenuItem onClick={handleRepostPost}>
-                <Text>Remove</Text>
-              </MenuItem>
-            ) : (
+  return (
+    <>
+      <Grid
+        gridTemplateColumns={"1fr"}
+        gridTemplateRows={"1fr"}
+        alignItems={"center"}
+        justifyItems={"end"}
+        w={"2rem"}
+        zIndex={0}
+      >
+        {/* More Menu Icon */}
+        <GridItem
+          colStart={1}
+          colEnd={2}
+          rowStart={1}
+          rowEnd={1}
+          zIndex={"dropdown"}
+        >
+          {isReposted ? (
+            <Reposted handleClick={handleClick} />
+          ) : (
+            <Repost handleClick={handleClick} />
+          )}
+        </GridItem>
+
+        {/*  Menu List */}
+        <GridItem colStart={1} colEnd={2} rowStart={1} rowEnd={1}>
+          <Menu closeOnSelect={true} size={"sm"}>
+            <MenuButton ref={buttonRef} opacity={0} aria-hidden></MenuButton>
+            <MenuList minW="0" p={2} w={"fit-content"}>
+              <MenuItem hidden aria-hidden></MenuItem>
+              {isReposted ? (
+                <MenuItem onClick={handleRepostPost}>
+                  <Text>Remove</Text>
+                </MenuItem>
+              ) : (
+                <MenuItem
+                  onClick={handleRepostPost}
+                  isDisabled={user?.uid === userProfile?.uid}
+                >
+                  <Text>Repost</Text>
+                </MenuItem>
+              )}
+              <MenuDivider />
               <MenuItem
-                onClick={handleRepostPost}
+                onClick={onOpen}
                 isDisabled={user?.uid === userProfile?.uid}
               >
-                <Text>Repost</Text>
+                <Text>Quote</Text>
               </MenuItem>
-            )}
-            <MenuDivider />
-            <MenuItem isDisabled={user?.uid === userProfile?.uid}>
-              <Text>Quote</Text>
-            </MenuItem>
-          </MenuList>
-        </Menu>
-      </GridItem>
-    </Grid>
+            </MenuList>
+          </Menu>
+        </GridItem>
+      </Grid>
+      {isOpen ? (
+        <FeedPostFormModal
+          onClosePost={onClose}
+          isOpenPost={isOpen}
+          quote={post}
+        />
+      ) : null}
+    </>
   );
 };
 FeedPostRepost.propTypes = {

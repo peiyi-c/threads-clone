@@ -23,7 +23,7 @@ const useCreateThread = () => {
   const { userProfile, addThread } = useUserProfileStore();
   const showToast = useShowToast();
 
-  const handleCreatePost = async (text, images) => {
+  const handleCreatePost = async (text, images, quote) => {
     if (isLoading) return;
     if (!text && !images) {
       showToast("Error", "Please add text or image.", "error");
@@ -47,6 +47,10 @@ const useCreateThread = () => {
       //   replies: [],
       //   hideLikes: false,
     };
+
+    if (quote && quote.id && quote.createdBy) {
+      newThread.quoting = { postId: quote.id, createdBy: quote.createdBy };
+    }
 
     try {
       // upload thread

@@ -33,8 +33,10 @@ const FeedPostReply = ({ reply }) => {
   const { onOpen, isOpen, onClose } = useDisclosure();
   const { replies } = useGetReplyReplies(reply.id);
   const { user } = useAuthStore();
-  const threadLength =
-    reply.replies && reply.replies?.length > 0 ? reply?.replies.length : "";
+
+  const repliedByLength = reply?.repliedBy?.length;
+  const replyLength = reply?.replies?.length || "";
+  const showDot = replies && likes > 0;
 
   if (reply && !isLoading)
     return (
@@ -46,7 +48,6 @@ const FeedPostReply = ({ reply }) => {
           columnGap={"0.65rem"}
         >
           {/* thread author avatar */}
-
           <Avatar
             gridColumnStart={1}
             gridColumnEnd={2}
@@ -148,15 +149,15 @@ const FeedPostReply = ({ reply }) => {
             gridRowEnd={5}
           >
             {/* 1 reply */}
-            {reply.repliedBy && reply.repliedBy.length === 1 && (
+            {repliedByLength === 1 && (
               <AvatarGroup1 repliedBy={reply.repliedBy} />
             )}
             {/* 2 replies */}
-            {reply.repliedBy && reply.repliedBy.length === 2 && (
+            {repliedByLength === 2 && (
               <AvatarGroup2 repliedBy={reply.repliedBy} />
             )}
             {/* 3-10 replies */}
-            {reply.repliedBy && reply.repliedBy.length >= 3 && (
+            {repliedByLength >= 3 && (
               <AvatarGroup3 repliedBy={reply.repliedBy} />
             )}
           </Flex>
@@ -172,16 +173,13 @@ const FeedPostReply = ({ reply }) => {
             opacity={0.5}
           >
             <Text as={"span"} cursor={"pointer"}>
-              {threadLength}{" "}
-              {reply.replies && reply.replies?.length > 1
-                ? "replies · "
-                : reply.replies?.length > 0
-                ? "reply · "
-                : ""}
-            </Text>{" "}
+              {replyLength}{" "}
+              {replyLength > 1 ? "replies" : replyLength > 0 ? "reply" : ""}
+            </Text>
+            {showDot && " · "}
             <Text as={"span"} cursor={"pointer"}>
-              {likes && likes > 0 ? likes : ""}{" "}
-              {likes > 1 ? "likes" : likes > 0 ? "like" : ""}
+              {likes || ""} {likes > 1 && "likes"}
+              {likes === 1 && "like"}
             </Text>
           </Text>
         </Grid>

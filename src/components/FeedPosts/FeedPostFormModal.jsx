@@ -21,6 +21,7 @@ import {
 } from "@chakra-ui/react";
 import { AttachMedia, Poll, Tag } from "../../assets/logos";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import FeedQuote from "./FeedQuote";
 import FeedPostFormModalAlert from "./FeedPostFormModalAlert";
 import useAuthStore from "../../store/authStore";
 import usePreviewImg from "../../hooks/usePreviewImg";
@@ -29,7 +30,7 @@ import useCreateThread from "../../hooks/useCreateThread";
 import useColors from "../../hooks/useColors";
 import PropTypes from "prop-types";
 
-const FeedPostFormModal = ({ onClosePost, isOpenPost }) => {
+const FeedPostFormModal = ({ onClosePost, isOpenPost, quote }) => {
   const [text, setText] = useState("");
   const [images, setImages] = useState([]);
   const textRef = useRef();
@@ -42,6 +43,7 @@ const FeedPostFormModal = ({ onClosePost, isOpenPost }) => {
   const { blackWhite, whiteBlack, subText } = useColors();
 
   const MIN_TEXTAREA_HEIGHT = 16;
+  const { imageBorder } = useColors();
 
   useLayoutEffect(() => {
     if (text) {
@@ -74,7 +76,7 @@ const FeedPostFormModal = ({ onClosePost, isOpenPost }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await handleCreatePost(text, images);
+    await handleCreatePost(text, images, quote);
     setText("");
     setImages([]);
     onClosePost();
@@ -169,7 +171,7 @@ const FeedPostFormModal = ({ onClosePost, isOpenPost }) => {
                   gridColumnStart={1}
                   gridColumnEnd={2}
                   gridRowStart={2}
-                  gridRowEnd={4}
+                  gridRowEnd={quote ? 5 : 4}
                 >
                   <Divider orientation="vertical" variant={"vertical"} />
                 </Flex>
@@ -202,6 +204,18 @@ const FeedPostFormModal = ({ onClosePost, isOpenPost }) => {
                   hidden
                   onChange={handleImgChange}
                 />
+                {/* if this post is a quote */}
+                {quote && (
+                  <Box
+                    my={2}
+                    p={"0.5rem 1.15rem"}
+                    border={`${imageBorder} solid 1px`}
+                    borderRadius={"18px"}
+                    gridColumnStart={2}
+                  >
+                    <FeedQuote postId={quote.id} createdBy={quote.createdBy} />
+                  </Box>
+                )}
                 <ModalBodySub user={user} edit={text.trim().length} />
               </Grid>
             </ModalBody>
@@ -251,6 +265,7 @@ const FeedPostFormModal = ({ onClosePost, isOpenPost }) => {
 FeedPostFormModal.propTypes = {
   onClosePost: PropTypes.func.isRequired,
   isOpenPost: PropTypes.bool.isRequired,
+  quote: PropTypes.object,
 };
 
 export default FeedPostFormModal;
