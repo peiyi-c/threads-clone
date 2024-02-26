@@ -38,7 +38,9 @@ const GeneralLayout = () => {
           <Outlet />
         </Container>
       </main>
-      <Footer />
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 };

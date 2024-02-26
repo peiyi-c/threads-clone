@@ -3,19 +3,16 @@ import Navigation from "../Navigation/Navigation";
 
 const Footer = () => {
   return (
-    <footer
-      style={{
-        width: "100%",
-        position: "fixed",
-        bottom: 0,
-      }}
+    <Box
+      w={"full"}
+      h={{ base: "60px", md: "74px" }}
+      position={"fixed"}
+      bottom={0}
+      display={{ base: "flex", md: "none" }}
+      bg={"inherit"}
     >
-      <Box h={{ base: "60px", md: "74px" }}>
-        <Box display={{ base: "flex", md: "none" }} h={"full"}>
-          <Navigation />
-        </Box>
-      </Box>
-    </footer>
+      <Navigation />
+    </Box>
   );
 };
 
