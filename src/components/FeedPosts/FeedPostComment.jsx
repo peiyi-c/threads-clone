@@ -76,7 +76,7 @@ const FeedPostComment = ({
   };
   const handleCloseComment = () => {
     // If text, open Alert Modal. If !text, close comment Modal.
-    text || images ? onOpen() : onCloseComment();
+    text ? onOpen() : onCloseComment();
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
