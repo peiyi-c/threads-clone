@@ -46,10 +46,17 @@ const ProfileCard = ({ userProfile, isLoading }) => {
           {user && <Avatar size={"xs"} src={user?.profilePicURL} />}
           <ProfileFollowerModal userProfile={userProfile} />
           <Link target="_blank" to={userProfile.bioLink}>
-            {userProfile.bioLink
-              .replace("https://www.", "")
-              .replace("http://www.", "")
-              .replace("www.", "")}
+            <Text
+              as={"span"}
+              _hover={{
+                textDecoration: "underline",
+              }}
+            >
+              {userProfile.bioLink
+                .replace("https://www.", "")
+                .replace("http://www.", "")
+                .replace("www.", "")}
+            </Text>
           </Link>
         </HStack>
       </VStack>
