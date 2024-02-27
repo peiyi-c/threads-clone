@@ -33,6 +33,7 @@ const FeedPostSliderModal = ({
     if (currentSlide === Object.keys(images).length - 1) return;
     swiperRef.current?.slideNext();
   };
+
   return (
     <Modal
       isCentered

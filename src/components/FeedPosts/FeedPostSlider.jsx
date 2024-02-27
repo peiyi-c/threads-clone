@@ -18,9 +18,10 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
   const INITIAL_SLIDE = 1;
   const [currentSlide, setCurrentSlide] = useState(INITIAL_SLIDE);
   const [clickedImage, setClickedImage] = useState();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const swiperRef = useRef(null);
-  const useSwiper = images?.length > 2;
+  const useSwiper = images?.length >= 2;
   const { imageBorder } = useColors();
 
   const handlePrevClick = () => {
@@ -43,6 +44,7 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
     setClickedImage(Number(e.target.dataset.image));
     onOpen();
   };
+
   return (
     <>
       {useSwiper ? (
@@ -75,19 +77,22 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
               spaceBetween={6}
               navigation={true}
               scrollbar={{ draggable: true }}
+              style={{
+                margin: "auto 0",
+              }}
             >
-              {images.map((image) => (
+              {images.map((image, index) => (
                 <SwiperSlide
                   key={image.id}
                   position={"relative"}
                   style={{
                     width: "auto",
+                    justifyContent: "flex-start",
                   }}
-                  justifyContent={"flex-start"}
                 >
                   {image.type?.includes("image") ? (
                     <Image
-                      data-image={image.id}
+                      data-image={index}
                       onClick={handleImageOpen}
                       src={image.path}
                       display={"block"}
@@ -97,6 +102,7 @@ const FeedPostSlider = ({ images, setImages, isEdit }) => {
                     />
                   ) : image.type?.includes("video") ? (
                     <video
+                      data-image={index}
                       style={{
                         height: "auto",
                         maxHeight: "20rem",
