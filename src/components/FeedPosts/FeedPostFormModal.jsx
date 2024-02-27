@@ -71,7 +71,7 @@ const FeedPostFormModal = ({ onClosePost, isOpenPost, quote }) => {
 
   const handleClosePost = () => {
     // If text, open Alert Modal. If !text, close this Modal.
-    text || images ? onOpen() : onClosePost();
+    text ? onOpen() : onClosePost();
   };
 
   const handleSubmit = async (e) => {
