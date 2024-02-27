@@ -47,9 +47,8 @@ const ProfileFollowerModal = ({ userProfile }) => {
         }}
       >
         {followersCount} {followersCount > 1 ? "followers" : "follower"}
-        {showDot && <Text as={"span"}> · </Text>}{" "}
       </Text>
-
+      {showDot && <Text as={"span"}> · </Text>}{" "}
       {isOpen && (
         <Modal
           isOpen={isOpen}
