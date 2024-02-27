@@ -56,7 +56,7 @@ const FeedPost = ({ thread }) => {
     return (
       <>
         <Grid
-          my={"12px"}
+          my={3}
           templateColumns={"48px minmax(0, 1fr)"}
           templateRows={"21px 19px repeat(3, max-content)"}
         >
@@ -106,12 +106,7 @@ const FeedPost = ({ thread }) => {
 
             {/* thread images */}
             {thread.mediaURLs && (
-              <Box
-                my={"12px"}
-                cursor={"pointer"}
-                position={"relative"}
-                zIndex={0}
-              >
+              <Box my={3} cursor={"pointer"} position={"relative"} zIndex={0}>
                 <FeedPostSlider images={thread.mediaURLs} isEdit={false} />
               </Box>
             )}
@@ -157,8 +152,8 @@ const FeedPost = ({ thread }) => {
           {/* thread line */}
           {replyLength && (
             <Flex
-              mt={"18px"}
-              mb={"6px"}
+              mt={4.5}
+              mb={1.5}
               gridColumnStart={1}
               gridColumnEnd={2}
               gridRowStart={3}
@@ -235,33 +230,32 @@ FeedPost.propTypes = {
 export default FeedPost;
 
 export const FeedPostSkeleton = () => {
+  const style = {
+    skeleton: {
+      startColor: "#00000026",
+      endColor: "#f3f5f733",
+    },
+  };
+
   return (
     <>
       <Grid
-        my={"12px"}
+        my={3}
         templateColumns={"48px minmax(0, 1fr)"}
         templateRows={"21px 19px max-content max-content"}
       >
         {/* thread author avatar */}
-        <SkeletonCircle
-          size={"36px"}
-          startColor="#00000026"
-          endColor="#f3f5f733"
-        />
+        <SkeletonCircle size={9} style={style.skeleton} />
 
         {/* thread author name */}
         <HStack justifyContent={"space-between"}>
-          <Skeleton
-            fadeDuration={4}
-            startColor="#00000026"
-            endColor="#f3f5f733"
-          >
+          <Skeleton fadeDuration={4} style={style.skeleton}>
             <Text as={"span"} ml={2}>
               --------------
             </Text>
           </Skeleton>
 
-          <Skeleton startColor="#00000026" endColor="#f3f5f733">
+          <Skeleton style={style.skeleton}>
             {/* thread created at */}
             <Text as={"span"}>-----</Text>
           </Skeleton>
@@ -277,12 +271,11 @@ export const FeedPostSkeleton = () => {
         >
           {/* thread text */}
           <SkeletonText
-            mt="4"
+            mt={4}
             noOfLines={2}
             spacing={1}
             skeletonHeight={4}
-            startColor="#00000026"
-            endColor="#ffffff12"
+            style={style.skeleton}
           />
         </Box>
       </Grid>

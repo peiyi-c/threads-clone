@@ -28,8 +28,8 @@ const UserCard = ({ profile }) => {
       {/* user image */}
       <Avatar
         onClick={handleForward}
-        w={"36px"}
-        h={"36px"}
+        w={9}
+        h={9}
         src={profile.profilePicURL}
         outline={`0.25px solid ${borderColor}`}
         cursor={"pointer"}

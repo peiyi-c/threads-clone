@@ -12,12 +12,13 @@ const SearchInput = ({ value, setValue, handleSubmit }) => {
   const { subText } = useColors();
   return (
     <form onSubmit={handleSubmit}>
-      <InputGroup mt={"6px"}>
+      <InputGroup mt={1.5}>
         <InputLeftElement
           pointerEvents="none"
           h={"full"}
-          w={"48px"}
-          left={"12px"}
+          w={{ base: 10, md: 12 }}
+          top={0.25}
+          left={3}
         >
           <SearchIcon color={subText} />
         </InputLeftElement>
@@ -35,7 +36,7 @@ const SearchInput = ({ value, setValue, handleSubmit }) => {
         {value?.length > 0 && (
           <InputRightElement
             h={"full"}
-            w={"48px"}
+            w={12}
             right={"12px"}
             cursor={"pointer"}
           >
