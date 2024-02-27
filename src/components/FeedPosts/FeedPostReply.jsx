@@ -16,7 +16,7 @@ import useGetReplyReplies from "../../hooks/useGetReplyReplies";
 import useGetProfileById from "../../hooks/useGetProfileById";
 import useLikeReply from "../../hooks/useLikeReply";
 import { timeAgo } from "../../utils/timeAgo";
-import { AvatarGroup1, AvatarGroup2, AvatarGroup3 } from "./AvatarGroup";
+import AvatarGroups from "./AvatarGroup";
 import {
   FeedPostMoreOther,
   FeedPostMoreSelf,
@@ -148,17 +148,13 @@ const FeedPostReply = ({ reply }) => {
             gridRowStart={4}
             gridRowEnd={5}
           >
-            {/* 1 reply */}
-            {repliedByLength === 1 && (
-              <AvatarGroup1 repliedBy={reply.repliedBy} />
-            )}
-            {/* 2 replies */}
-            {repliedByLength === 2 && (
-              <AvatarGroup2 repliedBy={reply.repliedBy} />
-            )}
-            {/* 3-10 replies */}
-            {repliedByLength >= 3 && (
-              <AvatarGroup3 repliedBy={reply.repliedBy} />
+            {repliedByLength ? (
+              <AvatarGroups
+                count={repliedByLength}
+                repliedBy={reply.repliedBy}
+              />
+            ) : (
+              ""
             )}
           </Flex>
 
@@ -178,8 +174,7 @@ const FeedPostReply = ({ reply }) => {
             </Text>
             {showDot && " · "}
             <Text as={"span"} cursor={"pointer"}>
-              {likes || ""} {likes > 1 && "likes"}
-              {likes === 1 && "like"}
+              {likes || ""} {likes > 1 ? "likes" : likes === 1 ? "like" : ""}
             </Text>
           </Text>
         </Grid>

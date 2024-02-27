@@ -4,8 +4,17 @@ import useColors from "../../hooks/useColors";
 import PropTypes from "prop-types";
 
 // Avatar groups used in thread and reply
+export const AvatarGroups = ({ count, repliedBy }) => {
+  if (count === 1) return <AvatarGroup1 repliedBy={repliedBy} />;
+  if (count === 2) return <AvatarGroup2 repliedBy={repliedBy} />;
+  if (count >= 3) return <AvatarGroup3 repliedBy={repliedBy} />;
+};
+AvatarGroups.propTypes = {
+  count: PropTypes.number.isRequired,
+  repliedBy: PropTypes.array.isRequired,
+};
 
-export const AvatarGroup1 = ({ repliedBy }) => {
+const AvatarGroup1 = ({ repliedBy }) => {
   return (
     <Avatar
       size="xs"
@@ -13,8 +22,10 @@ export const AvatarGroup1 = ({ repliedBy }) => {
     />
   );
 };
-
-export const AvatarGroup2 = ({ repliedBy }) => {
+AvatarGroup1.propTypes = {
+  repliedBy: PropTypes.array.isRequired,
+};
+const AvatarGroup2 = ({ repliedBy }) => {
   const { avatarBorder1, avatarBorder2 } = useColors();
   const style = {
     avatar: {
@@ -40,8 +51,10 @@ export const AvatarGroup2 = ({ repliedBy }) => {
     </>
   );
 };
-
-export const AvatarGroup3 = ({ repliedBy }) => {
+AvatarGroup2.propTypes = {
+  repliedBy: PropTypes.array.isRequired,
+};
+const AvatarGroup3 = ({ repliedBy }) => {
   const { avatarBorder1, avatarBorder2 } = useColors();
   const style = {
     avatar: {
@@ -78,13 +91,8 @@ export const AvatarGroup3 = ({ repliedBy }) => {
     </>
   );
 };
-
-AvatarGroup1.propTypes = {
-  repliedBy: PropTypes.array.isRequired,
-};
-AvatarGroup2.propTypes = {
-  repliedBy: PropTypes.array.isRequired,
-};
 AvatarGroup3.propTypes = {
   repliedBy: PropTypes.array.isRequired,
 };
+
+export default AvatarGroups;

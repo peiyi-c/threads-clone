@@ -21,7 +21,7 @@ import FeedPostComment from "./FeedPostComment";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ContentContext } from "../../contexts/contentContext";
-import { AvatarGroup1, AvatarGroup2, AvatarGroup3 } from "./AvatarGroup";
+import AvatarGroups from "./AvatarGroup";
 import {
   FeedPostMoreSelf,
   FeedPostMoreOther,
@@ -46,8 +46,12 @@ const FeedPost = ({ thread }) => {
   const replyLength =
     thread?.replies && thread?.replies.length > 0 ? thread.replies.length : "";
   const showDot = replyLength && likes > 0;
-  const { imageBorder } = useColors();
-
+  const { imageBorder, whiteBlack } = useColors();
+  const style = {
+    count: {
+      cursor: "pointer",
+    },
+  };
   const openThreadPage = () => {
     setContent("thread");
     navigate(`/@${userProfile.username}/post/${thread.id}`);
@@ -172,17 +176,13 @@ const FeedPost = ({ thread }) => {
             gridRowStart={4}
             gridRowEnd={5}
           >
-            {/* 1 reply */}
-            {repliedByLength === 1 && (
-              <AvatarGroup1 repliedBy={thread.repliedBy} />
-            )}
-            {/* 2 replies */}
-            {repliedByLength === 2 && (
-              <AvatarGroup2 repliedBy={thread.repliedBy} />
-            )}
-            {/* 3-10 replies */}
-            {repliedByLength >= 3 && (
-              <AvatarGroup3 repliedBy={thread.repliedBy} />
+            {repliedByLength ? (
+              <AvatarGroups
+                count={repliedByLength}
+                repliedBy={thread.repliedBy}
+              />
+            ) : (
+              ""
             )}
           </Flex>
 
@@ -195,14 +195,22 @@ const FeedPost = ({ thread }) => {
             alignSelf={"center"}
             opacity={0.5}
           >
-            <Text as={"span"} cursor={"pointer"} onClick={openThreadPage}>
+            <Text
+              as={"span"}
+              onClick={openThreadPage}
+              _active={{ color: whiteBlack }}
+              style={style.count}
+            >
               {replyLength}{" "}
               {replyLength > 1 ? "replies" : replyLength > 0 ? "reply" : ""}
             </Text>
             {showDot && " · "}
-            <Text as={"span"} cursor={"pointer"}>
-              {likes || ""} {likes > 1 && "likes"}
-              {likes === 1 && "like"}
+            <Text
+              as={"span"}
+              style={style.count}
+              _active={{ color: whiteBlack }}
+            >
+              {likes || ""} {likes > 1 ? "likes" : likes === 1 ? "like" : ""}
             </Text>
           </Text>
         </Grid>

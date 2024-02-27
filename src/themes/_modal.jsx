@@ -43,6 +43,9 @@ const modalStyle = {
         maxW: { md: "38.75rem" },
         backgroundColor: "transparent",
         "--modal-shadow": "none",
+        _dark: {
+          "--modal-shadow": "none",
+        },
       },
       body: {
         py: 0,
