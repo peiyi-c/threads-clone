@@ -82,6 +82,7 @@ const ProfilePage = () => {
                   transition: "transform 0.11s ease-in-out",
                 }}
                 fontSize={"15px"}
+                isDisabled
               >
                 Mention
               </Button>

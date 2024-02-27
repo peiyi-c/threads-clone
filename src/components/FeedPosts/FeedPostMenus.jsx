@@ -123,11 +123,11 @@ export const FeedPostMoreOther = ({ post }) => {
               </>
             )}
 
-            <MenuItem>
+            <MenuItem isDisabled>
               <Text>Mute</Text>
             </MenuItem>
             <MenuDivider />
-            <MenuItem>
+            <MenuItem isDisabled>
               <Text>Hide</Text>
             </MenuItem>
           </MenuList>
