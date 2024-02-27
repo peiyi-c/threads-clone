@@ -1,6 +1,4 @@
 import { Box, Button } from "@chakra-ui/react";
-import { useContext } from "react";
-import { ContentContext } from "../contexts/contentContext";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import useColors from "../hooks/useColors";
 import PropTypes from "prop-types";
@@ -141,14 +139,9 @@ export const Search = () => {
 };
 export const Create = () => {
   const { logo, logoSub } = useColors();
-  const { content } = useContext(ContentContext);
 
   return (
-    <Box
-      style={{
-        color: content !== "create" ? logoSub : logo,
-      }}
-    >
+    <Box color={logoSub} _active={{ color: logo }} _focus={{ color: logo }}>
       <svg
         aria-label="create"
         role="img"
@@ -305,31 +298,6 @@ Menu.propTypes = {
 };
 
 // Comment
-// export const VerticalLine = ({ h }) => {
-//   const color = useColorModeValue("#e5e5e5", "#333638");
-
-//   return (
-//     <Box color={color} m={"12px 0 0 6px"}>
-//       <svg
-//         className="xv787a8"
-//         aria-hidden="true"
-//         fill="none"
-//         height={h}
-//         viewBox={`0 0 21 ${h}`}
-//         width={21}
-//         xmlns="http://www.w3.org/2000/svg"
-//       >
-//         <path
-//           d={`M18 1L18 ${h}`}
-//           stroke="currentColor"
-//           strokeLinecap="round"
-//           strokeLinejoin="round"
-//           strokeWidth={2}
-//         />
-//       </svg>
-//     </Box>
-//   );
-// };
 export const AttachMedia = () => {
   const { subText } = useColors();
   return (
@@ -561,7 +529,6 @@ export const Reposted = ({ handleClick }) => {
         aria-label="Reposten"
         role="img"
         viewBox="0 0 24 24"
-        className="x1lliihq xffa9am x1jwls1v x1n2onr6 x17fnjtu x1yxark7"
         style={{
           fill: `${logo}`,
           height: 20,
