@@ -1,6 +1,6 @@
 # threads-clone
 
-This project is created solely for my practice purposes.
+This project is created for practice purposes.
 
 ## Live link
 
@@ -112,7 +112,7 @@ This project is created solely for my practice purposes.
 
 </details>
 
-## Function descriptions & progrgess
+## Function descriptions & progress
 
 **LOGIN / SIGNUP PAGE**
 
