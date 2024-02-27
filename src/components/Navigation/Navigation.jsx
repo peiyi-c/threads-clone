@@ -20,6 +20,23 @@ const Navigation = () => {
   const { user } = useAuthStore();
   const { setContent } = useContext(ContentContext);
 
+  const style = {
+    icon: {
+      _hover: {
+        bg: `${hoverBgColor}`,
+        borderRadius: "8px",
+      },
+      _active: {
+        transform: "scale(0.9)",
+        transition: "transform 0.11s ease-in-out",
+      },
+      m: "0.5",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+  };
+
   const handleNavClick = (e) => {
     let value = e.target?.closest("svg")?.ariaLabel || e.target.title;
     switch (value) {
@@ -59,53 +76,19 @@ const Navigation = () => {
         h={"full"}
         cursor={"pointer"}
       >
-        <GridItem
-          title="home"
-          _hover={{ bg: `${hoverBgColor}`, borderRadius: "8px" }}
-          _active={{
-            transform: "scale(0.9)",
-            transition: "transform 0.11s ease-in-out",
-          }}
-          m={"2px"}
-          display={"flex"}
-          alignItems={"center"}
-          justifyContent={"center"}
-        >
+        <GridItem title="home" style={style.icon}>
           <Link to="/" as={RouterLink}>
             <Home />
           </Link>
         </GridItem>
 
-        <GridItem
-          title="search"
-          _hover={{ bg: `${hoverBgColor}`, borderRadius: "8px" }}
-          _active={{
-            transform: "scale(0.9)",
-            transition: "transform 0.11s ease-in-out",
-          }}
-          m={"2px"}
-          display={"flex"}
-          alignItems={"center"}
-          justifyContent={"center"}
-        >
+        <GridItem title="search" style={style.icon}>
           <Link to="/search" as={RouterLink}>
             <Search />
           </Link>
         </GridItem>
 
-        <GridItem
-          onClick={onOpen}
-          title="create"
-          _hover={{ bg: `${hoverBgColor}`, borderRadius: "8px" }}
-          _active={{
-            transform: "scale(0.9)",
-            transition: "transform 0.11s ease-in-out",
-          }}
-          m={"2px"}
-          display={"flex"}
-          alignItems={"center"}
-          justifyContent={"center"}
-        >
+        <GridItem onClick={onOpen} style={style.icon} title="create">
           <Box>
             <Create />
           </Box>
@@ -113,35 +96,13 @@ const Navigation = () => {
         {isOpen ? (
           <FeedPostFormModal onClosePost={onClose} isOpenPost={isOpen} />
         ) : null}
-        <GridItem
-          title="activity"
-          _hover={{ bg: `${hoverBgColor}`, borderRadius: "8px" }}
-          _active={{
-            transform: "scale(0.9)",
-            transition: "transform 0.11s ease-in-out",
-          }}
-          m={"2px"}
-          display={"flex"}
-          alignItems={"center"}
-          justifyContent={"center"}
-        >
+        <GridItem title="activity" style={style.icon}>
           <Link to="/activity" as={RouterLink}>
             <Activity />
           </Link>
         </GridItem>
 
-        <GridItem
-          title="profile"
-          _hover={{ bg: `${hoverBgColor}`, borderRadius: "8px" }}
-          _active={{
-            transform: "scale(0.9)",
-            transition: "transform 0.11s ease-in-out",
-          }}
-          m={"2px"}
-          display={"flex"}
-          alignItems={"center"}
-          justifyContent={"center"}
-        >
+        <GridItem title="profile" style={style.icon}>
           <Link>
             <Profile />
           </Link>
