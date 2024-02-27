@@ -1,21 +1,25 @@
-### threads-clone
+# threads-clone
 
 This project is created solely for my practice purposes.
 
 ## Live link
 
-- [View Demo]https://threads-clone-silk-five.vercel.app/
+[View Demo](https://threads-clone-silk-five.vercel.app/)
 
 ## Screenshots
 
 <details>
-<summary>Profile</summary>
+<summary>Profile Page</summary>
+
 ![Profile](https://github.com/peiyi-c/threads-clone/assets/73789013/bc22e4a5-97d0-4470-b9af-403ae5e61cad)
+
 </details>
 
 <details>
-<summary>Search</summary>
+<summary>Search Page </summary>
+
 ![Search](https://github.com/peiyi-c/threads-clone/assets/73789013/9d4b342d-6ea4-4b48-a104-6531c580e9ef)
+
 </details>
 
 ## Built with
