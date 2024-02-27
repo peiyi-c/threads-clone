@@ -166,6 +166,7 @@ const FollowCard = ({ userId }) => {
           h={"36px"}
           src={userProfile.profilePicURL}
           outline={`0.25px solid ${borderColor}`}
+          cursor={"pointer"}
         />
 
         <VStack ml={2} flex={1}>
@@ -175,6 +176,7 @@ const FollowCard = ({ userId }) => {
               alignItems={"flex-start"}
               gap={0}
               onClick={handleForward}
+              cursor={"pointer"}
             >
               {/* user display name */}
               <Text as={"span"} fontSize={"15px"} fontWeight={"bold"}>

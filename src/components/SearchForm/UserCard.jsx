@@ -32,6 +32,7 @@ const UserCard = ({ profile }) => {
         h={"36px"}
         src={profile.profilePicURL}
         outline={`0.25px solid ${borderColor}`}
+        cursor={"pointer"}
       />
       <VStack ml={2} flex={1}>
         <HStack w={"full"} mb={1}>
@@ -40,6 +41,7 @@ const UserCard = ({ profile }) => {
             alignItems={"flex-start"}
             gap={0}
             onClick={handleForward}
+            cursor={"pointer"}
           >
             {/* user display name */}
             <Text as={"span"} fontSize={"15px"} fontWeight={"bold"}>

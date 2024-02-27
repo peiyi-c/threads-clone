@@ -83,6 +83,7 @@ const ProfileEditModal = ({ onCloseEdit, isOpenEdit, user }) => {
                     value={inputs.displayName}
                     name="displayName"
                     readOnly
+                    cursor={"pointer"}
                   />
                 </FormControl>
                 <Avatar
@@ -91,6 +92,7 @@ const ProfileEditModal = ({ onCloseEdit, isOpenEdit, user }) => {
                   size={"md"}
                   alignSelf={"flex-start"}
                   onClick={() => fileRef.current.click()}
+                  cursor={"pointer"}
                 />
                 <Input
                   type="file"
@@ -113,6 +115,7 @@ const ProfileEditModal = ({ onCloseEdit, isOpenEdit, user }) => {
                   value={inputs.bioDescription}
                   name="bioDescription"
                   readOnly
+                  cursor={"pointer"}
                 />
               </FormControl>
               <FormControl mb={3} borderBottom={`1px solid ${borderColor}`}>
@@ -129,6 +132,7 @@ const ProfileEditModal = ({ onCloseEdit, isOpenEdit, user }) => {
                   value={inputs.bioLink}
                   name="bioLink"
                   readOnly
+                  cursor={"pointer"}
                 />
               </FormControl>
               <FormControl display={"flex"} justifyContent={"space-between"}>
