@@ -47,6 +47,7 @@ const UserSignup = () => {
           type="text"
           variant={"auth"}
           placeholder="* Username"
+          color={blackWhite}
         />
         <Input
           onChange={handleChange}
@@ -56,6 +57,7 @@ const UserSignup = () => {
           variant={"auth"}
           placeholder="* Display Name"
           ml={{ base: 0, md: "6px" }}
+          color={blackWhite}
         />
       </Flex>
 
@@ -66,6 +68,7 @@ const UserSignup = () => {
         type="email"
         variant={"auth"}
         placeholder="* E-Mail Adresse"
+        color={whiteBlack}
       />
       <Input
         onChange={handleChange}
@@ -74,6 +77,7 @@ const UserSignup = () => {
         type="password"
         variant={"auth"}
         placeholder="* Password"
+        color={blackWhite}
       />
       <Button
         onClick={handleClick}

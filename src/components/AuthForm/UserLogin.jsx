@@ -41,6 +41,7 @@ const UserLogin = () => {
         type="email"
         variant={"auth"}
         placeholder="* E-Mail Adresse"
+        color={blackWhite}
       />
       <Input
         onChange={handleChange}
@@ -49,6 +50,7 @@ const UserLogin = () => {
         type="password"
         variant={"auth"}
         placeholder="* Password"
+        color={blackWhite}
       />
       <Button
         onClick={handleClick}
