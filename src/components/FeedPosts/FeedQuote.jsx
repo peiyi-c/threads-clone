@@ -6,6 +6,7 @@ import useGetThreadById from "../../hooks/useGetThreadById";
 import useGetReplyById from "../../hooks/useGetReplyById";
 import PropTypes from "prop-types";
 import useGetProfileById from "../../hooks/useGetProfileById";
+import { Link } from "react-router-dom";
 
 const FeedQuote = ({ postId, createdBy }) => {
   const { thread } = useGetThreadById(postId);
@@ -41,8 +42,9 @@ const FeedQuote = ({ postId, createdBy }) => {
 
         {/* thread author name */}
         <HStack justifyContent={"space-between"}>
-          <FeedPostProfileName userProfile={userProfile} />
-
+          <Link to={`/@${userProfile.username}`}>
+            <FeedPostProfileName userProfile={userProfile} />
+          </Link>
           {/* thread created at */}
           <Text as={"span"} opacity={0.5}>
             {timeAgo(post.createdAt)}

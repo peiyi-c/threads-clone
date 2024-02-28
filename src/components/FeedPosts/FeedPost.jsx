@@ -61,7 +61,6 @@ const FeedPost = ({ thread }) => {
           templateRows={"21px 19px repeat(3, max-content)"}
         >
           {/* thread author avatar */}
-
           <Link to={`/@${userProfile.username}`}>
             <Avatar
               gridColumnStart={1}
@@ -75,8 +74,9 @@ const FeedPost = ({ thread }) => {
 
           {/* thread author name */}
           <HStack justifyContent={"space-between"}>
-            <FeedPostProfileName userProfile={userProfile} />
-
+            <Link to={`/@${userProfile.username}`}>
+              <FeedPostProfileName userProfile={userProfile} />
+            </Link>
             <HStack>
               {/* thread created at */}
               <Text as={"span"} opacity={0.5}>

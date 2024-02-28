@@ -32,7 +32,7 @@ import {
   RepostAct,
   QuoteAct,
 } from "../../assets/logos";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useFollowUser from "../../hooks/useFollowUser";
 import useGetProfileById from "../../hooks/useGetProfileById";
 import { ActivityStyle } from "../Activity/ActivityStyle";
@@ -165,8 +165,9 @@ const FeedPostActivity = ({ likes, post, userProfile }) => {
 
                   {/* thread author name */}
                   <HStack justifyContent={"space-between"}>
-                    <FeedPostProfileName userProfile={userProfile} />
-
+                    <Link to={`/@${userProfile.username}`}>
+                      <FeedPostProfileName userProfile={userProfile} />
+                    </Link>
                     {/* thread created at */}
                     <Text as={"span"} opacity={0.5}>
                       {timeAgo(post.createdAt)}
