@@ -68,7 +68,7 @@ const UserSignup = () => {
         type="email"
         variant={"auth"}
         placeholder="* E-Mail Adresse"
-        color={whiteBlack}
+        color={blackWhite}
       />
       <Input
         onChange={handleChange}
