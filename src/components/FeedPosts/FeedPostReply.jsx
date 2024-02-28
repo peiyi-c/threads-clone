@@ -26,17 +26,19 @@ import {
 } from "./FeedPostMenus";
 import useAuthStore from "../../store/authStore";
 import PropTypes from "prop-types";
+import { useState } from "react";
+import FeedPostActivity from "./FeedPostActivity";
 
 const FeedPostReply = ({ reply }) => {
   const { isLoading, userProfile } = useGetProfileById(reply.createdBy);
   const { isLiked, likes, handleLikeReply } = useLikeReply(reply);
   const { onOpen, isOpen, onClose } = useDisclosure();
+  const [showSubReply, setShowSubReply] = useState(false);
   const { replies } = useGetReplyReplies(reply.id);
   const { user } = useAuthStore();
 
   const repliedByLength = reply?.repliedBy?.length;
   const replyLength = reply?.replies?.length || "";
-  const showDot = replies && likes > 0;
 
   if (reply && !isLoading)
     return (
@@ -168,14 +170,20 @@ const FeedPostReply = ({ reply }) => {
             alignSelf={"center"}
             opacity={0.5}
           >
-            <Text as={"span"} cursor={"pointer"}>
+            <Text
+              as={"span"}
+              cursor={"pointer"}
+              onClick={() => setShowSubReply((prev) => !prev)}
+            >
               {replyLength}{" "}
               {replyLength > 1 ? "replies" : replyLength > 0 ? "reply" : ""}
             </Text>
-            {showDot && " · "}
-            <Text as={"span"} cursor={"pointer"}>
-              {likes || ""} {likes > 1 ? "likes" : likes === 1 ? "like" : ""}
-            </Text>
+
+            <FeedPostActivity
+              likes={likes}
+              post={reply}
+              userProfile={userProfile}
+            />
           </Text>
         </Grid>
         {/* thread button divider */}
@@ -183,6 +191,7 @@ const FeedPostReply = ({ reply }) => {
 
         {/* subreplies */}
         {replies &&
+          showSubReply &&
           replies.map((reply) => (
             <Box key={reply.id} pl={5}>
               <FeedPostReply reply={reply} />
