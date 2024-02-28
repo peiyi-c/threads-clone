@@ -111,6 +111,37 @@ const modalStyle = {
         borderRadius: { base: "0", sm: "0 0 18px 18px" },
       },
     }),
+    postActivity: (props) => ({
+      header: {
+        px: 0,
+        backgroundColor: mode("#ffffff", "#181818")(props),
+        borderRadius: { base: "0", sm: "18px 18px 0 0" },
+        color: mode("#000000", "#ffffff")(props),
+        fontSize: "16px",
+        fontWeight: 500,
+        textAlign: "center",
+      },
+      dialogContainer: {},
+      dialog: {
+        my: { base: 0, sm: "auto" },
+        h: { base: "100svh", sm: "auto" },
+        w: { base: "100svw" },
+        maxW: { md: "30rem" },
+        backgroundColor: "transparent",
+        "--modal-shadow": "none",
+      },
+      body: {
+        p: 0,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "1.25rem",
+        borderRadius: 0,
+      },
+      footer: {
+        borderRadius: { base: "0", sm: "0 0 18px 18px" },
+      },
+    }),
   },
 };
 

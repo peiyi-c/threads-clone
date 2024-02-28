@@ -207,6 +207,7 @@ export const FeedPostRepost = ({ post, type, userProfile, user }) => {
           onClosePost={onClose}
           isOpenPost={isOpen}
           quote={post}
+          quoteType={type}
         />
       ) : null}
     </>

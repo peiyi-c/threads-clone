@@ -13,7 +13,7 @@ const FeedQuote = ({ postId, createdBy }) => {
   const { isLoading, userProfile } = useGetProfileById(createdBy);
 
   const likes = thread?.likedBy?.length || "";
-  const replies = thread?.replies.length || "";
+  const replies = thread?.replies?.length || "";
   const showDot = replies && likes > 0;
 
   const post = thread || reply;
@@ -83,7 +83,7 @@ const FeedQuote = ({ postId, createdBy }) => {
             {replies} {replies > 1 ? "replies" : replies > 0 ? "reply" : ""}
           </Text>
           {showDot && " · "}
-          <Text as={"span"} cursor={"pointer"}>
+          <Text as={"span"}>
             {likes} {likes > 1 ? "likes" : likes > 0 ? "like" : ""}
           </Text>
         </Text>

@@ -33,6 +33,7 @@ import useAuthStore from "../../store/authStore";
 import PropTypes from "prop-types";
 import FeedQuote from "./FeedQuote";
 import useColors from "../../hooks/useColors";
+import FeedPostActivity from "./FeedPostActivity";
 
 const FeedPost = ({ thread }) => {
   const { isLoading, userProfile } = useGetProfileById(thread?.createdBy);
@@ -45,13 +46,8 @@ const FeedPost = ({ thread }) => {
   const repliedByLength = thread?.repliedBy?.length;
   const replyLength =
     thread?.replies && thread?.replies.length > 0 ? thread.replies.length : "";
-  const showDot = replyLength && likes > 0;
   const { imageBorder, whiteBlack } = useColors();
-  const style = {
-    count: {
-      cursor: "pointer",
-    },
-  };
+
   const openThreadPage = () => {
     setContent("thread");
     navigate(`/@${userProfile.username}/post/${thread.id}`);
@@ -198,20 +194,18 @@ const FeedPost = ({ thread }) => {
             <Text
               as={"span"}
               onClick={openThreadPage}
+              cursor={"pointer"}
               _active={{ color: whiteBlack }}
-              style={style.count}
             >
               {replyLength}{" "}
               {replyLength > 1 ? "replies" : replyLength > 0 ? "reply" : ""}
             </Text>
-            {showDot && " · "}
-            <Text
-              as={"span"}
-              style={style.count}
-              _active={{ color: whiteBlack }}
-            >
-              {likes || ""} {likes > 1 ? "likes" : likes === 1 ? "like" : ""}
-            </Text>
+
+            <FeedPostActivity
+              likes={likes}
+              post={thread}
+              userProfile={userProfile}
+            />
           </Text>
         </Grid>
 

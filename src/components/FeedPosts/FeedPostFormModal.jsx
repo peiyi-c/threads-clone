@@ -30,7 +30,7 @@ import useCreateThread from "../../hooks/useCreateThread";
 import useColors from "../../hooks/useColors";
 import PropTypes from "prop-types";
 
-const FeedPostFormModal = ({ onClosePost, isOpenPost, quote }) => {
+const FeedPostFormModal = ({ onClosePost, isOpenPost, quote, quoteType }) => {
   const [text, setText] = useState("");
   const [images, setImages] = useState([]);
   const textRef = useRef();
@@ -76,7 +76,7 @@ const FeedPostFormModal = ({ onClosePost, isOpenPost, quote }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await handleCreatePost(text, images, quote);
+    await handleCreatePost(text, images, quote, quoteType);
     setText("");
     setImages([]);
     onClosePost();
@@ -266,6 +266,7 @@ FeedPostFormModal.propTypes = {
   onClosePost: PropTypes.func.isRequired,
   isOpenPost: PropTypes.bool.isRequired,
   quote: PropTypes.object,
+  quoteType: PropTypes.string,
 };
 
 export default FeedPostFormModal;

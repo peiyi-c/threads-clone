@@ -23,7 +23,7 @@ const useCreateThread = () => {
   const { userProfile, addThread } = useUserProfileStore();
   const showToast = useShowToast();
 
-  const handleCreatePost = async (text, images, quote) => {
+  const handleCreatePost = async (text, images, quote, type) => {
     if (isLoading) return;
     if (!text && !images) {
       showToast("Error", "Please add text or image.", "error");
@@ -47,7 +47,7 @@ const useCreateThread = () => {
       //   replies: [],
       //   hideLikes: false,
     };
-
+    // if quoting, add quoting content
     if (quote && quote.id && quote.createdBy) {
       newThread.quoting = { postId: quote.id, createdBy: quote.createdBy };
     }
@@ -73,6 +73,12 @@ const useCreateThread = () => {
         id: postDocRef.id,
         mediaURLs: downloadURLs,
       });
+
+      // if quoting, update post got quoted
+      if (quote && quote.id) {
+        const quoteDocRef = doc(firestore, type, quote.id);
+        await updateDoc(quoteDocRef, { quotedBy: arrayUnion(user.uid) });
+      }
 
       // update store
       newThread.mediaURLs = downloadURLs;
