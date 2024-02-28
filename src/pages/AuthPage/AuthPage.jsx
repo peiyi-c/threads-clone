@@ -18,7 +18,7 @@ const AuthPage = () => {
       <Flex
         display={{ base: "block", lg: "none" }}
         position={"absolute"}
-        top={"10%"}
+        top={"5%"}
         left={"50%"}
         transform={"translateX(-50%)"}
         w={"60px"}
