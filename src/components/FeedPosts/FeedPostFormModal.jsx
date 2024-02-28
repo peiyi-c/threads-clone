@@ -271,7 +271,7 @@ FeedPostFormModal.propTypes = {
 
 export default FeedPostFormModal;
 
-const ModalBodySub = ({ user, edit }) => {
+export const ModalBodySub = ({ user, edit }) => {
   return (
     <>
       <Avatar

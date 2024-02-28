@@ -29,6 +29,7 @@ import useReplyThread from "../../hooks/useReplyThread";
 import useReplyReply from "../../hooks/useReplyReply";
 import useColors from "../../hooks/useColors";
 import PropTypes from "prop-types";
+import { ModalBodySub } from "./FeedPostFormModal";
 
 const FeedPostComment = ({
   onCloseComment,
@@ -50,7 +51,74 @@ const FeedPostComment = ({
   const { blackWhite, whiteBlack, subText } = useColors();
 
   const MIN_TEXTAREA_HEIGHT = 12;
+  const post = thread || reply;
 
+  const style = {
+    title: {
+      gridColumnStar: 2,
+      gridColumnEnd: 3,
+      justifySelf: "center",
+    },
+    avatar: {
+      big: {
+        gridColumnStart: 1,
+        gridColumnEnd: 2,
+        gridRowStart: 1,
+        gridRowEnd: 3,
+      },
+      sm: {
+        gridColumnStart: 1,
+        gridColumnEnd: 2,
+        gridRowStart: 1,
+        gridRowEnd: 3,
+      },
+    },
+    displayName: {
+      fontSize: "15px",
+      fontWeight: "bold",
+    },
+    content: {
+      gridColumnStart: 2,
+      gridColumnEnd: 3,
+      gridRowStart: 3,
+      gridRowEnd: 4,
+    },
+    threadWrapper: {
+      top: {
+        gridColumnStart: 1,
+        gridColumnEnd: 2,
+        gridRowStart: 3,
+        gridRowEnd: 4,
+        justifyContent: "center",
+        alignItems: "center",
+      },
+      bottom: {
+        gridColumnStart: 1,
+        gridColumnEnd: 2,
+        gridRowStart: 2,
+        gridRowEnd: 4,
+        justifyContent: "center",
+      },
+    },
+    textInput: {
+      resize: "none",
+      overflowY: "hidden",
+      gridColumnStart: 2,
+      gridColumnEnd: 3,
+      gridRowStart: 2,
+    },
+    media: {
+      columnGap: "0.75rem",
+      gridColumnStart: 2,
+      gridColumnEnd: 3,
+      gridRowStart: 3,
+      gridRowEnd: 4,
+    },
+    footer: {
+      display: "flex",
+      justifyContent: "space-between",
+    },
+  };
   useLayoutEffect(() => {
     if (text) {
       textRef.current.style.height = "inherit";
@@ -118,97 +186,48 @@ const FeedPostComment = ({
                 >
                   Cancel
                 </Button>
-                <Text
-                  gridColumnStart={2}
-                  gridColumnEnd={3}
-                  as={"span"}
-                  justifySelf={"center"}
-                >
-                  Reply
-                </Text>
+                <span style={style.title}>Reply</span>
               </Grid>
             </ModalHeader>
 
             <ModalBody>
               {/* Original Thread Post / Thread Reply */}
               <Grid
-                my={"12px"}
+                my={3}
                 templateColumns={"48px minmax(0, 1fr)"}
                 templateRows={"21px 19px max-content max-content"}
               >
                 <Avatar
-                  gridColumnStart={1}
-                  gridColumnEnd={2}
-                  gridRowStart={1}
-                  gridRowEnd={3}
+                  style={style.avatar.big}
                   size="md"
                   src={userProfile?.profilePicURL}
                 />
 
                 <HStack justifyContent={"space-between"}>
-                  <Text
-                    as={"span"}
-                    fontSize={"15px"}
-                    fontWeight={"bold"}
-                    ml={2}
-                  >
+                  <Text as={"span"} ml={2} style={style.displayName}>
                     {userProfile.displayName}
                   </Text>
 
                   <Text as={"span"} opacity={0.5}>
-                    {thread && timeAgo(thread.createdAt)}
-                    {reply && timeAgo(reply.createdAt)}
+                    {post && timeAgo(post.createdAt)}
                   </Text>
                 </HStack>
 
-                <Box
-                  ml={2}
-                  mt={-19}
-                  gridColumnStart={2}
-                  gridColumnEnd={3}
-                  gridRowStart={3}
-                  gridRowEnd={4}
-                >
-                  <Text>
-                    {thread && thread.text}
-                    {reply && reply.text}
-                  </Text>
-                  {thread && thread.mediaURLs && (
+                <Box ml={2} mt={-19} style={style.content}>
+                  <Text>{post && post.text}</Text>
+
+                  {post && post.mediaURLs && (
                     <Box my={"12px"} cursor={"pointer"}>
-                      <FeedPostSlider
-                        images={thread.mediaURLs}
-                        isEdit={false}
-                      />
-                    </Box>
-                  )}
-                  {reply && reply.mediaURLs && (
-                    <Box my={"12px"} cursor={"pointer"}>
-                      <FeedPostSlider images={reply.mediaURLs} isEdit={false} />
+                      <FeedPostSlider images={post.mediaURLs} isEdit={false} />
                     </Box>
                   )}
                 </Box>
 
-                <Flex
-                  mt={"18px"}
-                  mb={"6px"}
-                  gridColumnStart={1}
-                  gridColumnEnd={2}
-                  gridRowStart={3}
-                  gridRowEnd={4}
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                >
+                <Flex mt={4} style={style.threadWrapper.top}>
                   <Divider orientation="vertical" variant={"vertical"} />
                 </Flex>
-
-                <Flex
-                  justifyContent={"center"}
-                  gridColumnStart={1}
-                  gridColumnEnd={2}
-                  gridRowStart={4}
-                  gridRowEnd={5}
-                ></Flex>
               </Grid>
+
               {/* New Thread Reply Field */}
               <Grid
                 templateColumns={"48px minmax(0, 1fr)"}
@@ -216,31 +235,24 @@ const FeedPostComment = ({
                 columnGap={"0.65rem"}
               >
                 <Avatar
-                  gridColumnStart={1}
-                  gridColumnEnd={2}
-                  gridRowStart={1}
-                  gridRowEnd={3}
-                  size="md"
+                  size={"md"}
                   name={user.username}
                   src={user.profilePicURL}
+                  style={style.avatar.sm}
                 />
-                <Text as={"span"} fontSize={"15px"} fontWeight={"bold"}>
+                <Text as={"span"} style={style.displayName}>
                   {user.displayName}
                 </Text>
                 <Box>
                   <Textarea
                     ref={textRef}
                     value={text}
-                    resize={"none"}
                     onChange={handleInputChange}
                     size={"sm"}
                     minHeight={MIN_TEXTAREA_HEIGHT}
-                    overflowY={"hidden"}
                     variant={"standard"}
-                    gridColumnStart={2}
-                    gridColumnEnd={3}
-                    gridRowStart={2}
                     placeholder={`Reply to ${userProfile.displayName}...`}
+                    style={style.textInput}
                   />
                   {images && (
                     <Box gridColumnStart={2} gridColumnEnd={3} gridRowStart={2}>
@@ -253,25 +265,11 @@ const FeedPostComment = ({
                   )}
                 </Box>
 
-                <Flex
-                  pt={"33px"}
-                  justifyContent={"center"}
-                  gridColumnStart={1}
-                  gridColumnEnd={2}
-                  gridRowStart={2}
-                  gridRowEnd={4}
-                >
+                <Flex pt={9} style={style.threadWrapper.bottom}>
                   <Divider orientation="vertical" variant={"vertical"} />
                 </Flex>
 
-                <HStack
-                  mt={2.5}
-                  columnGap={"0.75rem"}
-                  gridColumnStart={2}
-                  gridColumnEnd={3}
-                  gridRowStart={3}
-                  gridRowEnd={4}
-                >
+                <HStack mt={2.5} style={style.media}>
                   <FormLabel
                     htmlFor="image"
                     m={0}
@@ -292,10 +290,11 @@ const FeedPostComment = ({
                   hidden
                   onChange={handleImgChange}
                 />
+                <ModalBodySub user={user} edit={text.trim().length} />
               </Grid>
             </ModalBody>
 
-            <ModalFooter display={"flex"} justifyContent={"space-between"}>
+            <ModalFooter style={style.footer}>
               <Text as={"span"} color={subText}>
                 Your followers can reply
               </Text>
