@@ -1,10 +1,15 @@
 import { Button, Flex } from "@chakra-ui/react";
 import { useState } from "react";
-
+import Activities from "../../components/Activity/Activities";
+import useAuthStore from "../../store/authStore";
+import useGetProfileById from "../../hooks/useGetProfileById";
 const ActivityPage = () => {
   const [select, setSelect] = useState("All");
+  const { user } = useAuthStore();
+  const { isLoading, userProfile } = useGetProfileById(user?.uid);
+  const activities = userProfile?.notifications;
 
-  const activities = [
+  const BUTTONs = [
     "All",
     "Requests",
     "Replies",
@@ -12,6 +17,7 @@ const ActivityPage = () => {
     "Quotes",
     "Verified",
   ];
+
   return (
     <>
       <Flex
@@ -20,7 +26,7 @@ const ActivityPage = () => {
         flexWrap={{ base: "wrap", sm: "nowrap" }}
         justifyContent={"center"}
       >
-        {activities.map((activity, index) => (
+        {BUTTONs.map((activity, index) => (
           <Button
             onClick={(e) => setSelect(e.target.title)}
             key={index}
@@ -36,6 +42,7 @@ const ActivityPage = () => {
           </Button>
         ))}
       </Flex>
+      {!isLoading && <Activities notifications={activities} select={select} />}
     </>
   );
 };
