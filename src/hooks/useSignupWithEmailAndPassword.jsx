@@ -73,7 +73,13 @@ const useSignupWithEmailAndPassword = () => {
           quotes: [],
           likes: [],
           hides: [],
-          notifications: [],
+          notifications: [
+            {
+              createdAt: Date.now(),
+              type: ["All", "JOIN"],
+              userId: newUser.user.uid,
+            },
+          ],
         };
 
         await setDoc(doc(firestore, "users", newUser.user.uid), userDoc);
