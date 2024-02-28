@@ -29,8 +29,8 @@ export const Threads = ({ h = 32, w = 32 }) => {
 };
 
 Threads.propTypes = {
-  h: PropTypes.number,
-  w: PropTypes.number,
+  h: PropTypes.string,
+  w: PropTypes.string,
 };
 
 // Navigation

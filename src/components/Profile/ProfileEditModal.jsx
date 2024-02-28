@@ -187,7 +187,7 @@ const ProfileEditModal = ({ onCloseEdit, isOpenEdit, user }) => {
 ProfileEditModal.propTypes = {
   onCloseEdit: PropTypes.func,
   isOpenEdit: PropTypes.bool,
-  user: PropTypes.object.isRequired,
+  user: PropTypes.object,
 };
 
 export default ProfileEditModal;
@@ -279,8 +279,8 @@ const ProfileEditFieldModal = ({
 ProfileEditFieldModal.propTypes = {
   onCloseField: PropTypes.func,
   isOpenField: PropTypes.bool,
-  user: PropTypes.object.isRequired,
+  user: PropTypes.object,
   inputs: PropTypes.object,
   setInputs: PropTypes.func,
-  field: PropTypes.string.isRequired,
+  field: PropTypes.string,
 };
