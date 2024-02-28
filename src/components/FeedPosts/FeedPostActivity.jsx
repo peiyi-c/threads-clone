@@ -51,7 +51,7 @@ const FeedPostActivity = ({ likes, post, userProfile }) => {
   const quotes = quotedByUsers?.length || 0;
 
   const showViewAcitvity = likes === 0 && (reposts > 0 || quotes > 0);
-  const showDot = post?.repliedBy?.length > 0 && (likes || showViewAcitvity);
+  const showDot = post?.replies?.length > 0 && (likes || showViewAcitvity);
 
   const style = {
     back: {
