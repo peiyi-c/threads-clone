@@ -47,6 +47,8 @@ This project is created for practice purposes.
 │   │     ├── logo.bg.png
 │   │     └── logos.jsx
 │   ├── components
+│   │     ├── Activity
+│   │     │    └──...jsx
 │   │     ├── AuthForm
 │   │     │    └──...jsx
 │   │     ├── FeedPosts
