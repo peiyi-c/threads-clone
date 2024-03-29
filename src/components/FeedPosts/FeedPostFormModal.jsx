@@ -124,7 +124,7 @@ const FeedPostFormModal = ({ onClosePost, isOpenPost, quote, quoteType }) => {
             <ModalBody>
               <Grid
                 templateColumns={"48px minmax(0, 1fr)"}
-                templateRows={"21px repeat(max-content, 3)"}
+                templateRows={"21px repeat(3, max-content)"}
                 columnGap={"0.65rem"}
               >
                 <Avatar
@@ -152,6 +152,7 @@ const FeedPostFormModal = ({ onClosePost, isOpenPost, quote, quoteType }) => {
                     gridColumnEnd={3}
                     gridRowStart={2}
                     placeholder={"Start a thread..."}
+                    // maxLength={250}
                     mb={2}
                   />
                   {images && (
