@@ -53,12 +53,12 @@ const useCreateThread = () => {
     }
 
     try {
-      // upload thread
+      // create thread
       const postDocRef = await addDoc(
         collection(firestore, "threads"),
         newThread
       );
-      // upload user
+      // update user
       const userDocRef = doc(firestore, "users", user.uid);
       await updateDoc(userDocRef, { threads: arrayUnion(postDocRef.id) });
 
