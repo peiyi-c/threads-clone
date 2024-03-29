@@ -5,6 +5,12 @@ const useThreadStore = create((set) => ({
   setThreads: (threads) => set({ threads }),
   createThread: (thread) =>
     set((state) => ({ threads: [thread, ...state.threads] })),
+  updateThread: (newThread) =>
+    set((state) => ({
+      threads: state.threads.map((thread) => {
+        return thread.id === newThread.id ? newThread : thread;
+      }),
+    })),
   deleteThread: (id) =>
     set((state) => ({
       threads: state.threads.filter((thread) => thread.id !== id),

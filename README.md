@@ -130,6 +130,7 @@ This project is created for practice purposes.
 - [x] user can repost visible threads posted by others.
 - [x] user can quote visible threads posted by others.
 - [x] user can follow other users.
+- [x] user can edit her/his threads/replies.
 - [ ] user can mute her/his followings.
 - [ ] user can hide viewable threads.
 

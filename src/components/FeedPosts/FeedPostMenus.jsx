@@ -25,6 +25,30 @@ import useColors from "../../hooks/useColors";
 import useGetProfileById from "../../hooks/useGetProfileById";
 import useShowToast from "../../hooks/useShowToast";
 import FeedPostFormModal from "./FeedPostFormModal";
+import FeedPostFormEditModal from "./FeedPostFormEditModal";
+
+export const EditButton = ({ post, postType }) => {
+  const { onOpen, isOpen, onClose } = useDisclosure();
+  return (
+    <>
+      <Text role="button" onClick={onOpen} w={"full"} textAlign={"center"}>
+        Edit
+      </Text>
+      {isOpen ? (
+        <FeedPostFormEditModal
+          post={post}
+          postType={postType}
+          onCloseEdit={onClose}
+          isOpenEdit={isOpen}
+        />
+      ) : null}
+    </>
+  );
+};
+EditButton.propTypes = {
+  post: PropTypes.object,
+  postType: PropTypes.string,
+};
 
 export const FeedPostMoreSelf = ({ thread, reply }) => {
   const { onOpen, isOpen, onClose } = useDisclosure();
@@ -58,6 +82,13 @@ export const FeedPostMoreSelf = ({ thread, reply }) => {
             <MenuButton ref={buttonRef} opacity={0} aria-hidden></MenuButton>
             <MenuList minW="0" p={2} w={"fit-content"}>
               <MenuItem hidden aria-hidden></MenuItem>
+              {/* Edit Button */}
+              <MenuItem>
+                {thread && <EditButton post={thread} postType="threads" />}
+                {reply && <EditButton post={reply} postType="replies" />}
+              </MenuItem>
+              <MenuDivider />
+              {/* Delete Button */}
               <MenuItem>
                 <Text role="button" color={"#FF3040"} onClick={onOpen}>
                   Delete
