@@ -32,6 +32,33 @@ const Header = () => {
           alignContent={"stretch"}
         >
           <GridItem
+            colStart={{ base: 1 }}
+            colEnd={{ base: 2 }}
+            display={{ base: "block", md: "none" }}
+          >
+            {/* Previous Page Button */}
+            {content !== null && (
+              <Button
+                onClick={goBack}
+                display={{ base: "flex", md: "none" }}
+                variant={"ghost"}
+                size={"md"}
+                position={"absolute"}
+                left={"5%"}
+                top={3.5}
+                justifyContent={"center"}
+                alignItems={"center"}
+                _active={{
+                  transform: "scale(0.9)",
+                  transition: "transform 0.11s ease-in-out",
+                }}
+              >
+                <Back />
+              </Button>
+            )}
+          </GridItem>
+
+          <GridItem
             colStart={{ base: 2, md: 1 }}
             colEnd={{ base: 3, md: 2 }}
             alignSelf={"center"}
@@ -40,14 +67,6 @@ const Header = () => {
             onClick={() => setContent("home")}
           >
             <Threads />
-          </GridItem>
-
-          <GridItem
-            display={{ base: "none", md: "block" }}
-            colStart={{ md: 2 }}
-            colEnd={{ md: 3 }}
-            justifySelf={"stretch"}
-          >
             {/* Previous Page Button */}
             {content !== null && (
               <Button
@@ -68,7 +87,14 @@ const Header = () => {
                 <Back />
               </Button>
             )}
-            {/* Navigation */}
+          </GridItem>
+
+          <GridItem
+            display={{ base: "none", md: "block" }}
+            colStart={{ md: 2 }}
+            colEnd={{ md: 3 }}
+            justifySelf={"stretch"}
+          >
             <Navigation />
           </GridItem>
 
